@@ -46,7 +46,7 @@ function initMainPage(dataArray) {
     let retailData = dataArray[6];
 
     // Initialize map
-    // myMap = new CanadaMap('canada', geoData, citiesData, industrialData, multifamilyData, retailData);
+    myMap = new CanadaMap('canada', geoData, citiesData, industrialData, multifamilyData, retailData);
     // myMap = new mapVis('canada', "data/canada.topo.json", "data/filtered_file.json", 'brushDiv');
     // Initialize map with actual data
     //myMap = new MapVis('canada', officeData, geoData, citiesData, industrialData, multifamilyData, retailData);
