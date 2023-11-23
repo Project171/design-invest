@@ -1,0 +1,261 @@
+/****************/
+/*  Animation Plot */
+/****************/
+
+.navbar {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom: 3px solid #D80621;
+}
+
+.nav-image {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.background-image {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/sector.jpg');
+}
+
+body {
+  margin: 0;
+}
+
+.centered-content {
+  display: flex;
+  /*flex-direction: column;*/
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+div.container {
+  font-family: "arial";
+  background-color: rgba(29,67,30,0.5);
+  /*background-color: rgba(0, 0, 0, 0.6);*/
+  padding-left: 5vh;
+  padding-right: 5vh;
+  padding-bottom: 5vh;
+  /* Removed fixed height to allow dynamic sizing */
+  width: 100%; /* Adjust the width as per requirement */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Adds a shadow for better visibility */
+}
+
+div.container1 {
+  font-family: "arial";
+  /*background-color: rgba(29,67,30,0.7);*/
+  background-color: rgba(0, 0, 0, 0.6);
+  padding-left: 5vh;
+  padding-right: 5vh;
+  padding-bottom: 5vh;
+  /* Removed fixed height to allow dynamic sizing */
+  width: 100%; /* Adjust the width as per requirement */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Adds a shadow for better visibility */
+}
+.axis {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.axis path,
+.axis line,
+.domain {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+#chart-area text {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.axis-label {
+  fill: brown;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+h2, .source {
+  font-size: 20px;
+  color: brown;
+  margin-bottom:10vh;
+}
+
+.source {
+  font-size: 12px;
+  margin-top: 5vh;
+  margin-bottom: 4vh;
+}
+
+h1 {
+  color: white;
+  font: 45px "arial";
+  /*font: 45px "Lucida Handwriting";*/
+  font-weight: bold;
+  margin-top: 1vh;
+}
+
+h3 {
+  font: 20px "Lucida Handwriting";
+  font-weight: bold;
+  color: #D80621;
+}
+
+h4 {
+  font: 20px "Lucida Handwriting";
+  font-weight: bold;
+  color: white;
+}
+
+h5 {
+  font: 10px "Lucida Handwriting";
+  color: black;
+  /*color: #0c5460;*/
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  font: 12px Lucida Handwriting;
+  background: white;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.legend {
+  font-size: 12px;
+}
+
+.legend rect {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  opacity: 0.7;
+}
+
+#commentary-box {
+  top: 250px;
+  left: 1100px;
+  width: 300px;
+  padding: 10px;
+  opacity: 0.9;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.circle-label {
+  opacity: 1;
+}
+
+th {
+  color: white;
+  font: 12px "arial";
+}
+
+
+#canada {
+  margin: 30px auto;
+  height: 500px;
+  width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*body {*/
+/*  font-family: 'Roboto', sans-serif;*/
+/*  background-color: #f7f7f7;*/
+/*  text-align: center;*/
+/*}*/
+
+/*h1 {*/
+/*  font-weight: 100;*/
+/*  font-size: 20px;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+.datamaps-hoverover {
+  position: absolute;
+  z-index: 1000;
+}
+
+#timeline-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#timeline {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#visualization-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sector-icon {
+  fill: #d21313;
+  margin: 50px;
+  width: 150px; /* Adjust as necessary */
+  height: 150px; /* Adjust as necessary */
+  position: absolute;
+  /* Use top and left to position each icon appropriately */
+}
+
+#industrial {
+  top: 10px;
+  left: 10px;
+}
+
+#office {
+  top: 10px;
+  right: 10px;
+}
+
+#multi {
+  bottom: 10px;
+  left: 10px;
+}
+
+#retail {
+  bottom: 10px;
+  right: 10px;
+}
+
+#map { height: 180px; }
+
+/*#canada-map {*/
+/*    !* Position and size your map *!*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*}*/
+
+
+div.container2 {
+  font-family: "arial";
+  /*background-color: rgba(29,67,30,0.7);*/
+  background-color: whitesmoke;
+  padding-left: 5vh;
+  padding-right: 5vh;
+  padding-bottom: 5vh;
+  /* Removed fixed height to allow dynamic sizing */
+  width: 100%; /* Adjust the width as per requirement */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Adds a shadow for better visibility */
+}
