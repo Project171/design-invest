@@ -67,14 +67,14 @@ Promise.all(promises)
                         // vehicles: +row['Consumer spending, nominal, LCU - Vehicle purchases']
                     }})
             } else if (index === 2) {
-                    return dataset.map(function (row) {
-                        return {
-                            date: dateParser(row['Date']),
-                            sale_price_index: +row['CREA Average Residential Sale Price Index'],
-                            // housing_starts: +row['Housing starts'],
-                            mortgage_rates: +row['Interest rate on fixed 5-year mortgages [%]'],
-                            housing_market_value: +row['Market value of housing stock, LCU [C$; Millions]'],
-                        }})
+                return dataset.map(function (row) {
+                    return {
+                        date: dateParser(row['Date']),
+                        sale_price_index: +row['CREA Average Residential Sale Price Index'],
+                        // housing_starts: +row['Housing starts'],
+                        mortgage_rates: +row['Interest rate on fixed 5-year mortgages [%]'],
+                        housing_market_value: +row['Market value of housing stock, LCU [C$; Millions]'],
+                    }})
             } else {
                 // For other datasets, keep them as they are
                 return dataset;
@@ -105,5 +105,32 @@ function createVis(data) {
     let mortgageChart = new AreaChart("mortgage_vis", housing_data)
 }
 
+// TODO: this function only works for min and max, but later on need to make it work for brushing
+function calculateMarketValueChange(data, selectedColumn) {
+    // Filter out rows with NA values for 'Market value of housing stock'
+    const filteredData = data.filter(d => d[selectedColumn] !== 'NA');
+    // const filteredData = data.filter(d => d[selectedColumn] !== 'NA' && !isNaN(d[selectedColumn]));
 
-// there's no travel
+    console.log("selectedColumn: ", selectedColumn)
+    console.log("filteredData: ", filteredData)
+    // Find the minimum and maximum dates
+    const minDate = d3.min(filteredData, d => new Date(d.date));
+    const maxDate = d3.max(filteredData, d => new Date(d.date));
+    console.log("minDate: ", minDate)
+    console.log("maxDate: ", maxDate)
+
+    // Find the market value at the minimum and maximum dates
+    const minValue = filteredData.find(d => new Date(d.date).getTime() === minDate.getTime())[selectedColumn];
+    const maxValue = filteredData.find(d => new Date(d.date).getTime() === maxDate.getTime())[selectedColumn];
+    console.log("minDate: ", minValue)
+    console.log("maxDate: ", maxValue)
+
+    // Calculate the percentage change
+    const percentageChange = ((maxValue / minValue) - 1) * 100;
+    console.log("percentageChange: ", percentageChange)
+
+    // console.log("percentageChange: ", percentageChange)
+    return percentageChange;
+}
+
+// restaurants_hotels = travel and hotels
