@@ -124,7 +124,6 @@ function createVis(data) {
     });
 }
 
-// TODO: this function only works for min and max, but later on need to make it work for brushing
 function calculateMarketValueChange(data, selectedColumn) {
     // Filter out rows with NA values for 'Market value of housing stock'
     const filteredData = data.filter(d => !isNaN(d[selectedColumn]));
@@ -153,7 +152,7 @@ function calculateMarketValueChange(data, selectedColumn) {
     // console.log("maxDate: ", maxValue)
 
     // Calculate the percentage change
-    const percentageChange = ((maxValue / minValue) - 1) * 100;
+    const percentageChange = ((maxValue / minValue) - 1);
     // console.log("percentageChange: ", percentageChange)
 
     // console.log("percentageChange: ", percentageChange)
