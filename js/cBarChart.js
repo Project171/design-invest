@@ -37,11 +37,12 @@ class cBarChart {
             .range([vis.height, 0]).padding(0.1);
 
         // Define a percentage format
-        const formatPercent = d3.format(".0%");
+        // const formatPercent = d3.format(".0%");
 
         vis.xAxis = d3.axisBottom()
             .scale(vis.x)
-            .tickFormat(formatPercent);
+            .tickFormat(d3.format(".0%"))
+            .ticks(8);
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y);

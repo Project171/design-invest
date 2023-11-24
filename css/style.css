@@ -187,8 +187,8 @@ h3 {
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.25); /* Light background for the content area */
   width: 100%; /* Use percentage for responsive width */
-  max-height: 300px; /* Example max height */
-  margin-bottom: 10px; /* Spacing between visualizations */
+  max-height:  662.5px; /* Example max height */
+  margin-bottom: 1px; /* Spacing between visualizations */
   overflow: hidden; /* Prevents content from overflowing */
 }
 

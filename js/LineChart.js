@@ -37,6 +37,7 @@ class LineChart {
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y)
+            .tickFormat(d3.format(".0%"))
             .ticks(6);
 
         // Set domains by finding the min and max of both the X and Y

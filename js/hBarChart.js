@@ -16,7 +16,7 @@ class hBarChart {
 
         // console.log("vis.market_change_data: ", vis.market_change_data);
 
-        vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
+        vis.margin = { top: 15, right: 25, bottom: 25, left: 50 };
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right,
             vis.height = 300 - vis.margin.top - vis.margin.bottom;
@@ -40,6 +40,7 @@ class hBarChart {
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y)
+            .tickFormat(d3.format(".0%"))
             .ticks(6);
 
         vis.svg.append("g")
@@ -98,6 +99,9 @@ class hBarChart {
 
     updateVis() {
         let vis = this;
+
+        // Update y domain
+        vis.y.domain([0, d3.max(vis.market_change_data, d => d.change)]);
 
         // Enter update barcharts
         vis.svg.selectAll(".bar")
