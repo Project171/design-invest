@@ -99,10 +99,29 @@ function createVis(data) {
     console.log("consumer_data: ", consumer_data)
     console.log("housing_data: ", housing_data)
 
-    let macroChart = new LineChart("macro_vis", macro_data)
+    let macroEventHandler = {
+        bind: (eventName, handler) => {
+            document.body.addEventListener(eventName, handler);
+        },
+        trigger: (eventName, extraParameters) => {
+            document.body.dispatchEvent(new CustomEvent(eventName, {
+                detail: extraParameters
+            }));
+        }
+    }
+
+    let macroChart = new LineChart("macro_vis", macro_data, macroEventHandler)
     let consumerChart = new cBarChart("consumer_vis", consumer_data)
     let housingChart = new hBarChart("housing_vis", housing_data)
     let mortgageChart = new AreaChart("mortgage_vis", housing_data)
+
+    macroEventHandler.bind("selectionChanged", function(event){
+        let rangeStart = event.detail[0];
+        let rangeEnd = event.detail[1];
+        consumerChart.onSelectionChange(rangeStart, rangeEnd);
+        housingChart.onSelectionChange(rangeStart, rangeEnd);
+        mortgageChart.onSelectionChange(rangeStart, rangeEnd);
+    });
 }
 
 // TODO: this function only works for min and max, but later on need to make it work for brushing
@@ -139,6 +158,51 @@ function calculateMarketValueChange(data, selectedColumn) {
 
     // console.log("percentageChange: ", percentageChange)
     return percentageChange;
+}
+
+function createConsumerData(data) {
+    let consumer_data = [
+        { category: 'Total Consumer Spending'
+            , change: calculateMarketValueChange(data, "total_consumer_spending") },
+        { category: 'Personal Care Goods and Services'
+            , change: calculateMarketValueChange(data, "personal_gs") },
+        { category: 'Food and Non-Alcoholic Beverages'
+            , change: calculateMarketValueChange(data, "food_bev") },
+        { category: 'Health Goods and Services'
+            , change: calculateMarketValueChange(data, "health_gs") },
+        { category: 'Medical Products'
+            , change: calculateMarketValueChange(data, "medical_products") },
+        { category: 'Travel and Hotels'
+            , change: calculateMarketValueChange(data, "restaurants_hotels") },
+        { category: 'Eating Out'
+            , change: calculateMarketValueChange(data, "eating_out") },
+        { category: 'Clothing and Footwear'
+            , change: calculateMarketValueChange(data, "clothing") },
+        { category: 'Recreational'
+            , change: calculateMarketValueChange(data, "rec_cult") },
+        { category: 'Household Furnishings'
+            , change: calculateMarketValueChange(data, "household_expenditures") },
+        { category: 'Household Appliances'
+            , change: calculateMarketValueChange(data, "household_appliances") },
+        { category: 'Household Garden Tools and Equipment'
+            , change: calculateMarketValueChange(data, "household_outdoor") },
+        { category: 'Housing Maintenance and Repairs'
+            , change: calculateMarketValueChange(data, "housing_maintenance") },
+    ];
+
+    return consumer_data
+};
+
+
+function createHousingData(data) {
+    let housing_data = [
+        { category: 'Housing Market Value'
+            , change: calculateMarketValueChange(data, "housing_market_value") },
+        { category: 'Residential Sales Price Index'
+            , change: calculateMarketValueChange(data, "sale_price_index") },
+    ];
+
+    return housing_data
 }
 
 // restaurants_hotels = travel and hotels
