@@ -34,7 +34,11 @@ class cBarChart {
             .range([0, vis.width]);
 
         vis.y = d3.scaleBand()
-            .range([vis.height, 0]).padding(0.1);
+            .range([vis.height, 0])
+            .padding(0.1);
+            // // Trying to have a different padding between groups
+            // .paddingInner(0.1)
+            // .paddingOuter(0.2);
 
         // Define a percentage format
         // const formatPercent = d3.format(".0%");
@@ -122,7 +126,21 @@ class cBarChart {
             .attr("y", d => vis.y(d.category))
             .attr("height", vis.y.bandwidth())
             .attr("x", d => (d.change >= 0) ? vis.x(0) : vis.x(d.change))  // This code helps us get the bars to start at the 0 line
-            .attr("width", d => Math.abs(vis.x(0) - vis.x(d.change)));
+            .attr("width", d => Math.abs(vis.x(0) - vis.x(d.change)))
+            .attr("fill", d => {
+                switch (d.grouping) {
+                    case "Total":
+                        return "darkgrey";
+                    case "Essential":
+                        return "green";
+                    case "Discretionary":
+                        return "orange";
+                    case "Housing":
+                        return "brown";
+                    default:
+                        return "gray"; // Or any other default color
+                }
+            });
 
         // Exit barcharts
         vis.svg.selectAll(".bar")
