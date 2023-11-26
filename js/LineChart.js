@@ -14,7 +14,7 @@ class LineChart {
         vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right,
-            vis.height = 300 - vis.margin.top - vis.margin.bottom;
+            vis.height = 200 - vis.margin.top - vis.margin.bottom;
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
 
@@ -37,6 +37,7 @@ class LineChart {
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y)
+            .tickFormat(d3.format(".0%"))
             .ticks(6);
 
         // Set domains by finding the min and max of both the X and Y

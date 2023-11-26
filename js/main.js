@@ -343,31 +343,44 @@ function calculateMarketValueChange(data, selectedColumn) {
 function createConsumerData(data) {
     let consumer_data = [
         { category: 'Total Consumer Spending'
-            , change: calculateMarketValueChange(data, "total_consumer_spending") },
+            , change: calculateMarketValueChange(data, "total_consumer_spending")
+            , grouping: 'Total' },
         { category: 'Personal Care Goods and Services'
-            , change: calculateMarketValueChange(data, "personal_gs") },
+            , change: calculateMarketValueChange(data, "personal_gs")
+            , grouping: 'Essential' },
         { category: 'Food and Non-Alcoholic Beverages'
-            , change: calculateMarketValueChange(data, "food_bev") },
+            , change: calculateMarketValueChange(data, "food_bev")
+            , grouping: 'Essential' },
         { category: 'Health Goods and Services'
-            , change: calculateMarketValueChange(data, "health_gs") },
+            , change: calculateMarketValueChange(data, "health_gs")
+            , grouping: 'Essential' },
         { category: 'Medical Products'
-            , change: calculateMarketValueChange(data, "medical_products") },
+            , change: calculateMarketValueChange(data, "medical_products")
+            , grouping: 'Essential' },
         { category: 'Travel and Hotels'
-            , change: calculateMarketValueChange(data, "restaurants_hotels") },
+            , change: calculateMarketValueChange(data, "restaurants_hotels")
+            , grouping: 'Discretionary' },
         { category: 'Eating Out'
-            , change: calculateMarketValueChange(data, "eating_out") },
+            , change: calculateMarketValueChange(data, "eating_out")
+            , grouping: 'Discretionary' },
         { category: 'Clothing and Footwear'
-            , change: calculateMarketValueChange(data, "clothing") },
+            , change: calculateMarketValueChange(data, "clothing")
+            , grouping: 'Discretionary' },
         { category: 'Recreational'
-            , change: calculateMarketValueChange(data, "rec_cult") },
+            , change: calculateMarketValueChange(data, "rec_cult")
+            , grouping: 'Discretionary' },
         { category: 'Household Furnishings'
-            , change: calculateMarketValueChange(data, "household_expenditures") },
+            , change: calculateMarketValueChange(data, "household_expenditures")
+            , grouping: 'Housing' },
         { category: 'Household Appliances'
-            , change: calculateMarketValueChange(data, "household_appliances") },
+            , change: calculateMarketValueChange(data, "household_appliances")
+            , grouping: 'Housing' },
         { category: 'Household Garden Tools and Equipment'
-            , change: calculateMarketValueChange(data, "household_outdoor") },
+            , change: calculateMarketValueChange(data, "household_outdoor")
+            , grouping: 'Housing' },
         { category: 'Housing Maintenance and Repairs'
-            , change: calculateMarketValueChange(data, "housing_maintenance") },
+            , change: calculateMarketValueChange(data, "housing_maintenance")
+            , grouping: 'Housing' },
     ];
 
     return consumer_data

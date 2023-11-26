@@ -18,14 +18,15 @@ body {
 h1 {
   font-family: 'Vina Sans', serif;
   color: #941010;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  /*margin-top: 10px;*/
+  /*margin-bottom: 10px;*/
   font-size: 48px;
   text-shadow: 3px 3px 3px #aaa;
 }
 
 h2 {
   color: #ffffff;
+  margin-top: 10px;
   margin-bottom: 10px;
   font-size: 28px;
   text-shadow: 2px 2px 2px #aaa;
@@ -187,8 +188,8 @@ h3 {
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.25); /* Light background for the content area */
   width: 100%; /* Use percentage for responsive width */
-  max-height: 300px; /* Example max height */
-  margin-bottom: 10px; /* Spacing between visualizations */
+  max-height:  662.5px; /* Example max height */
+  margin-bottom: 1px; /* Spacing between visualizations */
   overflow: hidden; /* Prevents content from overflowing */
 }
 
@@ -199,6 +200,23 @@ h3 {
     max-height: 100px; /* Smaller max height for small screens */
   }
 }
+
+#macro_vis {
+  height: 25vh;
+}
+
+#consumer_vis {
+  height: 56vh;
+}
+
+#housing_vis {
+  height: 25vh;
+}
+
+#mortgage_vis {
+  height: 25vh;
+}
+
 /****************/
 /*  Perf   Viz  */
 /****************/

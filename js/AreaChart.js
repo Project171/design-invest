@@ -11,10 +11,10 @@ class AreaChart {
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
+        vis.margin = { top: 15, right: 25, bottom: 25, left: 50 };
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right,
-            vis.height = 300 - vis.margin.top - vis.margin.bottom;
+            vis.height = 190 - vis.margin.top - vis.margin.bottom;
 
         // SVG drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -31,10 +31,12 @@ class AreaChart {
             .range([vis.height, 0]);
 
         vis.xAxis = d3.axisBottom()
-            .scale(vis.x);
+            .scale(vis.x)
+            .ticks(5);
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y)
+            .tickFormat(value => d3.format(".0%")(value / 100)) // because we're using percentages
             .ticks(6);
 
         // Set domains by finding the min and max of both the X and Y

@@ -19,7 +19,7 @@ class cBarChart {
         vis.margin = { top: 40, right: 20, bottom: 60, left: 225 };
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right,
-            vis.height = 662.5 - vis.margin.top - vis.margin.bottom;
+            vis.height = 462.5 - vis.margin.top - vis.margin.bottom;
 
         // SVG drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -34,14 +34,19 @@ class cBarChart {
             .range([0, vis.width]);
 
         vis.y = d3.scaleBand()
-            .range([vis.height, 0]).padding(0.1);
+            .range([vis.height, 0])
+            .padding(0.1);
+            // // Trying to have a different padding between groups
+            // .paddingInner(0.1)
+            // .paddingOuter(0.2);
 
         // Define a percentage format
-        const formatPercent = d3.format(".0%");
+        // const formatPercent = d3.format(".0%");
 
         vis.xAxis = d3.axisBottom()
             .scale(vis.x)
-            .tickFormat(formatPercent);
+            .tickFormat(d3.format(".0%"))
+            .ticks(8);
 
         vis.yAxis = d3.axisLeft()
             .scale(vis.y);
@@ -121,7 +126,21 @@ class cBarChart {
             .attr("y", d => vis.y(d.category))
             .attr("height", vis.y.bandwidth())
             .attr("x", d => (d.change >= 0) ? vis.x(0) : vis.x(d.change))  // This code helps us get the bars to start at the 0 line
-            .attr("width", d => Math.abs(vis.x(0) - vis.x(d.change)));
+            .attr("width", d => Math.abs(vis.x(0) - vis.x(d.change)))
+            .attr("fill", d => {
+                switch (d.grouping) {
+                    case "Total":
+                        return "darkgrey";
+                    case "Essential":
+                        return "green";
+                    case "Discretionary":
+                        return "orange";
+                    case "Housing":
+                        return "brown";
+                    default:
+                        return "gray"; // Or any other default color
+                }
+            });
 
         // Exit barcharts
         vis.svg.selectAll(".bar")
