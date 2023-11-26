@@ -19,7 +19,7 @@ class cBarChart {
         vis.margin = { top: 40, right: 20, bottom: 60, left: 225 };
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right,
-            vis.height = 662.5 - vis.margin.top - vis.margin.bottom;
+            vis.height = 462.5 - vis.margin.top - vis.margin.bottom;
 
         // SVG drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
