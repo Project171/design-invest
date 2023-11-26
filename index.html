@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>CS171 - Term Project &amp; Invest Real Estate</title>
+    <!-- Load CSS libraries -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Vina Sans' rel='stylesheet'>
+</head>
+<body>
+
+<!-- Scrollable Container for Sections -->
+<div class="scroll-container">
+
+    <!-- 1. Introduction Section -->
+    <section class="scroll-section" id="introduction1">
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <div class="row h-25 align-items-center">
+                    <!-- Header row (25% height of the container) -->
+                    <div class="col text-center">
+                        <h1>Canada Commercial Real Estate</h1>
+                    </div>
+                </div>
+                <div class="row h-75">
+                    <!-- Content row (75% height of the container) -->
+                    <div class="col text-center">
+                        <h2>What does the future hold?</h2>
+                        <!-- Additional text and visualizations here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="scroll-section" id="introduction2">
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <div class="row">
+                    <!-- Your content here -->
+                    <h1>Introduction Page</h1>
+                    <h2>As we step into a post-pandemic world, the Canadian commercial real estate sector stands at the
+                        cusp of a new era of growth. </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Macro Section -->
+    <section class="scroll-section" id="macro1">
+        <!-- Content for Macro -->
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <div class="row">
+                    <h1>Macro Page</h1>
+                    <h2>Discuss key indicators like Real GDP Growth, Population Growth, and Employment Growth.</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-section" id="macro2">
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <h1>GDP - "Mother Graph"</h1>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="vis-container" id="macro_vis"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2>Consumer Spending</h2>
+                        <div class="vis-container" id="consumer_vis"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h2>Housing Value</h2>
+                        <div class="vis-container" id="housing_vis"></div>
+                        <h2>Mortgage Rates</h2>
+                        <div class="vis-container" id="mortgage_vis"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Investment Performance Section -->
+    <section class="scroll-section" id="performance1">
+        <!-- Content for Investment Performance -->
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <div class="row">
+                    <h1>Performance Page</h1>
+                    <h2>Highlight how consumer spending habits have shifted post-pandemic, affecting different
+                        categories of retail real estate.</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-section" id="performance2">
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <div class="row">
+                    <h1>Performance Page</h1>
+                    <h2>This is where Naina's visualization will be.</h2>
+
+                    <div class="centered-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1><span class="h1-sub">Sector Allocations</span></h1>
+                                <h3>Industrial, Retail, Residential, Office</h3>
+                            </div>
+                        </div>
+                        <div class="row" style="width:100%">
+                            <div class="col-lg-8">
+                                <div id="chart-area"></div>
+                                <!--                                <div id="legend"></div>-->
+                            </div>
+                            <div class="col-lg-4 text-end">
+                                <div id="commentary-box"></div>
+                            </div>
+                            <!-- Buttons Row -->
+                            <div class="row mt-sm-3 buttons">
+                            </div>
+                            <!-- Text below scatter plot -->
+                            <a class="source"
+                               href="https://www.msci.com/research-and-insights?topic=real_estate" target="_blank">Source:
+                                <em>MSCI</em>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 4. Sectors Section -->
+    <section class="scroll-section" id="sectors1">
+        <!-- Content for Sectors -->
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <div class="row">
+                    <h1>What is VECTOM?</h1>
+                </div>
+                <div class="row">
+                    <div id="map" style="height: 400px;"></div>
+                </div>
+                <div class="row h-25 align-items-center">
+                    <!-- Header row (25% height of the container) -->
+                    <div class="col text-center">
+                        <h2>VECTOM: Vancouver, Edmonton, Calgary, Toronto,
+                            Ottawa and Montreal.</h2>
+                    </div>
+                </div>
+                <div class="row h-75">
+                    <!-- Content row (75% height of the container) -->
+                    <div class="col text-center">
+                        <h2>The VECTOM markets represent Canada's six largest urban markets with populations over 1
+                            million.</h2>
+                        <!-- Additional text and visualizations here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Sectors Section -->
+    <section class="scroll-section" id="sectors2">
+        <!-- Content for Sectors -->
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <h1>What is the impact of economic events over time by market?</h1>
+                <!-- Placeholder Image Row -->
+                <div class="row">
+                    <img alt="Sectors Visualization" class="img-fluid" src="img/sectors.jpeg">
+                </div>
+                <!--                &lt;!&ndash; Map and Sector Visualizations Row &ndash;&gt;-->
+                <!--                <div class="row" id="visualization-container">-->
+                <!--                    <div class="col sector-icon" id="industrial">-->
+                <!--                        &lt;!&ndash; SVG for Industrial will be loaded here &ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                    <div class="col sector-icon" id="office">-->
+                <!--                        <div id="officeVis">-->
+                <!--                            &lt;!&ndash; SVG for Office will be loaded here &ndash;&gt;-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <div class="col sector-icon" id="multi">-->
+                <!--                        &lt;!&ndash; SVG for Multi will be loaded here &ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                    <div class="col sector-icon" id="retail">-->
+                <!--                        &lt;!&ndash; SVG for Retail will be loaded here &ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                    <div class="col" id="canada">-->
+                <!--                        &lt;!&ndash; Map of Canada will be rendered here &ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!-- Timeline Container -->
+                <div class="row" id="visualization-container">
+                    <div class="col" id="brushDiv" style="height: 18vh; background: #bdbdbd;">
+                        <!-- Timeline visualization will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 5. Recommendation Section -->
+    <section class="scroll-section" id="recommendation">
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <h1>Where to invest in Canada</h1>
+                <div class="investment-categories">
+                    <div class="category buy">
+                        <h2>Buy</h2>
+                        <p><strong>Strong Secular Growth Sectors</strong></p>
+                        <ul>
+                            <li><b>Multifamily:</b> mid-market, modern product not subject to rent control; value-add
+                                older vintage with attainable market rents in A locations with the potential to
+                                decarbonize
+                            </li>
+                            <li><b>Industrial:</b> value-add small and mid bay in "A" locations where land is scarce
+                            </li>
+                            <li><b>Grocery-anchored retail:</b> with strong local trade area demographics</li>
+                            <li><b>Cold Storage:</b> modern facilities to support robust population growth</li>
+                            <li><b>Data Centres:</b> in Quebec, Ontario, and BC</li>
+                            <li><b>Student housing:</b> in select markets</li>
+                        </ul>
+                    </div>
+                    <div class="category hold">
+                        <h2>Hold</h2>
+                        <p><strong>Neutral/Negative
+                            Growth Sectors</strong></p>
+                        <ul>
+                            <li>Modern, <b>big box Logistics</b></li>
+                            <li>Trophy, <b>best-in-class Office</b> that meet the amenity and sustainability goals of
+                                credit tenants
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="category sell">
+                        <h2>Sell</h2>
+                        <p><strong>Low/Negative Growth Sectors
+                            & Regions/Markets</strong></p>
+                        <ul>
+                            <li><b>Commodity office</b></li>
+                            <li><b>Enclosed retail</b></li>
+                            <li><b>Older vintage Industrial:</b> without superior locational attributes</li>
+                            <li>Critical evaluation of all assets that are exposed to increasing <b>physical risks</b>
+                                and/or <b>decarbonization challenges</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 6. Acknowledgements Section -->
+    <section class="scroll-section" id="acknowledgements">
+        <!-- Content for Acknowledgements -->
+        <div class="container-fluid">
+            <div class="container custom-container-box">
+                <div class="row">
+                    <h1>Acknowledgements</h1>
+                    <h2>Datasets used:</h2>
+                    <h2>Other sources:</h2>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+<div class="dot-navigation">
+    <a class="dot" href="#introduction1"></a>
+    <a class="dot" href="#introduction2"></a>
+    <a class="dot" href="#macro1"></a>
+    <a class="dot" href="#macro2"></a>
+    <a class="dot" href="#performance1"></a>
+    <a class="dot" href="#performance2"></a>
+    <a class="dot" href="#sectors1"></a>
+    <a class="dot" href="#sectors2"></a>
+    <a class="dot" href="#recommendation"></a>
+    <a class="dot" href="#acknowledgements"></a>
+</div>
+
+<!-- Load JS libraries: jQuery, bootstrap, D3 -->
+<script crossorigin="anonymous"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<!-- d3 -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-array.v2.min.js"></script>
+<script src="https://d3js.org/d3-geo.v2.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+
+<!--==============================================================================================-->
+<!-- Team JS Files -->
+<script src="js/bubble.js"></script>
+<script src="js/LineChart.js"></script>
+<script src="js/cBarChart.js"></script>
+<script src="js/hBarChart.js"></script>
+<script src="js/AreaChart.js"></script>
+<script src="js/vectom.js"></script>
+<script src="js/industrialVis.js"></script>
+<script src="js/multifamilyVis.js"></script>
+<script src="js/retailVis.js"></script>
+<script src="js/officeVis.js"></script>
+<script src="js/brushVis.js"></script>
+<script src="js/main.js"></script>
+
+<!--==============================================================================================-->
+
+</body>
+</html>

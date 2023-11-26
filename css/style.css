@@ -1,0 +1,482 @@
+/****************/
+/* General CSS  */
+/****************/
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Vina Sans', serif;
+  color: #941010;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 48px;
+  text-shadow: 3px 3px 3px #aaa;
+}
+
+h2 {
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-size: 28px;
+  text-shadow: 2px 2px 2px #aaa;
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-size: 28px;
+  text-shadow: 2px 2px 2px #aaa;
+}
+
+.custom-container-box {
+  padding: 10px;
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dot-navigation {
+  position: fixed;
+  right: 18px; /* Adjust as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.dot-navigation .dot {
+  display: block;
+  height: 10px; /* Dot size */
+  width: 10px;  /* Dot size */
+  background-color: #ffffff; /* Dot color */
+  border-radius: 50%;
+  margin-bottom: 10px; /* Space between dots */
+  transition: background-color 0.3s;
+}
+
+.dot-navigation .dot.active,
+.dot-navigation .dot:hover,
+.dot-navigation .dot:focus {
+  background-color: #941010; /* Active dot color */
+}
+
+.scroll-container {
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  height: 100vh; /* Adjust based on your layout */
+}
+
+.scroll-section {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.scroll-section .container-fluid {
+  height: 100%;
+  width: 100%;
+}
+
+.source {
+  font-size: 12px;
+  margin-top: 5vh;
+  margin-bottom: 4vh;
+}
+
+/****************/
+/*Page  Settings*/
+/****************/
+
+#introduction1{
+  background-image: url(../img/intro.jpg);
+  background-color: #ffffff;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#introduction2{
+  background-image: url(../img/canada-map.jpg);
+  background-color: #ffffff;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#macro1{
+  /*background-image: url(../img/intro.jpg);*/
+  background-color: #999aa0;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#macro2{
+  /*background-image: url(../img/intro.jpg);*/
+  background-color: #e79d13;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#performance1{
+  /*background-image: url(../img/intro.jpg);*/
+  background-color: #3f3f3f;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#performance2{
+  /*background-image: url(../img/intro.jpg);*/
+  background-color: #999aa0;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#sectors1{
+  /*background-image: url(../img/sectors.jpeg);*/
+  background-color: #e79d13;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#sectors2{
+  /*background-image: url(../img/intro.jpg);*/
+  background-color: #3f3f3f;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+#recommendation{
+  background-image: url(../img/Downtown_Ottawa_2022.jpg);
+  background-color: #999aa0;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#acknowledgements{
+  /*background-image: url(../img/intro.jpg);*/
+  background-color: #e79d13;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/****************/
+/*  Macro  Viz  */
+/****************/
+
+
+.vis-container {
+  /*border: 1px solid #ff0000; !* Example border for visualization area *!*/
+  padding: 1px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.25); /* Light background for the content area */
+  width: 100%; /* Use percentage for responsive width */
+  max-height: 300px; /* Example max height */
+  margin-bottom: 10px; /* Spacing between visualizations */
+  overflow: hidden; /* Prevents content from overflowing */
+}
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .vis-container {
+    max-height: 100px; /* Smaller max height for small screens */
+  }
+}
+/****************/
+/*  Perf   Viz  */
+/****************/
+
+/*h1 {*/
+/*  color: white;*/
+/*  font: 45px "arial";*/
+/*  !*font: 45px "Lucida Handwriting";*!*/
+/*  font-weight: bold;*/
+/*  margin-top: 1vh;*/
+/*}*/
+
+/*h3 {*/
+/*  font: 20px "Lucida Handwriting";*/
+/*  font-weight: bold;*/
+/*  color: #D80621;*/
+/*}*/
+
+/*h4 {*/
+/*  font: 20px "Lucida Handwriting";*/
+/*  font-weight: bold;*/
+/*  color: white;*/
+/*}*/
+
+/*h5 {*/
+/*  font: 10px "Lucida Handwriting";*/
+/*  color: black;*/
+/*  !*color: #0c5460;*!*/
+/*}*/
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  font: 12px Lucida Handwriting;
+  background: white;
+  border: 0;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.legend {
+  font-size: 12px;
+}
+
+.legend rect {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  opacity: 0.7;
+}
+
+#commentary-box {
+  top: 250px;
+  left: 1100px;
+  width: 300px;
+  padding: 10px;
+  opacity: 0.9;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.circle-label {
+  opacity: 1;
+}
+
+th {
+  color: white;
+  font: 12px "arial";
+}
+
+
+/*div.container2 {*/
+/*  font-family: "arial";*/
+/*  !*background-color: rgba(29,67,30,0.7);*!*/
+/*  background-color: whitesmoke;*/
+/*  padding-left: 5vh;*/
+/*  padding-right: 5vh;*/
+/*  padding-bottom: 5vh;*/
+/*  !* Removed fixed height to allow dynamic sizing *!*/
+/*  width: 100%; !* Adjust the width as per requirement *!*/
+/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); !* Optional: Adds a shadow for better visibility *!*/
+/*}*/
+
+.centered-content {
+  display: flex;
+  /*flex-direction: column;*/
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/*div.container {*/
+/*  font-family: "arial";*/
+/*  background-color: rgba(29,67,30,0.5);*/
+/*  !*background-color: rgba(0, 0, 0, 0.6);*!*/
+/*  padding-left: 5vh;*/
+/*  padding-right: 5vh;*/
+/*  padding-bottom: 5vh;*/
+/*  !* Removed fixed height to allow dynamic sizing *!*/
+/*  width: 100%; !* Adjust the width as per requirement *!*/
+/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); !* Optional: Adds a shadow for better visibility *!*/
+/*}*/
+
+/*div.container1 {*/
+/*  font-family: "arial";*/
+/*  !*background-color: rgba(29,67,30,0.7);*!*/
+/*  background-color: rgba(0, 0, 0, 0.6);*/
+/*  padding-left: 5vh;*/
+/*  padding-right: 5vh;*/
+/*  padding-bottom: 5vh;*/
+/*  !* Removed fixed height to allow dynamic sizing *!*/
+/*  width: 100%; !* Adjust the width as per requirement *!*/
+/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); !* Optional: Adds a shadow for better visibility *!*/
+/*}*/
+
+.axis {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.axis path,
+.axis line,
+.domain {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+#chart-area text {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.axis-label {
+  fill: brown;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/****************/
+/*  Sector Viz  */
+/****************/
+
+#canada {
+  margin: 30px auto;
+  height: 500px;
+  width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.datamaps-hoverover {
+  position: absolute;
+  z-index: 1000;
+}
+
+#timeline-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#timeline {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#visualization-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sector-icon {
+  fill: #941010;
+  margin: 50px;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+
+}
+
+#industrial {
+  top: 10px;
+  left: 10px;
+}
+
+#office {
+  top: 10px;
+  right: 10px;
+}
+
+#multi {
+  bottom: 10px;
+  left: 10px;
+}
+
+#retail {
+  bottom: 10px;
+  right: 10px;
+}
+
+#map {
+  height: 50%;
+}
+
+
+/*****************/
+/*Recommendations*/
+/*****************/
+
+.investment-categories {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.category {
+  flex: 1;
+  margin: 0 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category h2 {
+  background-color: rgba(42, 145, 46, 0.9); /* Green for 'Buy' */
+  color: white;
+  text-align: center;
+  margin: -20px -20px 20px;
+  padding: 10px 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.category.hold h2 {
+  background-color: rgb(231, 157, 19, 0.9); /* Yellow for 'Hold' */
+}
+
+.category.sell h2 {
+  background-color: rgb(148, 16, 16, 0.9); /* Red for 'Sell' */
+}
+
+@media (max-width: 768px) {
+  .investment-categories {
+    flex-direction: column;
+  }
+  .category {
+    margin-bottom: 20px;
+  }
+}
+
+.category ul {
+  list-style-type: square;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.category li {
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.category strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: bold;
+}
