@@ -21,7 +21,7 @@ h1 {
   /*margin-top: 10px;*/
   /*margin-bottom: 10px;*/
   font-size: 3rem;
-  text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.72);
+  text-shadow: 2px 2px 2px #ffffff;
 }
 
 h2 {
@@ -55,17 +55,17 @@ h3 {
 
 .text-box {
   background-color: white;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
   border: 1px solid black;
   padding: 20px;
-  margin-top: 20px; /* or any other value for positioning */
-  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: for better visibility */
-  border-radius: 5px; /* Optional: for rounded corners */
+  margin-top: 0;
 }
 
 .engaging-text {
   font-family: 'Roboto', sans-serif;
   font-weight: 400; /* Normal font weight - 700 for bold */
-  color: #333; /* Dark gray for sharpness */
+  color: #212121; /* Dark gray for sharpness */
   font-size: 1rem;
   line-height: 1.6; /* Adjust line height for better readability */
   text-align: justify; /* This makes the text edges sharp and aligned */
@@ -146,6 +146,11 @@ h3 {
   margin-bottom: 2vh;
 }
 
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
 /****************/
 /*Page  Settings*/
 /****************/
@@ -206,11 +211,6 @@ h3 {
   background-attachment: fixed;
 }
 
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
 #recommendation{
   background-image: url(../img/Downtown_Ottawa_2022.jpg);
   background-color: #e79d13;
@@ -230,9 +230,9 @@ h3 {
 /****************/
 
 .vis-container {
-  /*border: 1px solid #ff0000; !* Example border for visualization area *!*/
+  /*border: 1px solid #ff0000;  */
   padding: 1px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.25); /* Light background for the content area */
   width: 100%; /* Use percentage for responsive width */
@@ -320,15 +320,16 @@ th {
 }
 
 #playPauseButton {
-  font-size: 16px; /* Adjust the font size as needed */
+  font-size: 1rem; /* Adjust the font size as needed */
   width: 50%;
-  padding: 10px 20px; /* Adjust the padding to make the button smaller or larger */
+  padding: 20px; /* Adjust the padding to make the button smaller or larger */
   background-color: #3f3f3f; /* Use any color you like */
   border: none; /* Remove border if present */
-  border-radius: 5px; /* Rounded corners for the button */
+  border-radius: 10px; /* Rounded corners for the button */
   color: white; /* Text color */
   cursor: pointer; /* Change cursor to pointer when hovering over the button */
   transition: background-color 0.3s; /* Smooth transition for hover effect */
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 #playPauseButton:hover {
@@ -445,10 +446,10 @@ th {
 .category {
   flex: 1;
   margin: 0 10px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .category h2 {
@@ -457,7 +458,7 @@ th {
   text-align: center;
   margin: -20px -20px 20px;
   padding: 10px 0;
-  border-radius: 5px 5px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 .category.hold h2 {
