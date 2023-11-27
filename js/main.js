@@ -3,14 +3,25 @@
 * * * * * * * * * * * * * */
 
 // Combined Global Variables
-let myMap, myBrushVis, myRetail, myIndustrial, myMultifamily, myOffice;
+let myMap;
 let selectedTimeRange = [];
 let selectedCategory;
 let macroChart, consumerChart, housingChart, mortgageChart;
 
 // Function to convert date objects to strings or reverse
-let dateFormatter = d3.timeFormat("%Y-%m-%d");
 let dateParser = d3.timeParse("%m/%d/%Y");
+
+// D3 time parser for monthly data
+let parseMonthlyDate = d3.timeParse("%m/%d/%Y");
+
+// Custom function to parse quarterly dates
+function parseQuarterlyDate(dateStr) {
+    let parts = dateStr.split(' ');
+    let quarter = parseInt(parts[0].substring(1));
+    let year = parseInt(parts[1]);
+    let month = (quarter - 1) * 3 + 1;
+    return new Date(year, month - 1, 1);  // JavaScript months are 0-indexed
+}
 
 let promises = [
     d3.csv("data/macro.csv"),
@@ -20,7 +31,7 @@ let promises = [
     d3.json("data/filtered_file.json"),
     d3.csv("data/IndustrialAvailability.csv"),
     d3.csv("data/OfficeVacancy.csv"),
-    d3.csv("data/RentalRateGrowthMultifamily_modified.csv"),
+    d3.csv("data/RentalRateGrowthMultifamily.csv"),
     d3.csv("data/Retail.csv")
 ];
 
@@ -92,6 +103,35 @@ Promise.all(promises)
                         mortgage_rates: +row['Interest rate on fixed 5-year mortgages [%]'],
                         housing_market_value: +row['Market value of housing stock, LCU [C$; Millions]'],
                     }})
+
+            } else if (index === 5 || index === 6 || index === 7 || index === 8){
+                return dataset.map(function (row) {
+                    let date;
+                    if (index === 5 || index === 6 || index === 8) { // Quarterly datasets
+                        date = parseQuarterlyDate(row['Date']);
+                        return {
+                            date,
+                            Toronto: +row['Toronto'] || null,
+                            Montreal: +row['Montréal'] || null,
+                            Ottawa: +row['Ottawa'] || null,
+                            Vancouver: +row['Vancouver'] || null,
+                            Calgary: +row['Calgary'] || null,
+                            Edmonton: +row['Edmonton'] || null
+                        };
+                    } else {
+                        date = parseMonthlyDate(row['Date']);
+                        return {
+                            date,
+                            Toronto: +row['Toronto'] || null,
+                            Montreal: +row['Montréal'] || null,
+                            Ottawa: +row['Ottawa'] || null,
+                            Vancouver: +row['Vancouver'] || null,
+                            Calgary: +row['Calgary'] || null,
+                            Edmonton: +row['Edmonton'] || null
+                        };
+                    }
+                }
+                );
             } else {
                 // For other datasets, keep them as they are
                 return dataset;
@@ -108,8 +148,7 @@ Promise.all(promises)
 // initMainPage
 function initMainPage(dataArray) {
 
-    // log data
-    console.log('check out ALL the data', dataArray);
+
 
     let macro_data = dataArray[0]
     let consumer_data = dataArray[1]
@@ -124,6 +163,9 @@ function initMainPage(dataArray) {
     console.log("macro_data: ", macro_data)
     console.log("consumer_data: ", consumer_data)
     console.log("housing_data: ", housing_data)
+
+    // log data
+    console.log('check out ALL the data', dataArray);
 
     let macroEventHandler = {
         bind: (eventName, handler) => {
@@ -149,101 +191,8 @@ function initMainPage(dataArray) {
         mortgageChart.onSelectionChange(rangeStart, rangeEnd);
     });
 
-
     // Initialize map
-    //myMap = new CanadaMap('canada', geoData, citiesData, industrialData, multifamilyData, retailData);
-    myMap = new CanadaMap('canada', "data/canada.topo.json", "data/filtered_file.json", 'brushDiv');
-    // Initialize map with actual data
-    //myMap = new MapVis('canada', officeData, geoData, citiesData, industrialData, multifamilyData, retailData);
-
-    console.log("office_data: ", officeData);
-
-    // Initialize visualizations for each sector
-    myIndustrial = new IndustrialVis('industrialVis', industrialData);
-    myOffice = new CanadaMap('officeVis', officeData);
-    myMultifamily = new MultifamilyVis('multifamilyVis', multifamilyData);
-    myRetail = new RetailVis('retailVis', retailData);
-
-    // init brush
-    //myBrushVis = new BrushVis('brushDiv', industrialData, officeData, multifamilyData, retailData);
-
-    // Listen for the category selector change
-    // document.getElementById('categorySelector').addEventListener('change', categoryChange);
-
-    // Load each sector SVG
-    loadSVG('industrial', 'img/industrial.svg');
-    loadSVG('office', 'img/office.svg');
-    loadSVG('multi', 'img/multi.svg');
-    loadSVG('retail', 'img/retail.svg');
-
-
-//     // Set the initial category
-//     categoryChange();
-
-
-// Category change function
-// function categoryChange() {
-//     selectedCategory = document.getElementById('categorySelector').value;
-//
-//     if (myMap) {
-//         myMap.wrangleData();
-//     } else {
-//         console.error('myMap is not initialized');
-//     }
-//     if (myRetail) {
-//         myRetail.wrangleData();
-//     } else {
-//         console.error('retail is not initialized');
-//     }
-//     // After initializing myBarVisOne and myBarVisTwo
-//     if (myIndustrial) {
-//         myIndustrial.wrangleData();
-//     } else {
-//         console.error('industrial is not initialized');
-//     }
-//
-//     if (myMultifamily) {
-//         myMultifamily.wrangleData();
-//     } else {
-//         console.error('multifamily is not initialized');
-//     }
-//
-//     if (myOffice) {
-//         myOffice.wrangleData();
-//     } else {
-//         console.error('office is not initialized');
-//     }
-// }
-
-// Function to load and append SVG to the container
-    function loadSVG(sectorId, filePath) {
-        fetch(filePath)
-            .then(response => response.text())
-            .then(svgData => {
-                document.getElementById(sectorId).innerHTML = svgData;
-                // Add your hover event listener here
-                document.getElementById(sectorId).addEventListener('mouseenter', () => {
-                    // Update the map based on the sector hovered
-                    updateMapForSector(sectorId);
-                });
-            });
-    }
-
-// Function to update the map visualization based on the sector
-    function updateMapForSector(sectorId) {
-        // Logic to update the map visualization
-        console.log(`Update map for sector: ${sectorId}`);
-
-        // Update the map based on the sector hovered
-        myMap.wrangleData(sectorId);
-        myBrushVis.wrangleData(sectorId);
-        // myRetail.wrangleData(sectorId);
-        // myIndustrial.wrangleData(sectorId);
-        // myMultifamily.wrangleData(sectorId);
-        // myOffice.wrangleData(sectorId);
-
-
-    }
+    myMap = new CanadaMap("canada", geoData, citiesData, industrialData, officeData, multifamilyData, retailData, macroEventHandler);
 
 
 // Ensure the DOM is fully loaded

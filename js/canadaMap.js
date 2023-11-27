@@ -1,129 +1,224 @@
 class CanadaMap {
-    constructor(_parentElement, _geoData, _citiesData, _timelineElementId) {
+
+    constructor(_parentElement, _geoData, _citiesData, _industrialData, _officeData, _multifamilyData, _retailData) {
         this.parentElement = _parentElement;
-        this.topoJsonPath = _geoData;
-        this.citiesJsonPath = _citiesData;
-        this.timelineElementId = _timelineElementId;
-        this.mapFillColor = '#9db943';
-        this.mapBorderColor = '#ffffff';
-        this.mapBorderWidth = 1;
-        this.cityHighlightFill = '#cb5b5b';
-        this.cityHighlightBorder = '#ffffff';
-        this.cityHighlightBorderWidth = 3;
-        this.initMap();
-        this.initTimeline();
+        this.geoData = _geoData;
+        this.citiesData = _citiesData;
+        this.industrialData = _industrialData;
+        this.officeData = _officeData;
+        this.multifamilyData = _multifamilyData;
+        this.retailData = _retailData;
+        this.combinedData = []; // Initialize combinedData
+        this.selectedSector = null; // Initialize selectedSector
+        this.timelineRange = null; // Initialize timelineRange
+        this.initVis();
     }
 
-    setProjection() {
-        let vis = this;
-        vis.element = document.getElementById(vis.parentElement);
-        if (!vis.element) {
-            console.error("Map element not found:", vis.parentElement);
-            return;
-        }
 
+    initVis() {
+        let vis = this;
+
+        // Define dimensions and margins for the SVG
+        vis.margin = { top: 10, right: 10, bottom: 10, left: 10 };
+        vis.width = 800 - vis.margin.left - vis.margin.right;
+        vis.height = 600 - vis.margin.top - vis.margin.bottom;
+
+        // Append SVG to the DOM
+        vis.svg = d3.select(`#${vis.parentElement}`)
+            .append("svg")
+            .attr("width", vis.width + vis.margin.left + vis.margin.right)
+            .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
+
+        // Define projection and path
         vis.projection = d3.geoMercator()
-            .center([-95, 71])
-            .scale(240)
-            .translate([vis.element.offsetWidth / 2, vis.element.offsetHeight / 2]);
+            .center([-97, 49])
+            .scale(300)
+            .translate([vis.width / 2, vis.height / 2]);
+
+        vis.path = d3.geoPath().projection(vis.projection);
+
+        // Draw the map
+        vis.svg.selectAll(".country")
+            .data(topojson.feature(vis.geoData, vis.geoData.objects.canada).features)
+            .enter().append("path")
+            .attr("class", "country")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1)
+            .attr("d", vis.path)
+            .attr("fill", "rgb(42, 145, 46, 0.9)");
+
+        // Initialize elements and functionality
+        vis.highlightRegions();
+        vis.initSectorIcons();
+        vis.wrangleData();
+        vis.initTimeline();
+
     }
 
-    initMap() {
+    highlightRegions() {
         let vis = this;
-        this.setProjection();
-        if (!vis.projection) return; // Stop if projection is not set
 
-        // Load TopoJSON and GeoJSON inside initMap
-        Promise.all([
-            d3.json(vis.topoJsonPath),
-            d3.json(vis.citiesJsonPath)
-        ]).then(function (data) {
-            const [canadaMapData, citiesData] = data;
+        // Coordinates for key regions - these would be longitude and latitude
+        const regions = {
+            "Vancouver": [-123.1207, 49.2827],
+            "Edmonton": [-113.4938, 53.5461],
+            "Calgary": [-114.0719, 51.0447],
+            "Toronto": [-79.3832, 43.6532],
+            "Ottawa": [-75.6972, 45.4215],
+            "Montreal": [-73.5673, 45.5017]
+        };
 
-            vis.map = new Datamap({
-                element: vis.element,
-                geographyConfig: {
-                    popupTemplate: () => null,
-                    highlightFillColor: vis.mapFillColor,
-                    highlightBorderColor: vis.mapBorderColor,
-                    borderColor: vis.mapBorderColor,
-                    borderWidth: vis.mapBorderWidth,
-                    highlightBorderWidth: vis.mapBorderWidth
-                },
-                scope: 'canada',
-                fills: {defaultFill: vis.mapFillColor},
-                setProjection: () => ({path: d3.geoPath().projection(vis.projection), projection: vis.projection})
-            });
+        // Plot circles for key regions
+        vis.svg.selectAll(".region")
+            .data(Object.entries(regions))
+            .enter().append("circle")
+            .attr("class", "region")
+            .attr("cx", d => vis.projection(d[1])[0])
+            .attr("cy", d => vis.projection(d[1])[1])
+            .attr("r", 10)
+            .attr("stroke", "#000")
+            .attr("stroke-width", 0.5)
+            .attr("fill", "rgba(148, 16, 16, 0.9)")
+            .append("title")
+            .text(d => d[0]);
 
-            vis.map.updateChoropleth(canadaMapData);
+        vis.initSectorIcons();
+    }
 
-            let bubblesData = citiesData.features.map(feature => {
-                let coords = feature.geometry.coordinates[0][0][0];
-                return {
-                    latitude: coords[1],
-                    longitude: coords[0],
-                    radius: 10,
-                    city: feature.properties.NAME_3,
-                    highlightFillColor: vis.cityHighlightFill,
-                    highlightBorderColor: vis.cityHighlightBorder,
-                    highlightBorderWidth: vis.cityHighlightBorderWidth
-                };
-            });
+    initSectorIcons() {
+        let vis = this;
 
-            vis.map.bubbles(bubblesData, {
-                popupTemplate: (geo, data) => `<div class="hoverinfo"><strong>Market: ${data.city}</strong></div>`,
-                highlightFillColor: vis.cityHighlightFill,
-                highlightBorderColor: vis.cityHighlightBorder,
-                highlightBorderWidth: vis.cityHighlightBorderWidth
-            });
+        // Define data for sector icons
+        const sectors = [
+            { id: "retail", iconPath: "img/retail.svg" },
+            { id: "office", iconPath: "img/office.svg" },
+            { id: "industrial", iconPath: "img/industrial.svg" },
+            { id: "multi", iconPath: "img/multi.svg" }
+        ];
 
-        }).catch(error => console.error("Error loading map data:", error));
+        // Iterate over sectors and load SVGs
+        sectors.forEach(sector => {
+            fetch(sector.iconPath)
+                .then(response => response.text())
+                .then(svgData => {
+                    document.getElementById(sector.id).innerHTML = svgData;
+                    // Additional logic (like event listeners) for each sector icon
+                });
+        });
 
-        // Initialize the timeline
-        this.initTimeline();
+        // Add click event listeners for each sector
+        document.getElementById("retail").addEventListener("click", () => vis.selectSector("retail"));
+        document.getElementById("office").addEventListener("click", () => vis.selectSector("office"));
+        document.getElementById("industrial").addEventListener("click", () => vis.selectSector("industrial"));
+        document.getElementById("multi").addEventListener("click", () => vis.selectSector("multi"));
+
+    }
+
+    selectSector(sector) {
+        let vis = this;
+        vis.selectedSector = sector;
+        vis.updateMap();
     }
 
     initTimeline() {
         let vis = this;
-        vis.timelineElement = document.getElementById(vis.timelineElementId);
 
-        if (!vis.timelineElement) {
-            console.error("Timeline element not found:", vis.timelineElementId);
+        // Define dimensions and margins for the timeline
+        vis.timelineMargin = { top: 20, right: 20, bottom: 20, left: 20 };
+        vis.timelineWidth = document.getElementById('timeline').clientWidth - vis.timelineMargin.left - vis.timelineMargin.right;
+        vis.timelineHeight = 100 - vis.timelineMargin.top - vis.timelineMargin.bottom; // Adjust height as needed
+
+        // Append SVG for the timeline to the 'timeline' div
+        vis.timelineSvg = d3.select("#timeline")
+            .append("svg")
+            .attr("width", vis.timelineWidth + vis.timelineMargin.left + vis.timelineMargin.right)
+            .attr("height", vis.timelineHeight + vis.timelineMargin.top + vis.timelineMargin.bottom)
+            .append("g")
+            .attr("transform", `translate(${vis.timelineMargin.left}, ${vis.timelineMargin.top})`);
+
+        // Scales for the timeline
+        vis.xScale = d3.scaleTime()
+            .range([0, vis.timelineWidth])
+            .domain(d3.extent(vis.combinedData, function(d) { return d.date; }));
+
+        vis.yScale = d3.scaleLinear()
+            .range([vis.timelineHeight, 0]);
+
+        // Axes
+        vis.xAxis = d3.axisBottom(vis.xScale);
+
+        vis.timelineSvg.append("g")
+            .attr("transform", `translate(0, ${vis.timelineHeight})`)
+            .call(vis.xAxis);
+
+        // Brush
+        vis.brush = d3.brushX()
+            .extent([[0, 0], [vis.timelineWidth, vis.timelineHeight]])
+            .on("brush end", brushed);
+
+        vis.timelineSvg.append("g")
+            .attr("class", "brush")
+            .call(vis.brush);
+
+        console.log("Timeline initialized", {
+            timelineWidth: vis.timelineWidth,
+            timelineHeight: vis.timelineHeight,
+            xScaleDomain: vis.xScale.domain()
+        });
+
+        function brushed(event) {
+            let selection = event.selection;
+            if (selection) {
+                let dateRange = selection.map(vis.xScale.invert);
+                vis.timelineRange = dateRange; // Set timeline range
+                vis.updateMap(vis.selectedSector); // Update the map with the current sector and new date range
+            }
+
+        }
+    }
+
+    updateMap() {
+        let vis = this;
+        if (!vis.selectedSector || !vis.timelineRange) return;
+
+        // Efficient filtering logic
+        let filteredData = vis.combinedData.filter(d =>
+            d.sector === vis.selectedSector &&
+            vis.timelineRange[0] <= d.date &&
+            d.date <= vis.timelineRange[1]
+        );
+    }
+
+    wrangleData() {
+        let vis = this;
+
+        if (!Array.isArray(vis.industrialData) || !Array.isArray(vis.officeData) ||
+            !Array.isArray(vis.multifamilyData) || !Array.isArray(vis.retailData)) {
+            console.error('Data is not in array format');
             return;
         }
 
-        const parseQuarter = (q) => {
-            let [quarter, year] = q.split(' ');
-            let month = (parseInt(quarter) - 1) * 3;
-            return new Date(year, month);
-        };
+        // Combine all sector data into one array
+        vis.combinedData = [...vis.industrialData, ...vis.officeData, ...vis.multifamilyData, ...vis.retailData];
 
-        this.width = vis.timelineElement.clientWidth;
-        this.height = vis.timelineElement.clientHeight;
+        vis.combinedData.forEach(d => d.date = new Date(d.date));
+        vis.combinedData.sort((a, b) => a.date - b.date);
 
-        this.timeScale = d3.scaleTime()
-            .domain([parseQuarter("Q1 2000"), parseQuarter("Q4 2023")])
-            .range([0, this.width]);
+        console.log("Display combinedData", vis.combinedData);
 
-        this.timelineSvg = d3.select("#" + this.timelineElementId);
-        this.timelineSvg.append("g")
-            .attr("transform", `translate(0,${this.height})`)
-            .call(d3.axisBottom(this.timeScale));
-
-        this.brush = d3.brushX()
-            .extent([[0, 0], [this.width, this.height]])
-            .on("end", event => this.brushEnded(event));
-
-        this.timelineSvg.append("g").call(this.brush);
+        // Update the visualization
+        vis.updateVis();
     }
 
-    brushEnded(event) {
-        if (!event.selection) return;
-        this.dateRange = event.selection.map(d => d.invert(d));
-        this.updateMapBasedOnDateRange(this.dateRange);
-    }
+    updateVis() {
+        let vis = this;
 
-    updateMapBasedOnDateRange(dateRange) {
-        // Logic to update map based on date range
+
+
+
+
+
     }
 }
