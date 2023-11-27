@@ -7,8 +7,8 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
   margin: 0;
   padding: 0;
   background-color: #f7f7f7;
@@ -18,25 +18,27 @@ body {
 h1 {
   font-family: 'Vina Sans', serif;
   color: rgba(148, 16, 16, 0.9);
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 48px;
+  /*margin-top: 10px;*/
+  /*margin-bottom: 10px;*/
+  font-size: 3rem;
   text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.72);
 }
 
 h2 {
   color: #ffffff;
+  font-family: 'Roboto', sans-serif;
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 28px;
+  font-size: 1.75rem;
   text-shadow: 2px 2px 2px #000000;
 }
 
 h3 {
   color: #000000;
+  font-family: 'Roboto', sans-serif;
   margin-top: 30px;
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 1.25rem;
   text-shadow: 2px 2px 2px #aaa;
 }
 
@@ -61,12 +63,24 @@ h3 {
 }
 
 .engaging-text {
-  font-family: 'Roboto', sans-serif; /* This is a modern, crisp font */
+  font-family: 'Roboto', sans-serif;
   font-weight: 400; /* Normal font weight - 700 for bold */
   color: #333; /* Dark gray for sharpness */
-  font-size: 1.2em;
+  font-size: 1rem;
   line-height: 1.6; /* Adjust line height for better readability */
   text-align: justify; /* This makes the text edges sharp and aligned */
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
 }
 
 .text-left-class {
@@ -215,10 +229,10 @@ h3 {
 /*  Macro  Viz  */
 /****************/
 
-
 .vis-container {
   /*border: 1px solid #ff0000; !* Example border for visualization area *!*/
   padding: 1px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.25); /* Light background for the content area */
   width: 100%; /* Use percentage for responsive width */
@@ -231,46 +245,20 @@ h3 {
 }
 
 #consumer_vis {
-  height: 50vh;
+  height: 56vh;
 }
 
 #housing_vis {
-  height: 22vh;
+  height: 25vh;
 }
 
 #mortgage_vis {
-  height: 22vh;
+  height: 25vh;
 }
 
 /****************/
 /*  Perf   Viz  */
 /****************/
-
-/*h1 {*/
-/*  color: white;*/
-/*  font: 45px "arial";*/
-/*  !*font: 45px "Lucida Handwriting";*!*/
-/*  font-weight: bold;*/
-/*  margin-top: 1vh;*/
-/*}*/
-
-/*h3 {*/
-/*  font: 20px "Lucida Handwriting";*/
-/*  font-weight: bold;*/
-/*  color: #D80621;*/
-/*}*/
-
-/*h4 {*/
-/*  font: 20px "Lucida Handwriting";*/
-/*  font-weight: bold;*/
-/*  color: white;*/
-/*}*/
-
-/*h5 {*/
-/*  font: 10px "Lucida Handwriting";*/
-/*  color: black;*/
-/*  !*color: #0c5460;*!*/
-/*}*/
 
 .tooltip {
   position: absolute;
@@ -296,15 +284,6 @@ h3 {
   opacity: 0.7;
 }
 
-#commentary-box {
-  top: 250px;
-  left: 1100px;
-  width: 300px;
-  padding: 10px;
-  opacity: 0.9;
-  text-align: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
 
 .circle-label {
   opacity: 1;
@@ -315,50 +294,6 @@ th {
   font: 12px "arial";
 }
 
-
-/*div.container2 {*/
-/*  font-family: "arial";*/
-/*  !*background-color: rgba(29,67,30,0.7);*!*/
-/*  background-color: whitesmoke;*/
-/*  padding-left: 5vh;*/
-/*  padding-right: 5vh;*/
-/*  padding-bottom: 5vh;*/
-/*  !* Removed fixed height to allow dynamic sizing *!*/
-/*  width: 100%; !* Adjust the width as per requirement *!*/
-/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); !* Optional: Adds a shadow for better visibility *!*/
-/*}*/
-
-.centered-content {
-  display: flex;
-  /*flex-direction: column;*/
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/*div.container {*/
-/*  font-family: "arial";*/
-/*  background-color: rgba(29,67,30,0.5);*/
-/*  !*background-color: rgba(0, 0, 0, 0.6);*!*/
-/*  padding-left: 5vh;*/
-/*  padding-right: 5vh;*/
-/*  padding-bottom: 5vh;*/
-/*  !* Removed fixed height to allow dynamic sizing *!*/
-/*  width: 100%; !* Adjust the width as per requirement *!*/
-/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); !* Optional: Adds a shadow for better visibility *!*/
-/*}*/
-
-/*div.container1 {*/
-/*  font-family: "arial";*/
-/*  !*background-color: rgba(29,67,30,0.7);*!*/
-/*  background-color: rgba(0, 0, 0, 0.6);*/
-/*  padding-left: 5vh;*/
-/*  padding-right: 5vh;*/
-/*  padding-bottom: 5vh;*/
-/*  !* Removed fixed height to allow dynamic sizing *!*/
-/*  width: 100%; !* Adjust the width as per requirement *!*/
-/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); !* Optional: Adds a shadow for better visibility *!*/
-/*}*/
 
 .axis {
   font-size: 11px;
@@ -382,6 +317,22 @@ th {
   fill: rgba(148, 16, 16, 0.9);
   font-size: 12px;
   font-weight: bold;
+}
+
+#playPauseButton {
+  font-size: 16px; /* Adjust the font size as needed */
+  width: 50%;
+  padding: 10px 20px; /* Adjust the padding to make the button smaller or larger */
+  background-color: #3f3f3f; /* Use any color you like */
+  border: none; /* Remove border if present */
+  border-radius: 5px; /* Rounded corners for the button */
+  color: white; /* Text color */
+  cursor: pointer; /* Change cursor to pointer when hovering over the button */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+#playPauseButton:hover {
+  background-color: rgb(42, 145, 46); /* Slightly darker shade when hovered for a visual feedback */
 }
 
 /****************/
@@ -409,6 +360,11 @@ th {
   align-items: center;
 }
 
+#brushDiv svg {
+  width: 100%;
+  height: 100%;
+}
+
 #timeline {
   position: relative;
   display: flex;
@@ -430,10 +386,11 @@ th {
   width: 150px;
   height: 150px;
   position: absolute;
+  transition: fill 0.3s;
 
 }
 
-#industrial {
+#retail {
   top: 10px;
   left: 10px;
 }
@@ -443,14 +400,30 @@ th {
   right: 10px;
 }
 
-#multi {
+#industrial {
   bottom: 10px;
   left: 10px;
 }
 
-#retail {
+#multi {
   bottom: 10px;
   right: 10px;
+}
+
+#retail:hover {
+  fill: rgb(148, 16, 16, 0.9);
+}
+
+#office:hover {
+  fill: rgb(231, 157, 19, 0.9);
+}
+
+#industrial:hover {
+  fill: rgb(42, 145, 46, 0.9);
+}
+
+#multi:hover {
+  fill: rgb(15, 83, 134, 0.9);
 }
 
 #map {

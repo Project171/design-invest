@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>CS171 - Term Project &amp; Invest Real Estate</title>
     <!-- Load CSS libraries -->
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
@@ -43,18 +43,19 @@
                 <h1>Charting a New Course in the Post-Pandemic Economy</h1>
                 <div class="row flex-grow-1 align-items-center">
                     <div class="col-md-8 offset-md-2 text-box">
-                        <p class="engaging-text">In the wake of the global pandemic, Canada's commercial real estate sector stands at a
+                        <p class="engaging-text">In the wake of the global pandemic, Canada's commercial real estate
+                            sector stands at a
                             pivotal juncture, poised to play a critical role in shaping the nation's economic
                             resurgence. As a cornerstone of economic growth, this sector not only reflects the health of
                             the broader economy but also drives it forward through innovation, job creation, and
                             investment opportunities. The resilience demonstrated by this sector amidst unprecedented
-                            challenges underscores its importance in Canada's journey towards economic recovery and long-term prosperity.</p>
+                            challenges underscores its importance in Canada's journey towards economic recovery and
+                            long-term prosperity.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
 
     <!-- 2. Macro Section -->
@@ -134,7 +135,6 @@
                 <h1>Macroeconomics at a Glance</h1>
                 <div class="row">
                     <div class="col-lg-12 mb-2">
-                        <h2>GDP</h2>
                         <div class="vis-container" id="macro_vis" style="height: 200px"></div>
                     </div>
                 </div>
@@ -162,47 +162,55 @@
             <div class="container custom-container-box">
                 <div class="row">
                     <h1>Investment Performance Page</h1>
-                    <h2>Highlight how consumer spending habits have shifted post-pandemic, affecting different
-                        categories of retail real estate.</h2>
-                    <h2>Add descriptive text that guides the user through the data, offering expert insights into the figures presented.
-                    </h2>
+                    <div class="row flex-grow-1 align-items-center">
+                        <div class="col-md-8 offset-md-2 text-box">
+                            <p class="engaging-text">Highlight how consumer spending habits have shifted post-pandemic, affecting different
+                                categories of retail real estate.
+                                Add descriptive text that guides the user through the data, offering expert insights into the
+                                figures presented.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="scroll-section" id="performance2">
-        <div class="container-fluid">
-            <div class="container custom-container-box">
+        <div class="container-fluid h-100 d-flex flex-column">
+            <div class="container custom-container-box flex-grow-1">
+                <!-- Header at the top -->
                 <div class="row">
-                    <h1>Decoding Market Signals: Income and Returns</h1>
-
-                    <div class="centered-content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1><span class="h1-sub">Sector Allocations</span></h1>
-                                <h3>Industrial, Retail, Residential, Office</h3>
-                            </div>
-                        </div>
-                        <div class="row" style="width:100%">
-                            <div class="col-lg-8">
-                                <div id="chart-area"></div>
-                                <!--                                <div id="legend"></div>-->
-                            </div>
-                            <div class="col-lg-4 text-end">
-                                <div id="commentary-box"></div>
-                            </div>
-                            <!-- Buttons Row -->
-                            <div class="row mt-sm-3 buttons">
-                            </div>
-                            <!-- Text below scatter plot -->
-                            <a class="source"
-                               href="https://www.msci.com/research-and-insights?topic=real_estate" target="_blank">Source:
-                                <em>MSCI</em>
-                            </a>
-                        </div>
+                    <div class="col">
+                        <h1>Decoding Market Signals: Income and Returns</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 mb-2">
+                        <h2>Sector Allocations</h2>
+                    </div>
+                </div>
+                <!-- Vertically centered content -->
+                <div class="row flex-grow-1 align-items-center">
+                    <div class="col-lg-9">
+                        <div class="vis-container" id="chart-area"></div>
+                        <!--                                <div id="legend"></div>-->
                     </div>
 
+                    <div class="col-lg-3">
+                        <div class="vis-container" id="commentary-box"></div>
+                    </div>
+                </div>
+                <!-- Buttons Row -->
+                <div class="row mt-sm-3 buttons justify-content-center">
+                </div>
+                <div class="row mt-auto">
+                    <div class="col">
+                        <!-- Text below scatter plot -->
+                        <a class="source"
+                           href="https://www.msci.com/research-and-insights?topic=real_estate" target="_blank">Source:
+                            <em>MSCI</em>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -229,9 +237,19 @@
                 <div class="row h-75">
                     <!-- Content row (75% height of the container) -->
                     <div class="col text-center">
-                        <p><h2>The VECTOM markets represent Canada's six largest urban markets with populations over 1 million. These dynamic cities are the economic engines of Canada, leading in terms of GDP contribution, infrastructure development, and demographic growth. Each city within VECTOM showcases unique opportunities and challenges within the commercial real estate sector, making them key areas of focus for investors and businesses alike. Their collective impact on the national economy cannot be overstated, as they continue to drive forward innovation, talent acquisition, and real estate development.
+                        <div class="row flex-grow-1 align-items-center">
+                            <div class="col-md-8 offset-md-2 text-box">
+                                <p class="engaging-text">The VECTOM markets represent Canada's six largest urban markets with populations over 1
+                                    million. These dynamic cities are the economic engines of Canada, leading in terms of GDP
+                                    contribution, infrastructure development, and demographic growth. Each city within VECTOM
+                                    showcases unique opportunities and challenges within the commercial real estate sector,
+                                    making them key areas of focus for investors and businesses alike. Their collective impact
+                                    on the national economy cannot be overstated, as they continue to drive forward innovation,
+                                    talent acquisition, and real estate development.</p>
+                            </div>
+                        </div>
+                    </div>
 
-                    </h2></div>
                 </div>
             </div>
         </div>
@@ -246,18 +264,18 @@
                 <!-- Placeholder Image Row -->
                 <!-- Map and Sector Visualizations Row -->
                 <div id="visualization-container">
-                    <div class="sector-icon" id="industrial">
-                        <!-- SVG for Industrial will be loaded here -->
+                    <div class="sector-icon" id="retail">
+                        <!-- SVG for Retail will be loaded here -->
                     </div>
                     <div class="sector-icon" id="office">
                         <div id="officeVis"></div>
                         <!-- SVG for Office will be loaded here -->
                     </div>
+                    <div class="sector-icon" id="industrial">
+                        <!-- SVG for Industrial will be loaded here -->
+                    </div>
                     <div class="sector-icon" id="multi">
                         <!-- SVG for Multi will be loaded here -->
-                    </div>
-                    <div class="sector-icon" id="retail">
-                        <!-- SVG for Retail will be loaded here -->
                     </div>
                     <div id="canada">
                         <!-- Map of Canada will be rendered here -->
@@ -267,7 +285,9 @@
                 <!-- TIMELINE CONTAINER -->
                 <div class="container-fluid">
                     <div class="row" style="height: 18vh; padding: 0; border: 0">
-                        <div class="vis-container" id="brushDiv" style="height: 100%; width:100%;"></div>
+                        <div class="vis-container" id="brushDiv" style="height: 100%; width:100%;">
+                            <svg id="timeline-svg"></svg>
+                        </div>
                     </div>
                 </div>
 
@@ -359,9 +379,9 @@
 </div>
 
 <!-- Load JS libraries: jQuery, bootstrap, D3 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+<script crossorigin="anonymous"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 <!-- jQuery -->
@@ -383,6 +403,7 @@
 <script src="js/hBarChart.js"></script>
 <script src="js/AreaChart.js"></script>
 <script src="js/vectom.js"></script>
+<script src="js/timeline.js"></script>
 <script src="js/canadaMap.js"></script>
 <script src="js/industrialVis.js"></script>
 <script src="js/multifamilyVis.js"></script>
