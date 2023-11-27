@@ -151,12 +151,12 @@ function initMainPage(dataArray) {
 
 
     // Initialize map
-    myMap = new CanadaMap('canada', geoData, citiesData, industrialData, multifamilyData, retailData);
-    // myMap = new mapVis('canada', "data/canada.topo.json", "data/filtered_file.json", 'brushDiv');
+    //myMap = new CanadaMap('canada', geoData, citiesData, industrialData, multifamilyData, retailData);
+    myMap = new CanadaMap('canada', "data/canada.topo.json", "data/filtered_file.json", 'brushDiv');
     // Initialize map with actual data
     //myMap = new MapVis('canada', officeData, geoData, citiesData, industrialData, multifamilyData, retailData);
 
-    console.log(officeData);
+    console.log("office_data: ", officeData);
 
     // Initialize visualizations for each sector
     myIndustrial = new IndustrialVis('industrialVis', industrialData);
@@ -165,7 +165,7 @@ function initMainPage(dataArray) {
     myRetail = new RetailVis('retailVis', retailData);
 
     // init brush
-    myBrushVis = new BrushVis('brushDiv', industrialData, officeData, multifamilyData, retailData);
+    //myBrushVis = new BrushVis('brushDiv', industrialData, officeData, multifamilyData, retailData);
 
     // Listen for the category selector change
     // document.getElementById('categorySelector').addEventListener('change', categoryChange);
@@ -332,7 +332,7 @@ function calculateMarketValueChange(data, selectedColumn) {
     // console.log("maxDate: ", maxValue)
 
     // Calculate the percentage change
-    const percentageChange = ((maxValue / minValue) - 1);
+    percentageChange = ((maxValue / minValue) - 1);
     // console.log("percentageChange: ", percentageChange)
 
     // console.log("percentageChange: ", percentageChange)
@@ -341,7 +341,7 @@ function calculateMarketValueChange(data, selectedColumn) {
 
 // For Macro Dash
 function createConsumerData(data) {
-    let consumer_data = [
+    consumer_data = [
         { category: 'Total Consumer Spending'
             , change: calculateMarketValueChange(data, "total_consumer_spending")
             , grouping: 'Total' },
@@ -384,11 +384,11 @@ function createConsumerData(data) {
     ];
 
     return consumer_data
-};
+}
 
 // For Macro Dash
 function createHousingData(data) {
-    let housing_data = [
+    housing_data = [
         { category: 'Housing Market Value'
             , change: calculateMarketValueChange(data, "housing_market_value") },
         { category: 'Residential Sales Price Index'

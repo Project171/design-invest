@@ -4,7 +4,6 @@ class cBarChart {
         this.parentElement = _parentElement;
         this.data = _data;
         // this.eventHandler = _eventHandler;
-
         this.initVis();
     }
 
@@ -18,7 +17,7 @@ class cBarChart {
 
         vis.margin = { top: 40, right: 20, bottom: 60, left: 225 };
 
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right,
+        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
             vis.height = 462.5 - vis.margin.top - vis.margin.bottom;
 
         // SVG drawing area
@@ -130,15 +129,15 @@ class cBarChart {
             .attr("fill", d => {
                 switch (d.grouping) {
                     case "Total":
-                        return "darkgrey";
+                        return "rgba(255,255,255,0.9)";
                     case "Essential":
-                        return "green";
+                        return "rgb(42, 145, 46, 0.9)"; // Green replaced
                     case "Discretionary":
-                        return "orange";
+                        return "rgb(231, 157, 19, 0.9)"; // Orange replaced
                     case "Housing":
-                        return "brown";
+                        return "rgb(148, 16, 16, 0.9)"; // Brown replaced
                     default:
-                        return "gray"; // Or any other default color
+                        return "rgb(63,63,63, 0.9)"; // Or any other default color
                 }
             });
 

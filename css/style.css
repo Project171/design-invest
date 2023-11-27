@@ -17,11 +17,11 @@ body {
 
 h1 {
   font-family: 'Vina Sans', serif;
-  color: #941010;
-  /*margin-top: 10px;*/
-  /*margin-bottom: 10px;*/
+  color: rgba(148, 16, 16, 0.9);
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 48px;
-  text-shadow: 3px 3px 3px #aaa;
+  text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.72);
 }
 
 h2 {
@@ -29,22 +29,56 @@ h2 {
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 28px;
-  text-shadow: 2px 2px 2px #aaa;
+  text-shadow: 2px 2px 2px #000000;
 }
 
 h3 {
+  color: #000000;
+  margin-top: 30px;
   margin-bottom: 10px;
-  font-size: 28px;
+  font-size: 20px;
   text-shadow: 2px 2px 2px #aaa;
 }
 
 .custom-container-box {
   padding: 10px;
   border-radius: 25px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-box {
+  background-color: white;
+  border: 1px solid black;
+  padding: 20px;
+  margin-top: 20px; /* or any other value for positioning */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: for better visibility */
+  border-radius: 5px; /* Optional: for rounded corners */
+}
+
+.engaging-text {
+  font-family: 'Roboto', sans-serif; /* This is a modern, crisp font */
+  font-weight: 400; /* Normal font weight - 700 for bold */
+  color: #333; /* Dark gray for sharpness */
+  font-size: 1.2em;
+  line-height: 1.6; /* Adjust line height for better readability */
+  text-align: justify; /* This makes the text edges sharp and aligned */
+}
+
+.text-left-class {
+  text-align: left; /* Aligns text to the left */
+}
+
+.container-fluid.d-flex.flex-column {
+  height: 100vh; /* This should already be there, just ensure it's correct */
+}
+
+.row.mt-auto {
+  margin-top: auto; /* This pushes the row to the bottom */
 }
 
 .dot-navigation {
@@ -68,7 +102,7 @@ h3 {
 .dot-navigation .dot.active,
 .dot-navigation .dot:hover,
 .dot-navigation .dot:focus {
-  background-color: #941010; /* Active dot color */
+  background-color: rgba(148, 16, 16, 0.9); /* Active dot color */
 }
 
 .scroll-container {
@@ -94,8 +128,8 @@ h3 {
 
 .source {
   font-size: 12px;
-  margin-top: 5vh;
-  margin-bottom: 4vh;
+  margin-top: 3vh;
+  margin-bottom: 2vh;
 }
 
 /****************/
@@ -118,42 +152,42 @@ h3 {
 
 #macro1{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #999aa0;
+  background-color: #e79d13;
   background-size: cover;
   background-attachment: fixed;
 }
 
 #macro2{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #e79d13;
+  background-color: #3f3f3f;
   background-size: cover;
   background-attachment: fixed;
 }
 
 #performance1{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #3f3f3f;
+  background-color: #999aa0;
   background-size: cover;
   background-attachment: fixed;
 }
 
 #performance2{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #999aa0;
+  background-color: #e79d13;
   background-size: cover;
   background-attachment: fixed;
 }
 
 #sectors1{
   /*background-image: url(../img/sectors.jpeg);*/
-  background-color: #e79d13;
+  background-color: #3f3f3f;
   background-size: cover;
   background-attachment: fixed;
 }
 
 #sectors2{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #3f3f3f;
+  background-color: #999aa0;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -165,14 +199,14 @@ h3 {
 
 #recommendation{
   background-image: url(../img/Downtown_Ottawa_2022.jpg);
-  background-color: #999aa0;
+  background-color: #e79d13;
   background-size: cover;
   background-attachment: fixed;
 }
 
-#acknowledgements{
+#acknowledgments{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #e79d13;
+  background-color: #3f3f3f;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -185,20 +219,11 @@ h3 {
 .vis-container {
   /*border: 1px solid #ff0000; !* Example border for visualization area *!*/
   padding: 1px;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.25); /* Light background for the content area */
   width: 100%; /* Use percentage for responsive width */
-  max-height:  662.5px; /* Example max height */
   margin-bottom: 1px; /* Spacing between visualizations */
   overflow: hidden; /* Prevents content from overflowing */
-}
-
-
-/* Adjustments for smaller screens */
-@media (max-width: 768px) {
-  .vis-container {
-    max-height: 100px; /* Smaller max height for small screens */
-  }
 }
 
 #macro_vis {
@@ -206,15 +231,15 @@ h3 {
 }
 
 #consumer_vis {
-  height: 56vh;
+  height: 50vh;
 }
 
 #housing_vis {
-  height: 25vh;
+  height: 22vh;
 }
 
 #mortgage_vis {
-  height: 25vh;
+  height: 22vh;
 }
 
 /****************/
@@ -354,7 +379,7 @@ th {
 }
 
 .axis-label {
-  fill: brown;
+  fill: rgba(148, 16, 16, 0.9);
   font-size: 12px;
   font-weight: bold;
 }
@@ -400,7 +425,7 @@ th {
 }
 
 .sector-icon {
-  fill: #941010;
+  fill: rgb(255, 255, 255);
   margin: 50px;
   width: 150px;
   height: 150px;
@@ -454,7 +479,7 @@ th {
 }
 
 .category h2 {
-  background-color: rgba(42, 145, 46, 0.9); /* Green for 'Buy' */
+  background-color: rgb(42, 145, 46, 0.9); /* Green for 'Buy' */
   color: white;
   text-align: center;
   margin: -20px -20px 20px;

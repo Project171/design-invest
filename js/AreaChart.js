@@ -13,7 +13,7 @@ class AreaChart {
 
         vis.margin = { top: 15, right: 25, bottom: 25, left: 50 };
 
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right,
+        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
             vis.height = 190 - vis.margin.top - vis.margin.bottom;
 
         // SVG drawing area
