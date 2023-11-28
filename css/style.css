@@ -341,12 +341,13 @@ th {
 /****************/
 
 #canada {
-  margin: 30px auto;
+  margin: 10px auto;
   height: 500px;
   width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: clip;
 }
 
 .datamaps-hoverover {
