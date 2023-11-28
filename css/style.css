@@ -171,56 +171,56 @@ h3 {
 
 #macro1{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #e79d13;
+  background-color: rgba(231, 157, 19, 0.5);
   background-size: cover;
   background-attachment: fixed;
 }
 
 #macro2{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #3f3f3f;
+  background-color: rgb(15, 83, 134, 0.5);
   background-size: cover;
   background-attachment: fixed;
 }
 
 #performance1{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #999aa0;
+  background-color: rgba(153, 154, 160, 0.5);
   background-size: cover;
   background-attachment: fixed;
 }
 
 #performance2{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #e79d13;
+  background-color: rgba(231, 157, 19, 0.5);
   background-size: cover;
   background-attachment: fixed;
 }
 
 #sectors1{
   /*background-image: url(../img/sectors.jpeg);*/
-  background-color: #3f3f3f;
+  background-color: rgb(15, 83, 134, 0.5);
   background-size: cover;
   background-attachment: fixed;
 }
 
 #sectors2{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #999aa0;
+  background-color: rgba(153, 154, 160, 0.5);
   background-size: cover;
   background-attachment: fixed;
 }
 
 #recommendation{
   background-image: url(../img/Downtown_Ottawa_2022.jpg);
-  background-color: #e79d13;
+  background-color: rgba(231, 157, 19, 0.5);
   background-size: cover;
   background-attachment: fixed;
 }
 
 #acknowledgments{
   /*background-image: url(../img/intro.jpg);*/
-  background-color: #3f3f3f;
+  background-color: rgb(15, 83, 134, 0.5);
   background-size: cover;
   background-attachment: fixed;
 }
