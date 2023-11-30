@@ -248,12 +248,14 @@ h3 {
   height: 56vh;
 }
 
-#housing_vis {
-  height: 25vh;
+#unemployment_vis {
+  height: 24vh;
+  fill: #A68965;
 }
 
 #mortgage_vis {
   height: 25vh;
+  fill: #A68965
 }
 
 /****************/

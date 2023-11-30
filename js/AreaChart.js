@@ -1,9 +1,10 @@
 class AreaChart {
 
-    constructor(_parentElement, _data) {
+    constructor(_parentElement, _data, selected_column) {
         this.parentElement = _parentElement;
         this.data = _data;
         // this.eventHandler = _eventHandler;
+        this.selected_column = selected_column;
 
         this.initVis();
     }
@@ -43,8 +44,8 @@ class AreaChart {
         let minMaxX = d3.extent(vis.data.map(function (d) { return d.date; }));
         vis.x.domain(minMaxX);
 
-        let minMaxY = [d3.min(vis.data.map(function (d) { return d.mortgage_rates; })),
-            d3.max(vis.data.map(function (d) { return d.mortgage_rates; }))];
+        let minMaxY = [d3.min(vis.data.map(function (d) { return d[vis.selected_column]; })),
+            d3.max(vis.data.map(function (d) { return d[vis.selected_column]; }))];
         vis.y.domain(minMaxY);
 
         vis.svg.append("g")
@@ -78,7 +79,7 @@ class AreaChart {
         vis.area = d3.area()
             .x(function (d) { return vis.x(d.date); })
             .y0(vis.height)
-            .y1(function (d) { return vis.y(d.mortgage_rates); });
+            .y1(function (d) { return vis.y(d[vis.selected_column]); });
 
         vis.area.curve(d3.curveCardinal);
 
@@ -154,7 +155,7 @@ class AreaChart {
             return d.date
         }));
         vis.y.domain(d3.extent(vis.displayData, function (d) {
-            return d.mortgage_rates
+            return d[vis.selected_column]
         }));
 
         // Call the area function and update the path

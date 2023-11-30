@@ -4,7 +4,15 @@ class cBarChart {
         this.parentElement = _parentElement;
         this.data = _data;
         // this.eventHandler = _eventHandler;
+        this.colorScale = {
+            "Total": "#A68965", // Tan
+            "Essential": "#3C88A6", // Deep Blue
+            "Discretionary": "#D8E6F2", // Light Blue
+            "Housing": "#A60321", // Red
+        };
+
         this.initVis();
+
     }
 
     initVis() {
@@ -34,7 +42,7 @@ class cBarChart {
 
         vis.y = d3.scaleBand()
             .range([vis.height, 0])
-            .padding(0.1);
+            .padding(0.2);
         // // Trying to have a different padding between groups
         // .paddingInner(0.1)
         // .paddingOuter(0.2);
@@ -80,6 +88,37 @@ class cBarChart {
         //     console.log("width: ", vis.x(d.change))
         // })
 
+        //// Creating the legend
+
+        var keys = Object.keys(vis.colorScale);
+        var size = 20;
+
+        // Legend container
+        var legend = vis.svg.append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(525, 250)"); // Adjust positioning as needed
+
+        // Add a square for each legend item
+        var legendItems = legend.selectAll(".legend-item")
+            .data(keys)
+            .enter().append("g")
+            .attr("class", "legend-item")
+            .attr("transform", (d, i) => "translate(0," + i * (size + 5) + ")");
+
+        legendItems.append("rect")
+            .attr("width", size)
+            .attr("height", size)
+            .style("fill", d => vis.colorScale[d]);
+
+        // Add text labels for each legend item
+        legendItems.append("text")
+            .attr("x", size * 1.2)
+            .attr("y", size / 2)
+            .style("fill", "black")
+            .text(d => d)
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle");
+        
         // (Filter, aggregate, modify data)
         vis.wrangleData();
     }
@@ -129,15 +168,15 @@ class cBarChart {
             .attr("fill", d => {
                 switch (d.grouping) {
                     case "Total":
-                        return "rgb(15, 83, 134, 0.9)";
+                        return "#A68965"; // Tan
                     case "Essential":
-                        return "rgb(42, 145, 46, 0.9)"; // Green replaced
+                        return "#3C88A6"; // Deep Blue
                     case "Discretionary":
-                        return "rgb(231, 157, 19, 0.9)"; // Orange replaced
+                        return "#D8E6F2"; // Light Blue
                     case "Housing":
-                        return "rgb(148, 16, 16, 0.9)"; // Brown replaced
+                        return "#A60321"; // Red
                     default:
-                        return "rgb(63,63,63, 0.9)"; // Or any other default color
+                        return "rgb(63,63,63, 0.9)";
                 }
             });
 
