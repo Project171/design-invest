@@ -84,12 +84,6 @@ class LineChart {
                 .y(function(d) { return vis.y(d.gdp_yy_chg) })
             );
 
-        // Quarter time scale for brushing
-        const quarterScale = d3.scaleTime()
-            .domain(vis.x.domain())  // Use the same domain as xScale
-            .range(vis.x.range())
-            .nice(d3.timeQuarter);  // Quantize to quarters
-
         vis.currentBrushRegion = null;
         vis.brush = d3.brushX()
             .extent([[0,0],[vis.width, vis.height]])
@@ -99,7 +93,7 @@ class LineChart {
 
                 if (vis.currentBrushRegion) {
                     // Quantize the brush selection to quarters
-                    vis.currentBrushRegion = vis.currentBrushRegion.map(quarterScale.invert);
+                    vis.currentBrushRegion = vis.currentBrushRegion.map(vis.x.invert);
                     console.log(vis.currentBrushRegion);
                 }
 
