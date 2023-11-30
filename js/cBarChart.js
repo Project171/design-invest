@@ -34,7 +34,7 @@ class cBarChart {
 
         vis.y = d3.scaleBand()
             .range([vis.height, 0])
-            .padding(0.1);
+            .padding(0.2);
         // // Trying to have a different padding between groups
         // .paddingInner(0.1)
         // .paddingOuter(0.2);
@@ -129,15 +129,15 @@ class cBarChart {
             .attr("fill", d => {
                 switch (d.grouping) {
                     case "Total":
-                        return "rgb(15, 83, 134, 0.9)";
+                        return "#A68965"; // Tan
                     case "Essential":
-                        return "rgb(42, 145, 46, 0.9)"; // Green replaced
+                        return "#3C88A6"; // Deep Blue
                     case "Discretionary":
-                        return "rgb(231, 157, 19, 0.9)"; // Orange replaced
+                        return "#D8E6F2"; // Light Blue
                     case "Housing":
-                        return "rgb(148, 16, 16, 0.9)"; // Brown replaced
+                        return "#A60321"; // Red
                     default:
-                        return "rgb(63,63,63, 0.9)"; // Or any other default color
+                        return "rgb(63,63,63, 0.9)";
                 }
             });
 

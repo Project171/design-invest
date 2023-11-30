@@ -6,7 +6,7 @@
 let myMap;
 let selectedTimeRange = [];
 let selectedCategory;
-let macroChart, consumerChart, housingChart, mortgageChart;
+let macroChart, consumerChart, unemploymentChart, mortgageChart;
 
 // Function to convert date objects to strings or reverse
 let dateParser = d3.timeParse("%m/%d/%Y");
@@ -51,7 +51,7 @@ Promise.all(promises)
                         // interest_bank: +row['Interest rate, central bank policy'],
                         // interest_bond: +row['Interest rate, 10-Year Benchmark Bond Yield'],
                         // population: +row['Population, total'],
-                        // unemployment: +row['Unemployment rate'],
+                        unemployment: +row['Unemployment rate'],
                         gdp_yy_chg: +row['GDP, real, LCU, Y/Y %Chg'],
 
                     };
@@ -148,8 +148,6 @@ Promise.all(promises)
 // initMainPage
 function initMainPage(dataArray) {
 
-
-
     let macro_data = dataArray[0]
     let consumer_data = dataArray[1]
     let housing_data = dataArray[2]
@@ -180,14 +178,15 @@ function initMainPage(dataArray) {
 
     macroChart = new LineChart("macro_vis", macro_data, macroEventHandler)
     consumerChart = new cBarChart("consumer_vis", consumer_data)
-    housingChart = new hBarChart("housing_vis", housing_data)
-    mortgageChart = new AreaChart("mortgage_vis", housing_data)
+    // housingChart = new hBarChart("housing_vis", housing_data)
+    unemploymentChart = new AreaChart("unemployment_vis", macro_data, "unemployment")
+    mortgageChart = new AreaChart("mortgage_vis", housing_data, "mortgage_rates")
 
     macroEventHandler.bind("selectionChanged", function(event){
         let rangeStart = event.detail[0];
         let rangeEnd = event.detail[1];
         consumerChart.onSelectionChange(rangeStart, rangeEnd);
-        housingChart.onSelectionChange(rangeStart, rangeEnd);
+        unemploymentChart.onSelectionChange(rangeStart, rangeEnd);
         mortgageChart.onSelectionChange(rangeStart, rangeEnd);
     });
 
