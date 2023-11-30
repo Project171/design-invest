@@ -4,7 +4,15 @@ class cBarChart {
         this.parentElement = _parentElement;
         this.data = _data;
         // this.eventHandler = _eventHandler;
+        this.colorScale = {
+            "Total": "#A68965", // Tan
+            "Essential": "#3C88A6", // Deep Blue
+            "Discretionary": "#D8E6F2", // Light Blue
+            "Housing": "#A60321", // Red
+        };
+
         this.initVis();
+
     }
 
     initVis() {
@@ -80,6 +88,37 @@ class cBarChart {
         //     console.log("width: ", vis.x(d.change))
         // })
 
+        //// Creating the legend
+
+        var keys = Object.keys(vis.colorScale);
+        var size = 20;
+
+        // Legend container
+        var legend = vis.svg.append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(525, 250)"); // Adjust positioning as needed
+
+        // Add a square for each legend item
+        var legendItems = legend.selectAll(".legend-item")
+            .data(keys)
+            .enter().append("g")
+            .attr("class", "legend-item")
+            .attr("transform", (d, i) => "translate(0," + i * (size + 5) + ")");
+
+        legendItems.append("rect")
+            .attr("width", size)
+            .attr("height", size)
+            .style("fill", d => vis.colorScale[d]);
+
+        // Add text labels for each legend item
+        legendItems.append("text")
+            .attr("x", size * 1.2)
+            .attr("y", size / 2)
+            .style("fill", "black")
+            .text(d => d)
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle");
+        
         // (Filter, aggregate, modify data)
         vis.wrangleData();
     }
