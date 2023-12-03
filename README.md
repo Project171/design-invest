@@ -24,7 +24,7 @@ We have designed an interactive web visualization project to showcase aspects of
 
 ### **VISUALIZATIONS**
 
-1. **MACROECONOMICS IN CANADA (Jessica Giochoco):** It highlights the recent movement patterns in critical macroeconomic variables:`Gross Domestic Product (GDP)` in Canada, `unemployment rate`, `mortgage rates`, `consumer spending`. 
+1. **MACROECONOMICS IN CANADA (Jessica Giochoco):** It highlights the recent movement patterns in critical macroeconomic variables:`Gross Domestic Product (GDP)` in Canada, `unemployment rate`, `mortgage rates` and `consumer spending`. 
 
 2. **INVESTMENT PERFORMANCE (Naina Garg):** It highlights the `capital value` invested across four major real estate sectors (**Industrial, Office, Retail, Residential**) and six major markets (**VECTOM: Vancouver, Edmonton, Calgary, Toronto, Ottawa, Montreal**) and how each of these have performed in terms of `income return`, `capital growth` and `total return`.
    
