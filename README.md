@@ -1,7 +1,8 @@
 ## **IN WHAT REAL ESTATE SECTOR SHOULD YOU INVEST AND NOT INVEST IN CANADA?**
 
-Live website: [click here!](https://csci-171.github.io/di/)
-2-minute Video: [click here!](https://youtube.com)
+1. Live website: [click here!](project171.github.io/design-invest/)
+2. 2-minute Video: [click here!](https://youtube.com)
+
 
 ## **TECHNICAL DETAILS**
 
@@ -12,6 +13,7 @@ Live website: [click here!](https://csci-171.github.io/di/)
 ### **USED LIBRARIES**
 1. Boostrap
 2. D3
+
  
 ## **PROECT SUMMARY**
 
