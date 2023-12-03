@@ -25,5 +25,5 @@ We recommend investing in the industrial real estate sector in Canada. Through a
 
 
 ### **ACKNOWLEDGMENTS**
-The majority of our data was provided by a private equity company. We also obtained some publicaly available data from Statistics Canada. 
+The majority of our data was provided by a private equity real estate company that Naina works at. We also obtained some publicaly available data from Statistics Canada. 
 
