@@ -1,12 +1,13 @@
-## **IN WHAT REAL ESTATE SECTOR SHOULD YOU INVEST IN CANADA?**
+## **IN WHAT REAL ESTATE SECTOR SHOULD YOU INVEST AND NOT INVEST IN CANADA?**
 
 Live website: [click here!](https://csci-171.github.io/di/)
 
-### **PROJECT DESCRIPTION**
+### **DESCRIPTION**
 
-We have designed an interactive web visualization project to showcase aspects of Commercial Real Estate in Canada. 
+We have designed an interactive web visualization project to showcase aspects of Commercial Real Estate in Canada. Our primary target audience are real estate investors who understand the nuanced variables and ideas presented in this project. 
 
-**Three major sections** as designed by members of our team:
+
+### **VISUALIZATION SECTIONS*
 
 1. **MACROECONOMICS IN CANADA (Jessica Giochoco):** It highlights the recent movement patterns in critical macroeconomic variables (e.g., Gross Domestic Product (GDP) in Canada, unemployment rate, mortgage rates, consumer spending). 
 
@@ -15,13 +16,10 @@ We have designed an interactive web visualization project to showcase aspects of
 3. **INDUSTRIAL SECTOR (Elizabeth Koch):** It highlights the impact of vacancy rates and rent growth in the Industrial sector across six VECTOM markets.
    
 
-### **PROJECT RECOMMENDATION**
+### **RECOMMENDATION**
 
-Our motivation to pursue this project stems from a desire and need to educate both technical and nontechnical audiences about where these markets have been and where they may be going. We plan to create a comprehensive set of easy-to-use advanced interactive web visualizations that will allow the user to understand the outcomes of these variables on four private equity real estate investment sectors.
+We recommend investing in the industrial real estate sector in Canada. Through a comprehensive set of innovative and intuitive web visualizations, we highlight the major macroeconomic movements in Canada, how commercial real estate  in Canada (across the four sectors and six markets) has performed during those economic troughs and peaks, and how one sector (INDUSTRIAL) has remained resilient producing high returns and net growth for investors. 
 
-1. **Target Audience - Knowledge and Interests:** Our primary audience are real estate investors who may already understand the more nuanced variables and ideas that are be presented in this project. Their depth of knowledge and interest would accord with the advanced information served in this project.
-
-We have also been able to procure a private equity company’s data that they are willing to let us use publically for our project. We will dedicate at least one full section of our visualization on presenting visualization as seen from the lens of a real private equity real estate fund.
-
-
+### **ACKNOWLEDGMENTS**
+The majority of our data was provided by a private equity company. We also obtained some publicaly available data from Statistics Canada. 
 
