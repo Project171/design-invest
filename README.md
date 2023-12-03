@@ -4,13 +4,13 @@ Live website: [click here!](https://csci-171.github.io/di/)
 
 ### **PROJECT DESCRIPTION**
 
-We have designed an interactive web visualization project to showcase aspects of Commercial Real Estate in Canada. Our question is: 
+We have designed an interactive web visualization project to showcase aspects of Commercial Real Estate in Canada. 
 
-Our project has three sections:
+Our project has **three major sections** designed individually by members of our team:
 
 1. **Macro Dashboard (Jessica Giochoco):** It highlights the recent movement patterns in critical macroeconomic variables (e.g., Gross Domestic Product (GDP) in Canada, unemployment rate, mortgage rates, consumer spending). 
 
-2. **Investment Performance (Naina Garg):** It highlights the returs and capital growth seen across four major real estate sectors (Industrial, Office, Retail, Residential) and six major markets (VECTOM: Vancouver, Edmonton, Calgary, Toronto, Ottawa, Montreal).
+2. **Investment Performance Measurements (Naina Garg):** It highlights the returs and capital growth seen across four major real estate sectors (Industrial, Office, Retail, Residential) and six major markets (VECTOM: Vancouver, Edmonton, Calgary, Toronto, Ottawa, Montreal).
    
 3. **Industrial Sector (Elizabeth Koch):** It highlights the impact of vacancy rates and rent growth in the Industrial sector across six VECTOM markets.
 
