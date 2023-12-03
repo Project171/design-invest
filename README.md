@@ -6,11 +6,11 @@
 
 ## **TECHNICAL DETAILS**
 
-### **HOW TO RUN THE CODE**
+**HOW TO RUN THE CODE**
 1. Load the project in a web visualization program such as Webstorm.
 2. Use the index.html in the folder to render the project on a browser of choice.
    
-### **USED LIBRARIES**
+**USED LIBRARIES**
 1. Boostrap
 2. D3
 
