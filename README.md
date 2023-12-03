@@ -1,10 +1,10 @@
-## INVEST REAL ESTATE IN CANADA
+## **IN WHAT REAL ESTATE SECTOR SHOULD YOU INVEST IN CANADA?**
 
-To view live website [click here!](https://csci-171.github.io/di/)
+Live website: [click here!](https://csci-171.github.io/di/)
 
 ## **PROJECT DESCRIPTION**
 
-We have designed an interactive web visualization project to showcase aspects of Commercial Real Estate in Canada. Our question is: **IN WHAT REAL ESTATE SECTOR SHOULD YOU INVEST IN CANADA?**
+We have designed an interactive web visualization project to showcase aspects of Commercial Real Estate in Canada. Our question is: 
 
 Our project has three sections:
 
