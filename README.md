@@ -7,7 +7,7 @@ Live website: [click here!](https://csci-171.github.io/di/)
 We have designed an interactive web visualization project to showcase aspects of Commercial Real Estate in Canada. Our primary target audience are real estate investors who understand the nuanced variables and ideas presented in this project. 
 
 
-### **VISUALIZATION DASHBOARDS*
+### **VISUALIZATIONS**
 
 1. **MACROECONOMICS IN CANADA (Jessica Giochoco):** It highlights the recent movement patterns in critical macroeconomic variables (e.g., Gross Domestic Product (GDP) in Canada, unemployment rate, mortgage rates, consumer spending). 
 
