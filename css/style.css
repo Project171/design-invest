@@ -1,474 +1,32 @@
 /****************/
-/* General CSS  */
+/*  Animation Plot */
 /****************/
-:root {
-    --color-profile: srgb;
-    --color-mode: light;
-    --color-text: #000000;
-    color: #000000;
-    --color-background: rgba(255, 255, 255, 0.8);
-    --text-background: rgba(255, 255, 255, 0.9);
-    /*--color-background: rgb(93, 93, 93);*/
-    --color-primary: #7CCCE5;
-    --color-secondary: #FDE47F;
-    --color-tertiary: #E04644;
-    --color-accent: #B7D968;
-    --myshadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.73);
 
-
-    --color1: #7CCCE5;;
-    --color2: #B576AD;
-    --color3: #E04644;
-    --color4: #B7D968;
-    --color5: #FDE47F;
-    --color6: #F9A553;
-}
-
-
-
-html {
-    scroll-behavior: smooth;
-}
-
-.fade-in-section {
-    opacity: 0;
-    transform: translateY(1rem);
-    transition: opacity 2.5s ease-out, transform 2.5s ease-out;
-}
-
-.fade-in-section.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
-    color: #000000;
-    padding: 0;
-    background-color: #3f3f3f;
-    text-align: center;
-}
-
-h1 {
-    font-family: 'Vina Sans', serif;
-    font-size: 2.6rem;
-    text-shadow: var(--myshadow);
-    margin: 1rem 3%;
-}
-
-h2 {
-    font-family: 'Montserrat', sans-serif;
-    margin: 1rem 3%;
-    font-size: 1.75rem;
-    text-shadow: 2px 2px 2px #aaa;
-}
-
-h3 {
-    font-family: 'Montserrat', sans-serif;
-    margin: 1rem 3%;
-    font-size: 1.25rem;
-    text-shadow: 2px 2px 2px #aaa;
-}
-
-.container-fluid-custom {
-    padding: 0;
-    /*border-radius: 1rem;*/
-    /*background-color: var(--color-background);*/
-    height: 100vh;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;;
-    align-items: center;
-}
-
-.custom-container-box {
-    padding: 0;
-    /*border-radius: 1rem;*/
-    background-color: var(--color-background);
-    height: 100%;
-    width: 103%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;;
-    align-items: center;
-
-}
-
-.title-box {
-    max-width: 60vw;
-    min-height: 40vh;
-    background-color: var(--text-background);
-    box-shadow: var(--myshadow);
-    border-radius: 1rem;
-    border: .1rem solid black;
-    padding: 20px;
-    /*margin: 0 auto;*/
-    resize: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-}
-
-/*.text-box {*/
-/*    background-color: var(--text-background);*/
-/*    box-shadow: var(--myshadow);*/
-/*    border-radius: 1rem;*/
-/*    border: .1rem solid black;*/
-/*    padding: 20px;*/
-/*    !*margin: 0 auto;*!*/
-/*    resize: none;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-
+/*body {*/
+/*    !*background-color: rgba(29,67,30,1);*!*/
+/*    background-color: wheat;*/
 /*}*/
 
-.vis-container {
-    /*border: 1px solid #000000;*/
-    padding: 1px;
-    /*box-shadow: var(--myshadow);*/
-    /*background-color: var(--text-background);*/
-    border-radius: 1rem;
-    width: 90%; /* Use percentage for responsive width */
-    margin-bottom: 1px; /* Spacing between visualizations */
-    overflow: hidden; /* Prevents content from overflowing */
-    box-sizing: border-box;
-}
-
-/* Targets unordered lists within the commentary columns */
-.row.text-center .col-md-4 ul {
-    text-align: left; /* Aligns the text to the left */
-}
-
-/* Style for the list items */
-.row.text-center .col-md-4 ul li {
-    list-style-type: disc; /* Adds bullet points */
-    margin-left: .5rem;
-    margin-right: .5rem;
+.background-image {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/sector.jpg');
 }
 
 
-.engaging-text {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600; /* Normal font weight - 700 for bold */
-    color: #000000;
-    font-size: 1rem;
-    line-height: 1.6; /* Adjust line height for better readability */
-    text-align: justify; /* This makes the text edges sharp and aligned */
-}
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    h3 {
-        font-size: 1rem;
-    }
-}
-
-.text-left-class {
-    text-align: left; /* Aligns text to the left */
-}
-
-.container-fluid.d-flex.flex-column {
-    height: 100vh; /* This should already be there, just ensure it's correct */
-}
-
-.row.mt-auto {
-    margin-top: auto; /* This pushes the row to the bottom */
-}
-
-.dot-navigation {
-    position: fixed;
-    right: 18px; /* Adjust as needed */
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-}
-
-.dot-navigation .dot {
-    display: block;
-    height: 10px; /* Dot size */
-    width: 10px; /* Dot size */
-    background-color: var(--color-background);
-    border-radius: 50%;
-    margin-bottom: 10px; /* Space between dots */
-    transition: background-color 0.3s;
-}
-
-.dot-navigation .dot.active,
-.dot-navigation .dot:hover,
-.dot-navigation .dot:focus {
-    background-color: var(--color1);
-}
-
-.scroll-container {
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    height: 100vh; /* Adjust based on your layout */
-}
-
-.scroll-section {
-    height: 100vh;
-    width: 100vw;
-    scroll-snap-align: start;
+div.container {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-direction: column;
-}
-
-.scroll-section .container-fluid {
+    font-family: "arial";
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    padding-top: 3vh;
+    padding-left: 5vh;
+    padding-right: 5vh;
+    padding-bottom: 3vh;
     height: 100%;
     width: 100%;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
 }
-
-.source {
-    font-size: 12px;
-    margin-top: 3vh;
-    margin-bottom: 2vh;
-}
-
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-}
-
-/****************/
-/*Page  Settings*/
-/****************/
-
-#introduction {
-    background-image: url(../img/Downtown_Ottawa_2022.jpg);
-    background-color: var(--color3);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#macro1  {
-    background-color: var(--color4);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#macro2 {
-    background-color: var(--color6);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#macro3 {
-    background-image: url(../img/1.jpeg);
-    background-color: var(--color1);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#vectom {
-    background-color: var(--color2);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#sectors {
-    background-color: var(--color5);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#performance1 {
-    background-image: url(../img/2.jpg);
-    background-color: var(--color3);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#performance2 {
-    background-color: var(--color4);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#performance3 {
-    background-color: var(--color6);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#performance4 {
-    background-image: url(../img/5.jpg);
-    background-color: var(--color1);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#industrial1 {
-    /*background-image: url(../img/1.jpeg);*/
-    background-color: var(--color2);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#recommendation {
-    background-image: url(../img/Downtown_Ottawa_2022.jpg);
-    background-color: var(--color1);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-#acknowledgments {
-    /*background-image: url(../img/1.jpeg);*/
-    background-color: var(--color5);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-/*****************/
-/* Macro Section */
-/*****************/
-
-/* Flex container for commentary columns */
-#macro1 .macro-categories {
-    display: flex;
-    justify-content: space-around; /* Space columns evenly */
-    align-items: flex-start;
-    margin: 20px 0;
-}
-
-/* Style for each column */
-#macro1 .category {
-    flex: 1; /* Each column takes equal width */
-    margin: 0 10px;
-    background-color: var(--color-background); /* Assuming you have this variable set */
-    padding: 20px;
-    border-radius: 1rem;
-    box-shadow: var(--myshadow); /* Assuming you have this variable set */
-}
-
-#macro1 .category h2 {
-    background-color: var(--color1);
-    color: white;
-    font-size: 1.5rem;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    margin: -20px -20px 20px;
-    padding: 10px 0;
-    border-radius: 1rem 1rem 0 0;
-}
-
-#macro1 .category.macro2 h2 {
-    background-color: var(--color2);/
-}
-
-#macro1 .category.macro3 h2 {
-    background-color: var(--color3);
-}
-
-
-/* List styling within each column */
-#macro1 .category ul {
-    list-style-type: square;
-    padding-left: 20px;
-    margin: 0;
-}
-
-#macro1 .category ul li {
-    margin-bottom: 10px;
-    text-align: left;
-    font-size: 0.9em;
-    line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-    .investment-categories {
-        flex-direction: column;
-    }
-
-    .category {
-        margin-bottom: 20px;
-    }
-}
-
-#macro_vis {
-    height: 200px;
-    width: 100vh;
-}
-
-#macro_vis2 {
-    height: 200px;
-    width: 100vh;
-}
-
-#consumer_vis {
-    height: 48vh;
-    width: 95vh;
-}
-
-#unemployment_vis {
-    height: 20vh;
-    fill: var(--color-secondary);
-    width: 45vh;
-}
-
-#mortgage_vis {
-    height: 20vh;
-    fill: var(--color-secondary);
-    width: 45vh;
-}
-
-/****************/
-/*  Perf   Viz  */
-/****************/
-
-.tooltip {
-    position: absolute;
-    text-align: center;
-    width: auto;
-    height: auto;
-    padding: 8px;
-    background: var(--color-background);
-    border: 0;
-    border-radius: 1rem;
-    pointer-events: none;
-}
-
-.legend {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-    padding: 0 10px;
-}
-
-.legend rect {
-    width: 18px;
-    height: 18px;
-    margin-right: 4px;
-    opacity: 0.7;
-}
-
-
-.circle-label {
-    opacity: 1;
-}
-
-th {
-    color: white;
-    font: 12px "arial";
-}
-
 
 .axis {
     font-size: 11px;
@@ -483,311 +41,199 @@ th {
     shape-rendering: crispEdges;
 }
 
-#chart-area text {
-    color: var(--color-text);
+#bubble-area text {
     font-size: 12px;
     font-weight: bold;
 }
 
-.axis-label {
-    fill: rgb(216, 6, 33, 0.9);
-    font-size: 12px;
+
+h1 {
+    color: white;
+    font: 32px "arial";
     font-weight: bold;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
-#playPauseButton {
-    font-size: 1rem; /* Adjust the font size as needed */
-    width: 50%;
-    padding: 20px; /* Adjust the padding to make the button smaller or larger */
-    background-color: rgb(143, 245, 60, 0.95); /* Use any color you like */
-    border: none; /* Remove border if present */
-    border-radius:  1rem;
-    color: white; /* Text color */
-    cursor: pointer; /* Change cursor to pointer when hovering over the button */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    box-shadow: var(--myshadow);
+
+h2 {
+    color: #D80621;
+    color: wheat;
+    font: 20px "arial";
+    font-weight: bold;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
-#playPauseButton:hover {
-    background-color: rgb(216, 6, 33, 0.95); /* Slightly darker shade when hovered for a visual feedback */
+/*Bubble & Bar-lollipop Tooltip*/
+.tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 8px;
+    font: 12px Arial;
+    background: white;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
 
-/****************/
-/*  Sector Viz  */
-/****************/
-
-#resetButton, #timeline1 {
-    display: none;
+h4 {
+    color: white;
+    font: 14px "arial";
+    font-weight: bold;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
-#population-legend {
+h5 {
+    font: 10px "arial";
+    font-weight: bold;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.tooltip h4, .tooltip h5 {
+    margin: 0;
+    padding: 0;
+}
+
+/*Performance table*/
+#table-box {
+    opacity: 0.9;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+th {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+    padding: 0.7vh;
+}
+
+td {
+    text-align: center;
+    font-size: 15px;
+}
+
+.table-highlight th {
+    font-size: larger;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+}
+
+.table.table-highlight tr {
+    border: black; /* Removes all borders from rows and cells */
+}
+
+#table-container {
+    position: relative; /* Container for the table and the commentary box */
+}
+
+#commentary-box, #commentary-bar {
+    border-radius: 20px;
+    padding: 15px 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Deeper shadow for a 3D effect */
+    width: auto;
+    max-width: 85%;
+    text-align: center;
+    font-size: 14px;
+    font-color: red;
+    margin: 10px auto;
+    transition: all 0.1s ease-in-out;
+}
+
+#commentary-box:hover, #commentary-bar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Arrow at the top of the bubble */
+#commentary-box:after, #commentary-bar:after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent transparent #9F21A3 transparent; /* Arrow color matching box */
+}
+
+/* Styling for the text */
+#commentary-box p, #commentary-bar p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.commentary-container {
     display: flex;
+    justify-content: center;
     align-items: center;
     margin-top: 10px;
-    padding: 0 10px;
 }
 
-#population-legend .legend {
-    display: flex;
-    align-items: center;
-}
-
-#population-legend .legend-line {
-    flex: 1;
-    height: 2px;
-    background-color: #007BFF;
-    margin: 0 5px; /* Adjust the spacing between the line and labels as needed */
-}
-
-#population-legend .legend span {
-    font-size: 14px; /* Adjust the font size as needed */
-}
-
-#population-legend .key {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-}
-
-#population-legend .key span {
-    display: block;
-    margin-right: 5px;
-}
-
-#population-legend .key span:first-child {
-    width: 20px;
-    height: 20px;
-}
-
-#canada {
-    margin: 20% 0 0 0;
-    height: 70vh;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#content {
-    position: sticky;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background-color: inherit;
-}
-
-.card {
-    width: 80%;
-    padding: 15px;
-}
-
-.card-body {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600; /* Normal font weight - 700 for bold */
-    color: #000000;
-    font-size: 1rem;
-    line-height: 1.6; /* Adjust line height for better readability */
-    text-align: justify; /* This makes the text edges sharp and aligned */
-}
-
-#chart-container {
-    margin: 20% 0 0 0;
-    height: 70vh;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/*.datamaps-hoverover {*/
-/*    position: absolute;*/
-/*    z-index: 1000;*/
-/*}*/
-
-#timeline-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90vh;
-    border-radius: 0 0 1rem 1rem;
-    box-shadow: var(--myshadow);
-    background-color: var(--text-background);
-}
-
-
-#brushDiv svg {
-    width: 100%;
-    height: 100%;
-}
-
-#timeline1, #timeline2 {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#timeline1 line,
-#timeline1 path {
-    stroke: #000000; /* Sets the SVG line color */
-}
-
-#sectors-container,
-#industrial-container {
-    position: relative;
-    max-height: 70vh;
-    width: 100%;
-    flex-grow: 1;  /* This will allow the container to expand and take up available space */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.sector-icon {
-    fill: var(--color5);
-    margin: 50px;
-    width: 150px;
-    height: 150px;
-    position: absolute;
-    transition: fill 0.3s;
-}
-
-#vacancy {
-    top: 100px;
-    left: 10px;
-}
-
-#rentGrowth {
-    top: 100px;
-    right: 10px;
-}
-
-
-#retail {
-    top: 10px;
-    left: 10px;
-}
-
-#office {
-    top: 10px;
-    right: 10px;
-}
-
-#industrial {
-    bottom: 10px;
-    left: 10px;
-}
-
-#multifamily {
-    bottom: 10px;
-    right: 10px;
-}
-
-#vacancy:hover, .vacancy-clicked {
-    fill: var(--color3);
-}
-
-#rentGrowth:hover, .rentGrowth-clicked {
-    fill: var(--color4);
-}
-
-#retail:hover, .retail-clicked {
-    fill: var(--color3);
-}
-
-#office:hover, .office-clicked {
-    fill: var(--color4);
-}
-
-#industrial:hover, .industrial-clicked {
-    fill: var(--color1);
-}
-
-#multifamily:hover, .multifamily-clicked {
-    fill: var(--color2);
-}
-
-.region-clicked {
-    stroke: black; /* Replace with the color you want for the border */
-    stroke-width: 1px; /* Adjust the width of the border as needed */
-}
-
-#map {
-    height: 50vh;
-    width: 90vh;
-    border-radius: 1rem 1rem 0 0;
-}
-
-
-/*****************/
-/*Recommendations*/
-/*****************/
-
-.investment-categories {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    padding: 20px;
-}
-
-.category {
-    flex: 1;
-    margin: 0 10px;
-    background-color: var(--color-background);
-    padding: 20px;
-    border-radius:  1rem;
-    box-shadow: var(--myshadow);
-}
-
-.category h2 {
-    background-color: var(--color4);
+/*Buttons and Others*/
+/*Play, Forward, Back buttons*/
+.btn, .btn1, .btn2, .btn3 {
+    padding: 5px 2px;
+    /*font-weight: bold;*/
+    /*margin-top: 1vh;*/
+    margin-bottom: 2vh;
     color: white;
-    font-size: 1.5rem;
-    font-family: Montserrat, sans-serif;
-    text-align: center;
-    margin: -20px -20px 20px;
-    padding: 10px 0;
-    border-radius:  1rem 1rem 0 0;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 0.5rem;
 }
 
-.category.hold h2 {
-    background-color: var(--color5);/
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.category.sell h2 {
-    background-color: var(--color3);
+.button-text {
+    margin-top: .5vh;
+    margin-top: .5vh;
 }
 
-@media (max-width: 768px) {
-    .investment-categories {
-        flex-direction: column;
-    }
 
-    .category {
-        margin-bottom: 20px;
-    }
+#sortSelection, #dataSelection, #metricSelect, #lollipop-heading  {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
 }
 
-.category ul {
-    list-style-type: square;
-    padding-left: 20px;
+#sortSelection:hover, #dataSelection:hover, #metricSelect:hover {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.source {
+    font-size: 12px;
+    color: purple;
+}
+
+/*Buttons*/
+.mt-2 {
+    color: purple;
     margin: 0;
+    font-size: 10px;
 }
 
-.category li {
-    margin-bottom: 10px;
-    text-align: left;
-    font-size: 0.9em;
-    line-height: 1.6;
+/*Bar-Lollipop Legend*/
+.legend {
+    font-size: 12px;
 }
 
-.category strong {
-    display: block;
-    margin-bottom: 10px;
-    color: #000000;
-    font-weight: bold;
+.legend rect {
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+    opacity: 0.7;
 }
