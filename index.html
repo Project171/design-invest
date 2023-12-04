@@ -1,411 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CS171 - Term Project &amp; Invest Real Estate</title>
+
     <!-- Load CSS libraries -->
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet"/>
-    <link href='https://fonts.googleapis.com/css?family=Vina Sans' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
 </head>
-<body>
 
-<!-- Scrollable Container for Sections -->
-<div class="scroll-container">
+<body class="background-image">
+<!--<body>-->
 
-    <!-- 1. Introduction Section -->
-    <section class="scroll-section" id="introduction1">
-        <div class="container-fluid">
-            <div class="container custom-container-box">
-                <div class="row h-25 align-items-center">
-                    <!-- Header row (25% height of the container) -->
-                    <div class="col text-center">
-                        <h1>Canada Commercial Real Estate: Navigating the Future Landscape</h1>
-                    </div>
-                </div>
-                <div class="row h-75">
-                    <!-- Content row (75% height of the container) -->
-                    <div class="col text-center">
-                        <h2>Emerging Stronger: Pioneering the New Era of Canadian Commercial Real Estate </h2>
-                        <!-- Additional text and visualizations here -->
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Diversification is key to outperformance over time</h1>
+            <!-- subtitle heading-->
+            <h2 id="dynamic-heading"></h2>
         </div>
-    </section>
-    <section class="scroll-section" id="introduction2">
-        <div class="container-fluid h-100 d-flex flex-column">
-            <div class="container custom-container-box flex-grow-1">
-                <h1>Charting a New Course in the Post-Pandemic Economy</h1>
-                <div class="row flex-grow-1 align-items-center">
-                    <div class="col-md-8 offset-md-2 text-box">
-                        <p class="engaging-text">In the wake of the global pandemic, Canada's commercial real estate
-                            sector stands at a
-                            pivotal juncture, poised to play a critical role in shaping the nation's economic
-                            resurgence. As a cornerstone of economic growth, this sector not only reflects the health of
-                            the broader economy but also drives it forward through innovation, job creation, and
-                            investment opportunities. The resilience demonstrated by this sector amidst unprecedented
-                            challenges underscores its importance in Canada's journey towards economic recovery and
-                            long-term prosperity.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
-
-    <!-- 2. Macro Section -->
-    <section class="scroll-section" id="macro1">
-        <div class="container-fluid h-100 d-flex flex-column">
-            <div class="container custom-container-box flex-grow-1">
-                <!-- Header at the top -->
-                <div class="row">
-                    <div class="col">
-                        <h1>Economic Forces Shaping Commercial Real Estate</h1>
-                    </div>
-                </div>
-                <!-- Vertically centered content -->
-                <div class="row flex-grow-1 align-items-center">
-                    <div class="col text-left-class">
-                        <h2>Gross Domestic Product (GDP)</h2>
-                        <ul>
-                            <li>Direct Correlation: As a broad measure of economic activity, GDP growth typically
-                                signals increased business confidence and spending. A rising GDP often translates to
-                                higher demand for commercial real estate as companies expand.
-                            </li>
-                            <li>Investment Attraction: Strong GDP figures can attract domestic and foreign
-                                investment in commercial real estate, as investors seek to capitalize on the economic
-                                growth.
-                            </li>
-                        </ul>
-                        <h2>Consumer Spending</h2>
-                        <ul>
-                            <li>Retail Sector Impact: High consumer spending can boost the retail sector, increasing
-                                demand
-                                for retail spaces in malls and shopping centers.
-                            </li>
-                            <li>Service Industry Growth: Increased spending also stimulates the service industry,
-                                leading to
-                                a greater need for office spaces and commercial lots.
-                            </li>
-                        </ul>
-                        <h2>Housing Values</h2>
-                        <ul>
-                            <li>Wealth Effect: Rising housing values can lead to a 'wealth effect' where
-                                homeowners feel
-                                financially secure and spend more, benefiting commercial real estate
-                                indirectly.
-                            </li>
-                            <li>Investment Shifts: High residential real estate prices may push investors towards
-                                commercial
-                                properties, looking for better yields and diversification.
-                            </li>
-                        </ul>
-                        <h2>Mortgage Rates</h2>
-                        <ul>
-                            <li>Cost of Capital: Lower mortgage rates reduce the cost of borrowing,
-                                encouraging investment
-                                in real estate development and acquisition.
-                            </li>
-                            <li>Refinancing Opportunities: For existing property owners, low rates offer
-                                refinancing
-                                opportunities, freeing up capital for further investment or improvements.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Footer Row -->
-                <div class="row mt-auto">
-                    <div class="col">
-                        <h2>Understanding these relationships is crucial for investors, developers, and
-                            businesses when making informed decisions in the commercial real estate space.</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="scroll-section" id="macro2">
-        <div class="container-fluid">
-            <div class="container custom-container-box">
-                <h1>Macroeconomics at a Glance</h1>
-                <div class="row">
-                    <div class="col-lg-12 mb-2">
-                        <div class="vis-container" id="macro_vis" style="height: 200px"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 mb-2">
-                        <h2>Consumer Spending</h2>
-                        <div class="vis-container" id="consumer_vis"></div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h2>Housing Values</h2>
-                        <div class="vis-container" id="housing_vis"></div>
-                        <h2>Mortgage Rates</h2>
-                        <div class="vis-container" id="mortgage_vis"></div>
-                    </div>
-                </div>
-            </div>
+    <!-- First Row -->
+    <div class="row">
+        <!-- Selection Dropdown -->
+        <div class="col-md-3 text-center">
+            <div class="mt-2">Select & Play OR Pause, Select & Play</div>
+            <select id="dataSelection" class="form-select btn btn-outline-info">
+                <option value="market.csv">Markets</option>
+                <option value="sector.csv">Sectors</option>
+            </select>
         </div>
 
-    </section>
-
-    <!-- 3. Investment Performance Section -->
-    <section class="scroll-section" id="performance1">
-        <!-- Content for Investment Performance -->
-        <div class="container-fluid">
-            <div class="container custom-container-box">
-                <div class="row">
-                    <h1>Investment Performance Page</h1>
-                    <div class="row flex-grow-1 align-items-center">
-                        <div class="col-md-8 offset-md-2 text-box">
-                            <p class="engaging-text">Highlight how consumer spending habits have shifted post-pandemic, affecting different
-                                categories of retail real estate.
-                                Add descriptive text that guides the user through the data, offering expert insights into the
-                                figures presented.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Play/Pause Button -->
+        <div class="col-md-2 text-center">
+            <div class="mt-2">Play Animation</div>
+            <button id="playPauseButton" type="button" class="btn1 btn-outline-info">Play</button>
         </div>
-    </section>
 
-    <section class="scroll-section" id="performance2">
-        <div class="container-fluid h-100 d-flex flex-column">
-            <div class="container custom-container-box flex-grow-1">
-                <!-- Header at the top -->
-                <div class="row">
-                    <div class="col">
-                        <h1>Decoding Market Signals: Income and Returns</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12 mb-2">
-                        <h2>Sector Allocations</h2>
-                    </div>
-                </div>
-                <!-- Vertically centered content -->
-                <div class="row flex-grow-1 align-items-center">
-                    <div class="col-lg-9">
-                        <div class="vis-container" id="chart-area"></div>
-                        <!--                                <div id="legend"></div>-->
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="vis-container" id="commentary-box"></div>
-                    </div>
-                </div>
-                <!-- Buttons Row -->
-                <div class="row mt-sm-3 buttons justify-content-center">
-                </div>
-                <div class="row mt-auto">
-                    <div class="col">
-                        <!-- Text below scatter plot -->
-                        <a class="source"
-                           href="https://www.msci.com/research-and-insights?topic=real_estate" target="_blank">Source:
-                            <em>MSCI</em>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <!-- Back Button -->
+        <div class="col-md-1 text-center button-container">
+            <div id="backButtonText" class="mt-2" style="display: none;">Back</div>
+            <button id="backButton" type="button" class="btn2 btn-outline-info">Back</button>
         </div>
-    </section>
 
-
-    <!-- 4. Sectors Section -->
-    <section class="scroll-section" id="sectors1">
-        <!-- Content for Sectors -->
-        <div class="container-fluid">
-            <div class="container custom-container-box">
-                <div class="row">
-                    <h1>VECTOM: The Powerhouses of Canadian Commercial Real Estate</h1>
-                </div>
-                <div class="row">
-                    <div id="map" style="height: 400px;"></div>
-                </div>
-                <div class="row h-25 align-items-center">
-                    <!-- Header row (25% height of the container) -->
-                    <div class="col text-center">
-                        <h2>VECTOM: Vancouver, Edmonton, Calgary, Toronto, Ottawa, and Montreal.</h2>
-                    </div>
-                </div>
-                <div class="row h-75">
-                    <!-- Content row (75% height of the container) -->
-                    <div class="col text-center">
-                        <div class="row flex-grow-1 align-items-center">
-                            <div class="col-md-8 offset-md-2 text-box">
-                                <p class="engaging-text">The VECTOM markets represent Canada's six largest urban markets with populations over 1
-                                    million. These dynamic cities are the economic engines of Canada, leading in terms of GDP
-                                    contribution, infrastructure development, and demographic growth. Each city within VECTOM
-                                    showcases unique opportunities and challenges within the commercial real estate sector,
-                                    making them key areas of focus for investors and businesses alike. Their collective impact
-                                    on the national economy cannot be overstated, as they continue to drive forward innovation,
-                                    talent acquisition, and real estate development.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        <!-- Forward Button -->
+        <div class="col-md-1 text-center button-container">
+            <div id="forwardButtonText" class="mt-2" style="display: none;">Forward</div>
+            <button id="forwardButton" type="button" class="btn3 btn-outline-info">Forward</button>
         </div>
-    </section>
 
-    <!-- 4. Sectors Section -->
-    <section class="scroll-section" id="sectors2">
-        <!-- Content for Sectors -->
-        <div class="container-fluid">
-            <div class="container custom-container-box">
-                <h1>What is the impact of economic events over time by market?</h1>
-                <!-- Placeholder Image Row -->
-                <!-- Map and Sector Visualizations Row -->
-                <div id="visualization-container">
-                    <div class="sector-icon" id="retail" title="Retail Sector">
-                        <!-- SVG for Retail will be loaded here -->
-                    </div>
-                    <div class="sector-icon" id="office" title="Office Sector">
-                        <!-- SVG for Office will be loaded here -->
-                    </div>
-                    <div class="sector-icon" id="industrial" title="Industrial Sector">
-                        <!-- SVG for Industrial will be loaded here -->
-                    </div>
-                    <div class="sector-icon" id="multi" title="Multifamily Sector">
-                        <!-- SVG for Multi will be loaded here -->
-                    </div>
-                    <div id="canada">
-                        <!-- Map of Canada will be rendered here -->
-                    </div>
-                </div>
+        <!-- Empty column -->
+        <div class="col-md-2 text-center"></div>
 
-                <!-- TIMELINE CONTAINER -->
-                <div class="container-fluid">
-                    <div class="row" style="height: 18vh; padding: 0; border: 0">
-                        <div class="vis-container" style="height: 100%; width:100%;">
-                            <div id="timeline"></div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
+        <!-- Table Sort Dropdown -->
+        <div class="col-md-3 text-center">
+            <div class="mt-2">Sort Table by Metric during "Play" mode</div>
+            <select id="sortSelection" class="form-select btn btn-outline-info">
+                <option value="total">Total Return</option>
+                <option value="income">Income Return</option>
+                <option value="capitalvalue">Capital Value</option>
+            </select>
         </div>
-    </section>
+    </div>
 
-
-    <!-- 5. Recommendation Section -->
-    <section class="scroll-section" id="recommendation">
-        <div class="container-fluid">
-            <div class="container custom-container-box">
-                <h1>Strategic Investment Insights: Where to Put Your Money in Canada</h1>
-                <div class="investment-categories">
-                    <div class="category buy">
-                        <h2>Buy</h2>
-                        <p><strong>Strong Secular Growth Sectors</strong></p>
-                        <ul>
-                            <li><b>Multifamily:</b> mid-market, modern product not subject to rent control; value-add
-                                older vintage with attainable market rents in A locations with the potential to
-                                decarbonize
-                            </li>
-                            <li><b>Industrial:</b> value-add small and mid bay in "A" locations where land is scarce
-                            </li>
-                            <li><b>Grocery-anchored retail:</b> with strong local trade area demographics</li>
-                            <li><b>Cold Storage:</b> modern facilities to support robust population growth</li>
-                            <li><b>Data Centres:</b> in Quebec, Ontario, and BC</li>
-                            <li><b>Student housing:</b> in select markets</li>
-                        </ul>
-                    </div>
-                    <div class="category hold">
-                        <h2>Hold</h2>
-                        <p><strong>Neutral/Negative
-                            Growth Sectors</strong></p>
-                        <ul>
-                            <li>Modern, <b>big box Logistics</b></li>
-                            <li>Trophy, <b>best-in-class Office</b> that meet the amenity and sustainability goals of
-                                credit tenants
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="category sell">
-                        <h2>Sell</h2>
-                        <p><strong>Low/Negative Growth Sectors
-                            & Regions/Markets</strong></p>
-                        <ul>
-                            <li><b>Commodity office</b></li>
-                            <li><b>Enclosed retail</b></li>
-                            <li><b>Older vintage Industrial:</b> without superior locational attributes</li>
-                            <li>Critical evaluation of all assets that are exposed to increasing <b>physical risks</b>
-                                and/or <b>decarbonization challenges</b></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- Second Row -->
+    <div class="row">
+        <!-- Bubble Chart -->
+        <div class="col-md-8" id="bubble-area"></div>
+        <!-- Table -->
+        <div class="col-md-4 text-end" id="table-container">
+            <div class="mt-2" id="table-box"></div>
+            <div id="commentary-box1" style="display: none;"></div>
+            <div id="commentary-box2" style="display: none;"></div>
+            <div id="commentary-box3" style="display: none;"></div>
+            <div id="commentary-box4" style="display: none;"></div>
         </div>
-    </section>
 
 
-    <!-- 6. Acknowledgments Section -->
-    <section class="scroll-section" id="acknowledgments">
-        <!-- Content for acknowledgments -->
-        <div class="container-fluid">
-            <div class="container custom-container-box">
-                <div class="row">
-                    <h1>Acknowledgments</h1>
-                    <h2>Datasets used:</h2>
-                    <h2>Other sources:</h2>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-</div>
-<div class="dot-navigation">
-    <a class="dot" href="#introduction1"></a>
-    <a class="dot" href="#introduction2"></a>
-    <a class="dot" href="#macro1"></a>
-    <a class="dot" href="#macro2"></a>
-    <a class="dot" href="#performance1"></a>
-    <a class="dot" href="#performance2"></a>
-    <a class="dot" href="#sectors1"></a>
-    <a class="dot" href="#sectors2"></a>
-    <a class="dot" href="#recommendation"></a>
-    <a class="dot" href="#acknowledgments"></a>
+        <!-- Text below scatterplot -->
+        <a class="source" href="https://www.msci.com/research-and-insights?topic=real_estate"
+           class="text-success" target="_blank">Source: <em>MSCI</em>
+        </a>
+        <a class="source" href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen?language=en"
+           class="text-success" target="_blank"><em>Inspired by the Hans Rosling TED talk shown by Dr. Pfister</em>
+        </a>
+    </div>
 </div>
 
 <!-- Load JS libraries: jQuery, bootstrap, D3 -->
-<script crossorigin="anonymous"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
 
 <!-- d3 -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://d3js.org/d3-array.v2.min.js"></script>
-<script src="https://d3js.org/d3-geo.v2.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-<script src="https://d3js.org/topojson.v3.min.js"></script>
-<script src="js/datamaps.can.min.js"></script>
 
-<!--==============================================================================================-->
-<!-- Team JS Files -->
+<!-- own js files -->
 <script src="js/bubble.js"></script>
-<script src="js/LineChart.js"></script>
-<script src="js/cBarChart.js"></script>
-<script src="js/hBarChart.js"></script>
-<script src="js/AreaChart.js"></script>
-<script src="js/vectom.js"></script>
-<script src="js/canadaMap.js"></script>
-<script src="js/main.js"></script>
-
-<!--==============================================================================================-->
 
 </body>
 </html>

@@ -1,500 +1,234 @@
 /****************/
-/* General CSS  */
+/*  Animation Plot */
 /****************/
 
-html {
-  scroll-behavior: smooth;
-}
+/*body {*/
+/*    !*background-color: rgba(29,67,30,1);*!*/
+/*    background-color: wheat;*/
+/*}*/
 
-body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
-  margin: 0;
-  padding: 0;
-  background-color: #f7f7f7;
-  text-align: center;
-}
-
-h1 {
-  font-family: 'Vina Sans', serif;
-  color: rgba(148, 16, 16, 0.9);
-  /*margin-top: 10px;*/
-  /*margin-bottom: 10px;*/
-  font-size: 3rem;
-  text-shadow: 2px 2px 2px #ffffff;
-}
-
-h2 {
-  color: #ffffff;
-  font-family: 'Roboto', sans-serif;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 1.75rem;
-  text-shadow: 2px 2px 2px #000000;
-}
-
-h3 {
-  color: #000000;
-  font-family: 'Roboto', sans-serif;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  font-size: 1.25rem;
-  text-shadow: 2px 2px 2px #aaa;
-}
-
-.custom-container-box {
-  padding: 10px;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.2);
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
-.text-box {
-  background-color: white;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  border: 1px solid black;
-  padding: 20px;
-  margin-top: 0;
-}
-
-.engaging-text {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400; /* Normal font weight - 700 for bold */
-  color: #212121; /* Dark gray for sharpness */
-  font-size: 1rem;
-  line-height: 1.6; /* Adjust line height for better readability */
-  text-align: justify; /* This makes the text edges sharp and aligned */
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-  h2 {
-    font-size: 1.5rem;
-  }
-  h3 {
-    font-size: 1rem;
-  }
-}
-
-.text-left-class {
-  text-align: left; /* Aligns text to the left */
-}
-
-.container-fluid.d-flex.flex-column {
-  height: 100vh; /* This should already be there, just ensure it's correct */
-}
-
-.row.mt-auto {
-  margin-top: auto; /* This pushes the row to the bottom */
-}
-
-.dot-navigation {
-  position: fixed;
-  right: 18px; /* Adjust as needed */
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-}
-
-.dot-navigation .dot {
-  display: block;
-  height: 10px; /* Dot size */
-  width: 10px;  /* Dot size */
-  background-color: #ffffff; /* Dot color */
-  border-radius: 50%;
-  margin-bottom: 10px; /* Space between dots */
-  transition: background-color 0.3s;
-}
-
-.dot-navigation .dot.active,
-.dot-navigation .dot:hover,
-.dot-navigation .dot:focus {
-  background-color: rgba(148, 16, 16, 0.9); /* Active dot color */
-}
-
-.scroll-container {
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  height: 100vh; /* Adjust based on your layout */
-}
-
-.scroll-section {
-  height: 100vh;
-  width: 100vw;
-  scroll-snap-align: start;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.scroll-section .container-fluid {
-  height: 100%;
-  width: 100%;
-}
-
-.source {
-  font-size: 12px;
-  margin-top: 3vh;
-  margin-bottom: 2vh;
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
-/****************/
-/*Page  Settings*/
-/****************/
-
-#introduction1{
-  background-image: url(../img/intro.jpg);
-  background-color: #ffffff;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#introduction2{
-  background-image: url(../img/canada-map.jpg);
-  background-color: #ffffff;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#macro1{
-  /*background-image: url(../img/intro.jpg);*/
-  background-color: rgba(231, 157, 19, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#macro2{
-  /*background-image: url(../img/intro.jpg);*/
-  background-color: rgb(15, 83, 134, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#performance1{
-  /*background-image: url(../img/intro.jpg);*/
-  background-color: rgba(153, 154, 160, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#performance2{
-  /*background-image: url(../img/intro.jpg);*/
-  background-color: rgba(231, 157, 19, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#sectors1{
-  /*background-image: url(../img/sectors.jpeg);*/
-  background-color: rgb(15, 83, 134, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#sectors2{
-  /*background-image: url(../img/intro.jpg);*/
-  background-color: rgba(153, 154, 160, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#recommendation{
-  background-image: url(../img/Downtown_Ottawa_2022.jpg);
-  background-color: rgba(231, 157, 19, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-#acknowledgments{
-  /*background-image: url(../img/intro.jpg);*/
-  background-color: rgb(15, 83, 134, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-/****************/
-/*  Macro  Viz  */
-/****************/
-
-.vis-container {
-  /*border: 1px solid #ff0000;  */
-  padding: 1px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.25); /* Light background for the content area */
-  width: 100%; /* Use percentage for responsive width */
-  margin-bottom: 1px; /* Spacing between visualizations */
-  overflow: hidden; /* Prevents content from overflowing */
-}
-
-#macro_vis {
-  height: 25vh;
-}
-
-#consumer_vis {
-  height: 56vh;
-}
-
-#housing_vis {
-  height: 25vh;
-}
-
-#mortgage_vis {
-  height: 25vh;
-}
-
-/****************/
-/*  Perf   Viz  */
-/****************/
-
-.tooltip {
-  position: absolute;
-  text-align: center;
-  width: auto;
-  height: auto;
-  padding: 8px;
-  font: 12px Lucida Handwriting;
-  background: white;
-  border: 0;
-  border-radius: 8px;
-  pointer-events: none;
-}
-
-.legend {
-  font-size: 12px;
-}
-
-.legend rect {
-  width: 18px;
-  height: 18px;
-  margin-right: 4px;
-  opacity: 0.7;
+.background-image {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/sector.jpg');
 }
 
 
-.circle-label {
-  opacity: 1;
+div.container {
+    display: flex;
+    flex-direction: column;
+    font-family: "arial";
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    padding-top: 3vh;
+    padding-left: 5vh;
+    padding-right: 5vh;
+    padding-bottom: 3vh;
+    height: 100%;
+    width: 100%;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
 }
-
-th {
-  color: white;
-  font: 12px "arial";
-}
-
 
 .axis {
-  font-size: 11px;
-  font-weight: bold;
+    font-size: 11px;
+    font-weight: bold;
 }
 
 .axis path,
 .axis line,
 .domain {
-  fill: none;
-  stroke: black;
-  shape-rendering: crispEdges;
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
 }
 
-#chart-area text {
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.axis-label {
-  fill: rgba(148, 16, 16, 0.9);
-  font-size: 12px;
-  font-weight: bold;
-}
-
-#playPauseButton {
-  font-size: 1rem; /* Adjust the font size as needed */
-  width: 50%;
-  padding: 20px; /* Adjust the padding to make the button smaller or larger */
-  background-color: #3f3f3f; /* Use any color you like */
-  border: none; /* Remove border if present */
-  border-radius: 10px; /* Rounded corners for the button */
-  color: white; /* Text color */
-  cursor: pointer; /* Change cursor to pointer when hovering over the button */
-  transition: background-color 0.3s; /* Smooth transition for hover effect */
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
-#playPauseButton:hover {
-  background-color: rgb(42, 145, 46); /* Slightly darker shade when hovered for a visual feedback */
-}
-
-/****************/
-/*  Sector Viz  */
-/****************/
-
-#canada {
-  margin: 10px auto;
-  height: 500px;
-  width: 800px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: clip;
-}
-
-.datamaps-hoverover {
-  position: absolute;
-  z-index: 1000;
-}
-
-#timeline-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#brushDiv svg {
-  width: 100%;
-  height: 100%;
-}
-
-#timeline {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#visualization-container {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sector-icon {
-  fill: rgb(255, 255, 255);
-  margin: 50px;
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  transition: fill 0.3s;
-
-}
-
-#retail {
-  top: 10px;
-  left: 10px;
-}
-
-#office {
-  top: 10px;
-  right: 10px;
-}
-
-#industrial {
-  bottom: 10px;
-  left: 10px;
-}
-
-#multi {
-  bottom: 10px;
-  right: 10px;
-}
-
-#retail:hover {
-  fill: rgb(148, 16, 16, 0.9);
-}
-
-#office:hover {
-  fill: rgb(231, 157, 19, 0.9);
-}
-
-#industrial:hover {
-  fill: rgb(42, 145, 46, 0.9);
-}
-
-#multi:hover {
-  fill: rgb(15, 83, 134, 0.9);
-}
-
-#map {
-  height: 50%;
+#bubble-area text {
+    font-size: 12px;
+    font-weight: bold;
 }
 
 
-/*****************/
-/*Recommendations*/
-/*****************/
-
-.investment-categories {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  padding: 20px;
+h1 {
+    color: white;
+    font: 32px "arial";
+    font-weight: bold;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
-.category {
-  flex: 1;
-  margin: 0 10px;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+
+h2 {
+    color: #D80621;
+    color: wheat;
+    font: 20px "arial";
+    font-weight: bold;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
-.category h2 {
-  background-color: rgb(42, 145, 46, 0.9); /* Green for 'Buy' */
-  color: white;
-  text-align: center;
-  margin: -20px -20px 20px;
-  padding: 10px 0;
-  border-radius: 10px 10px 0 0;
+/*Bubble & Bar-lollipop Tooltip*/
+.tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 8px;
+    font: 12px Arial;
+    background: white;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
 
-.category.hold h2 {
-  background-color: rgb(231, 157, 19, 0.9); /* Yellow for 'Hold' */
+h4 {
+    color: white;
+    font: 14px "arial";
+    font-weight: bold;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
-.category.sell h2 {
-  background-color: rgb(148, 16, 16, 0.9); /* Red for 'Sell' */
+h5 {
+    font: 10px "arial";
+    font-weight: bold;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
-@media (max-width: 768px) {
-  .investment-categories {
+.tooltip h4, .tooltip h5 {
+    margin: 0;
+    padding: 0;
+}
+
+/*Performance table*/
+#table-box {
+    opacity: 0.9;
+    text-align: start;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+th {
+    color: white;
+    font-size: 14px;
+    text-align: end;
+    white-space: normal;
+    word-break: break-word;
+    padding: 0.7vh;
+}
+
+td {
+    text-align: end;
+    font-size: 15px;
+}
+
+.table-highlight th {
+    font-size: larger;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+}
+
+.table.table-highlight tr {
+    border: black; /* Removes all borders from rows and cells */
+}
+
+#table-container {
+    position: relative; /* Container for the table and the commentary box */
+}
+
+#commentary-box1, #commentary-box2, #commentary-box3, #commentary-box4 {
+    display: none; /* Initially hidden */
+    background-color: wheat;
+    border-radius: 20px; /* Rounded corners for bubble effect */
+    padding: 15px; /* Padding inside the bubble */
+    margin-top: 2vh;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); /* Subtle shadow for depth */
+    width: auto; /* Auto width based on content */
+    max-width: 100%; /* Maximum width */
+    text-align: center; /* Center align text */
+    font-size: 14px; /* Font size */
+    color: #333; /* Text color */
+    /* Position the box */
+    position: absolute;
+    /*right: 20%;*/
+    left: 20%;
+    transform: translateX(0%);
+}
+
+/* Arrow at the top of the bubble */
+#commentary-box1:after, #commentary-box2:after, #commentary-box3:after, #commentary-box4:after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* At the bottom of the bubble */
+    left: 85%; /* Centered horizontally */
+    margin-left: -10px; /* Half the width of the arrow */
+    border-width: 15px; /* Size of the arrow */
+    border-style: solid;
+    border-color: transparent transparent wheat transparent; /* Arrow color */
+}
+
+/* Optional: Add custom styling for the text */
+#commentary-box1 p, #commentary-box2 p, #commentary-box3 p, #commentary-box4 p {
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    line-height: 1.5; /* Improves line spacing */
+}
+
+/*Buttons and Others*/
+
+/*Play, Forward, Back buttons*/
+.btn, .btn1, .btn2, .btn3 {
+    padding: 5px 2px;
+    /*font-weight: bold;*/
+    /*margin-top: 1vh;*/
+    margin-bottom: 2vh;
+    color: white;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 0.5rem;
+}
+
+.button-container {
+    display: flex;
     flex-direction: column;
-  }
-  .category {
-    margin-bottom: 20px;
-  }
+    align-items: center;
+    justify-content: center;
 }
 
-.category ul {
-  list-style-type: square;
-  padding-left: 20px;
-  margin: 0;
+.button-text {
+    margin-top: .5vh;
+    margin-top: .5vh;
 }
 
-.category li {
-  margin-bottom: 10px;
-  text-align: left;
-  font-size: 0.9em;
-  line-height: 1.6;
+
+#sortSelection, #dataSelection, #metricSelect, #lollipop-heading  {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
 }
 
-.category strong {
-  display: block;
-  margin-bottom: 10px;
-  color: #333;
-  font-weight: bold;
+#sortSelection:hover, #dataSelection:hover, #metricSelect:hover {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.source {
+    font-size: 12px;
+    color: purple;
+}
+
+ /*Buttons*/
+.mt-2 {
+    color: purple;
+    margin: 1vh;
+    font-size: 11px;
+}
+
+/*Legend*/
+.legend {
+    font-size: 12px;
+}
+
+.legend rect {
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+    opacity: 0.7;
 }
