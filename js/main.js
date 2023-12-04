@@ -2,37 +2,28 @@
 *           MAIN           *
 * * * * * * * * * * * * * */
 
+
 // Combined Global Variables
-let myMap;
-let selectedTimeRange = [];
-let selectedCategory;
+let myMap, VectomMap, mySectorVis;
 let macroChart, consumerChart, unemploymentChart, mortgageChart;
 
 // Function to convert date objects to strings or reverse
 let dateParser = d3.timeParse("%m/%d/%Y");
 
-// D3 time parser for monthly data
-let parseMonthlyDate = d3.timeParse("%m/%d/%Y");
 
-// Custom function to parse quarterly dates
-function parseQuarterlyDate(dateStr) {
-    let parts = dateStr.split(' ');
-    let quarter = parseInt(parts[0].substring(1));
-    let year = parseInt(parts[1]);
-    let month = (quarter - 1) * 3 + 1;
-    return new Date(year, month - 1, 1);  // JavaScript months are 0-indexed
-}
+let geoDataPath = "data/canada.topo.json";
+let populationDataPath = "data/canada_provinces_pop.csv";
+
 
 let promises = [
     d3.csv("data/macro.csv"),
     d3.csv("data/consumer.csv"),
     d3.csv("data/housing.csv"),
-    d3.json("data/canada.topo.json"),
+    d3.json(geoDataPath),
     d3.json("data/filtered_file.json"),
-    d3.csv("data/IndustrialAvailability.csv"),
-    d3.csv("data/OfficeVacancy.csv"),
-    d3.csv("data/RentalRateGrowthMultifamily.csv"),
-    d3.csv("data/Retail.csv")
+    d3.csv("data/vacancy.csv"),
+    d3.csv("data/rentGrowth.csv"),
+    d3.csv(populationDataPath)
 ];
 
 
@@ -93,7 +84,8 @@ Promise.all(promises)
                         total_consumer_spending: +row['Consumer spending, nominal, LCU - Total consumer spending'],
                         // transport_vehicles: +row['Consumer spending, nominal, LCU - Transport services and vehicle purchases - Total'],
                         // vehicles: +row['Consumer spending, nominal, LCU - Vehicle purchases']
-                    }})
+                    }
+                })
             } else if (index === 2) {
                 return dataset.map(function (row) {
                     return {
@@ -102,36 +94,9 @@ Promise.all(promises)
                         // housing_starts: +row['Housing starts'],
                         mortgage_rates: +row['Interest rate on fixed 5-year mortgages [%]'],
                         housing_market_value: +row['Market value of housing stock, LCU [C$; Millions]'],
-                    }})
-
-            } else if (index === 5 || index === 6 || index === 7 || index === 8){
-                return dataset.map(function (row) {
-                    let date;
-                    if (index === 5 || index === 6 || index === 8) { // Quarterly datasets
-                        date = parseQuarterlyDate(row['Date']);
-                        return {
-                            date,
-                            Toronto: +row['Toronto'] || null,
-                            Montreal: +row['Montréal'] || null,
-                            Ottawa: +row['Ottawa'] || null,
-                            Vancouver: +row['Vancouver'] || null,
-                            Calgary: +row['Calgary'] || null,
-                            Edmonton: +row['Edmonton'] || null
-                        };
-                    } else {
-                        date = parseMonthlyDate(row['Date']);
-                        return {
-                            date,
-                            Toronto: +row['Toronto'] || null,
-                            Montreal: +row['Montréal'] || null,
-                            Ottawa: +row['Ottawa'] || null,
-                            Vancouver: +row['Vancouver'] || null,
-                            Calgary: +row['Calgary'] || null,
-                            Edmonton: +row['Edmonton'] || null
-                        };
                     }
-                }
-                );
+                })
+
             } else {
                 // For other datasets, keep them as they are
                 return dataset;
@@ -153,10 +118,13 @@ function initMainPage(dataArray) {
     let housing_data = dataArray[2]
     let geoData = dataArray[3];
     let citiesData = dataArray[4];
-    let industrialData = dataArray[5];
-    let officeData = dataArray[6];
-    let multifamilyData = dataArray[7];
-    let retailData = dataArray[8];
+    let vacancyData = dataArray[5];
+    let rentGrowthData = dataArray[6];
+    let populationData = dataArray[7];
+
+    let colors = getColorDefinitions();
+    console.log(colors)
+
 
     console.log("macro_data: ", macro_data)
     console.log("consumer_data: ", consumer_data)
@@ -177,12 +145,13 @@ function initMainPage(dataArray) {
     }
 
     macroChart = new LineChart("macro_vis", macro_data, macroEventHandler)
-    consumerChart = new cBarChart("consumer_vis", consumer_data)
+    macroChart = new LineChart("macro_vis2", macro_data, macroEventHandler)
+    consumerChart = new cBarChart("consumer_vis", consumer_data, colors, macroEventHandler)
     // housingChart = new hBarChart("housing_vis", housing_data)
     unemploymentChart = new AreaChart("unemployment_vis", macro_data, "unemployment")
     mortgageChart = new AreaChart("mortgage_vis", housing_data, "mortgage_rates")
 
-    macroEventHandler.bind("selectionChanged", function(event){
+    macroEventHandler.bind("selectionChanged", function (event) {
         let rangeStart = event.detail[0];
         let rangeEnd = event.detail[1];
         consumerChart.onSelectionChange(rangeStart, rangeEnd);
@@ -190,40 +159,37 @@ function initMainPage(dataArray) {
         mortgageChart.onSelectionChange(rangeStart, rangeEnd);
     });
 
-    // Initialize map
-    myMap = new CanadaMap("canada", geoData, citiesData, industrialData, officeData, multifamilyData, retailData, macroEventHandler);
+    // Initialize my visualizations
+    myMap = new CanadaMap("canada", geoData, colors);
+    VectomMap = new VectomMapVis('map', populationDataPath, geoDataPath, colors);
+    mySectorVis = new SectorVis("chart-container", vacancyData, rentGrowthData, colors);
+    mySectorVis.toggleView('line'); // or 'bar'
+    VectomMap.addColorScaleKey();
+
+    document.getElementById('resetButton').addEventListener('click', () => {
+        VectomMap.resetToCurrentPopulation(); //
+    });
 
 
-// Ensure the DOM is fully loaded
+    // Ensure the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', function () {
         // Fetch and load the industrial SVG
-        fetch('img/industrial.svg')
+        fetch('img/vacancy.svg')
             .then(response => response.text())
             .then(data => {
-                document.getElementById('industrial').innerHTML = data;
+                document.getElementById('vacancy').innerHTML = data;
             });
 
         // Repeat the process for multi, office, and retail
-        fetch('img/multi.svg')
+        fetch('img/rentGrowth.svg')
             .then(response => response.text())
             .then(data => {
-                document.getElementById('multi').innerHTML = data;
+                document.getElementById('rentGrowth').innerHTML = data;
             });
 
-        fetch('img/office.svg')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('office').innerHTML = data;
-            });
-
-        fetch('img/retail.svg')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('retail').innerHTML = data;
-            });
     });
 
-    document.addEventListener('scroll', function() {
+    document.addEventListener('scroll', function () {
         const sections = document.querySelectorAll('.scroll-section');
         const dots = document.querySelectorAll('.dot-navigation .dot');
 
@@ -290,45 +256,71 @@ function calculateMarketValueChange(data, selectedColumn) {
 // For Macro Dash
 function createConsumerData(data) {
     consumer_data = [
-        { category: 'Total Consumer Spending'
+        {
+            category: 'Total Consumer Spending'
             , change: calculateMarketValueChange(data, "total_consumer_spending")
-            , grouping: 'Total' },
-        { category: 'Personal Care Goods and Services'
+            , grouping: 'Total'
+        },
+        {
+            category: 'Personal Care Goods and Services'
             , change: calculateMarketValueChange(data, "personal_gs")
-            , grouping: 'Essential' },
-        { category: 'Food and Non-Alcoholic Beverages'
+            , grouping: 'Essential'
+        },
+        {
+            category: 'Food and Non-Alcoholic Beverages'
             , change: calculateMarketValueChange(data, "food_bev")
-            , grouping: 'Essential' },
-        { category: 'Health Goods and Services'
+            , grouping: 'Essential'
+        },
+        {
+            category: 'Health Goods and Services'
             , change: calculateMarketValueChange(data, "health_gs")
-            , grouping: 'Essential' },
-        { category: 'Medical Products'
+            , grouping: 'Essential'
+        },
+        {
+            category: 'Medical Products'
             , change: calculateMarketValueChange(data, "medical_products")
-            , grouping: 'Essential' },
-        { category: 'Travel and Hotels'
+            , grouping: 'Essential'
+        },
+        {
+            category: 'Travel and Hotels'
             , change: calculateMarketValueChange(data, "restaurants_hotels")
-            , grouping: 'Discretionary' },
-        { category: 'Eating Out'
+            , grouping: 'Discretionary'
+        },
+        {
+            category: 'Eating Out'
             , change: calculateMarketValueChange(data, "eating_out")
-            , grouping: 'Discretionary' },
-        { category: 'Clothing and Footwear'
+            , grouping: 'Discretionary'
+        },
+        {
+            category: 'Clothing and Footwear'
             , change: calculateMarketValueChange(data, "clothing")
-            , grouping: 'Discretionary' },
-        { category: 'Recreational'
+            , grouping: 'Discretionary'
+        },
+        {
+            category: 'Recreational'
             , change: calculateMarketValueChange(data, "rec_cult")
-            , grouping: 'Discretionary' },
-        { category: 'Household Furnishings'
+            , grouping: 'Discretionary'
+        },
+        {
+            category: 'Household Furnishings'
             , change: calculateMarketValueChange(data, "household_expenditures")
-            , grouping: 'Housing' },
-        { category: 'Household Appliances'
+            , grouping: 'Housing'
+        },
+        {
+            category: 'Household Appliances'
             , change: calculateMarketValueChange(data, "household_appliances")
-            , grouping: 'Housing' },
-        { category: 'Household Garden Tools and Equipment'
+            , grouping: 'Housing'
+        },
+        {
+            category: 'Household Garden Tools and Equipment'
             , change: calculateMarketValueChange(data, "household_outdoor")
-            , grouping: 'Housing' },
-        { category: 'Housing Maintenance and Repairs'
+            , grouping: 'Housing'
+        },
+        {
+            category: 'Housing Maintenance and Repairs'
             , change: calculateMarketValueChange(data, "housing_maintenance")
-            , grouping: 'Housing' },
+            , grouping: 'Housing'
+        },
     ];
 
     return consumer_data
@@ -337,11 +329,35 @@ function createConsumerData(data) {
 // For Macro Dash
 function createHousingData(data) {
     housing_data = [
-        { category: 'Housing Market Value'
-            , change: calculateMarketValueChange(data, "housing_market_value") },
-        { category: 'Residential Sales Price Index'
-            , change: calculateMarketValueChange(data, "sale_price_index") },
+        {
+            category: 'Housing Market Value'
+            , change: calculateMarketValueChange(data, "housing_market_value")
+        },
+        {
+            category: 'Residential Sales Price Index'
+            , change: calculateMarketValueChange(data, "sale_price_index")
+        },
     ];
 
     return housing_data
+}
+
+function getColorDefinitions() {
+    const rootStyle = getComputedStyle(document.documentElement);
+    return {
+        totalColor: rootStyle.getPropertyValue('--color1').trim(),
+        essentialColor: rootStyle.getPropertyValue('--color2').trim(),
+        discretionaryColor: rootStyle.getPropertyValue('--color3').trim(),
+        housingColor: rootStyle.getPropertyValue('--color4').trim(),
+        retailColor: rootStyle.getPropertyValue('--color3').trim(),
+        officeColor: rootStyle.getPropertyValue('--color4').trim(),
+        industrialColor: rootStyle.getPropertyValue('--color1').trim(),
+        multifamilyColor: rootStyle.getPropertyValue('--color2').trim(),
+        vColor: rootStyle.getPropertyValue('--color3').trim(),
+        eColor: rootStyle.getPropertyValue('--color4').trim(),
+        cColor: rootStyle.getPropertyValue('--color1').trim(),
+        tColor: rootStyle.getPropertyValue('--color2').trim(),
+        oColor: rootStyle.getPropertyValue('--color5').trim(),
+        mColor: rootStyle.getPropertyValue('--color6').trim()
+    };
 }

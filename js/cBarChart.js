@@ -1,14 +1,19 @@
 class cBarChart {
 
-    constructor(_parentElement, _data) {
+    constructor(_parentElement, _data, _colors) {
         this.parentElement = _parentElement;
         this.data = _data;
-        // this.eventHandler = _eventHandler;
+        this.totalColor = _colors.totalColor;
+        this.essentialColor = _colors.essentialColor;
+        this.discretionaryColor = _colors.discretionaryColor;
+        this.housingColor = _colors.housingColor;
+
+
         this.colorScale = {
-            "Total": "#A68965", // Tan
-            "Essential": "#3C88A6", // Deep Blue
-            "Discretionary": "#D8E6F2", // Light Blue
-            "Housing": "#A60321", // Red
+            "Total": this.totalColor, // Tan
+            "Essential": this.essentialColor, // Deep Blue
+            "Discretionary": this.discretionaryColor, // Light Blue
+            "Housing": this.housingColor, // Use CSS variable color
         };
 
         this.initVis();
@@ -168,13 +173,13 @@ class cBarChart {
             .attr("fill", d => {
                 switch (d.grouping) {
                     case "Total":
-                        return "#A68965"; // Tan
+                        return vis.totalColor;
                     case "Essential":
-                        return "#3C88A6"; // Deep Blue
+                        return vis.essentialColor;
                     case "Discretionary":
-                        return "#D8E6F2"; // Light Blue
+                        return vis.discretionaryColor;
                     case "Housing":
-                        return "#A60321"; // Red
+                        return vis.housingColor; // Red
                     default:
                         return "rgb(63,63,63, 0.9)";
                 }

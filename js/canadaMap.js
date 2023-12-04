@@ -1,29 +1,38 @@
 class CanadaMap {
 
-    constructor(_parentElement, _geoData, _citiesData, _industrialData, _officeData, _multifamilyData, _retailData) {
+    constructor(_parentElement, _geoData, _colors) {
         this.parentElement = _parentElement;
         this.geoData = _geoData;
-        this.citiesData = _citiesData;
-        this.industrialData = _industrialData;
-        this.officeData = _officeData;
-        this.multifamilyData = _multifamilyData;
-        this.retailData = _retailData;
-        this.combinedData = []; // Initialize combinedData
-        this.selectedSector = null; // Initialize selectedSector
-        this.timelineRange = null; // Initialize timelineRange
+        this.colors = _colors;
+        this.retailColor = _colors.retailColor;
+        this.officeColor = _colors.officeColor;
+        this.industrialColor = _colors.industrialColor;
+        this.multifamilyColor = _colors.multifamilyColor;
+        this.vColor = _colors.vColor;
+        this.eColor = _colors.eColor;
+        this.cColor = _colors.cColor;
+        this.tColor = _colors.tColor;
+        this.oColor = _colors.oColor;
+        this.mColor = _colors.mColor;
+        this.selectedSector = null;
+        this.selectedRegionElement = null;
+        this.selectedSectorElement = null;
+
+
         this.initVis();
     }
 
 
     initVis() {
         let vis = this;
-
-        // Define dimensions and margins for the SVG
         vis.margin = { top: 10, right: 10, bottom: 10, left: 10 };
         vis.width = 800 - vis.margin.left - vis.margin.right;
         vis.height = 600 - vis.margin.top - vis.margin.bottom;
+        vis.projection = d3.geoMercator().center([-97, 49]).scale(300).translate([vis.width / 2, vis.height / 2]);
+        vis.path = d3.geoPath().projection(vis.projection);
 
-        // Append SVG to the DOM
+        // console.log("colors: ",vis.colors);
+
         vis.svg = d3.select(`#${vis.parentElement}`)
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -31,30 +40,17 @@ class CanadaMap {
             .append("g")
             .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
 
-        // Define projection and path
-        vis.projection = d3.geoMercator()
-            .center([-97, 49])
-            .scale(300)
-            .translate([vis.width / 2, vis.height / 2]);
-
-        vis.path = d3.geoPath().projection(vis.projection);
-
-        // Draw the map
         vis.svg.selectAll(".country")
             .data(topojson.feature(vis.geoData, vis.geoData.objects.canada).features)
             .enter().append("path")
             .attr("class", "country")
-            .attr("stroke", "#fff")
-            .attr("stroke-width", 1)
             .attr("d", vis.path)
-            .attr("fill", "rgb(42, 145, 46, 0.9)");
+            .attr("fill", "gray")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1);
 
-        // Initialize elements and functionality
         vis.highlightRegions();
         vis.initSectorIcons();
-        vis.wrangleData();
-        vis.initTimeline();
-
     }
 
     highlightRegions() {
@@ -62,163 +58,114 @@ class CanadaMap {
 
         // Coordinates for key regions - these would be longitude and latitude
         const regions = {
-            "Vancouver": [-123.1207, 49.2827],
-            "Edmonton": [-113.4938, 53.5461],
-            "Calgary": [-114.0719, 51.0447],
-            "Toronto": [-79.3832, 43.6532],
-            "Ottawa": [-75.6972, 45.4215],
-            "Montreal": [-73.5673, 45.5017]
+            "Vancouver": { coords: [-123.1207, 49.2827], color: vis.vColor },
+            "Edmonton": { coords: [-113.4938, 53.5461], color: vis.eColor },
+            "Calgary": { coords: [-114.0719, 51.0447], color: vis.cColor },
+            "Toronto": { coords: [-79.3832, 43.6532], color: vis.tColor },
+            "Ottawa": { coords: [-75.6972, 45.4215], color: vis.oColor },
+            "Montreal": { coords: [-73.5673, 45.5017], color: vis.mColor }
         };
 
-        // Plot circles for key regions
+
         vis.svg.selectAll(".region")
             .data(Object.entries(regions))
             .enter().append("circle")
             .attr("class", "region")
-            .attr("cx", d => vis.projection(d[1])[0])
-            .attr("cy", d => vis.projection(d[1])[1])
+            .attr("cx", d => vis.projection(d[1].coords)[0])
+            .attr("cy", d => vis.projection(d[1].coords)[1])
             .attr("r", 10)
-            .attr("stroke", "#000")
-            .attr("stroke-width", 0.5)
-            .attr("fill", "rgba(148, 16, 16, 0.9)")
+            .attr("fill", d => d[1].color)
+            .on("click", function(event, d) {
+                if (vis.selectedSectorElement) {
+                    vis.selectedSectorElement.classList.remove(`${vis.selectedSectorElement.id}-clicked`);
+                    vis.selectedSectorElement = null;
+                }
+                if (vis.selectedRegionElement) {
+                    vis.selectedRegionElement.classed("region-clicked", false);
+                }
+                vis.selectedRegionElement = d3.select(this);
+                vis.selectedRegionElement.classed("region-clicked", true);
+                vis.updateCardContentRegion(d[0]);
+                vis.updateHeaderText(`${d[0]}`, d[1].color);
+            })
             .append("title")
             .text(d => d[0]);
-
-        vis.initSectorIcons();
     }
+
+    updateCardContentRegion(region) {
+        let vis = this;
+        vis.regionInfo = {
+            'Vancouver': "Known for its vibrant real estate market, Vancouver is a hub for residential and commercial properties, characterized by high property values and a diverse market. Key features include a strong housing market, diverse demographics, and thriving commercial districts. Vancouver is also a major port city contributing significantly to Canada's economy.",
+            'Edmonton': "Edmonton's real estate market is influenced by its status as a governmental and cultural center, offering a stable environment for both commercial and residential sectors. Key features include governmental buildings, cultural institutions, and an affordable housing market. Edmonton has strong public sector influence, with growing service and technology sectors.",
+            'Calgary': "Calgary's real estate market is dynamic, influenced by the energy sector. It features a mix of modern commercial properties and residential areas. Key features include proximity to natural resources, modern downtown area, and suburban expansion. Calgary is known for its robust energy sector, complemented by growing financial and technology industries, positioning it as a key player in both traditional and emerging economic sectors.",
+            'Toronto': "As Canada's financial capital, Toronto's real estate market is robust, with a high demand for both commercial and residential spaces. Key Features include a diverse economy, high-density urban center, and a luxury housing market. Toronto, as a financial services hub with a diverse cultural scene, stands out as a major international city, significantly contributing to the global economy with its robust financial sector, rich cultural diversity, and international stature.",
+            'Ottawa': "Being the capital city, Ottawa has a stable real estate market with a significant presence of governmental and diplomatic properties. Key features include governmental offices, historical sites, mixed urban and suburban areas. Its economic significance lies in public sector employment, a burgeoning tech industry, and a vibrant tourism sector, all contributing to a mixed urban and suburban landscape enriched with governmental offices and historical sites.",
+            'Montreal': "Montreal's real estate market uniquely fuses historical architecture with contemporary development, reflecting its rich cultural and artistic vibrancy. This blend of old and new is accentuated by its deep French heritage and a lively arts scene. Economically, Montreal stands out as a cultural hub, bolstered by robust industrial and service sectors, and its status as a significant port city."
+        };
+        d3.select("#content .card-body").html(vis.regionInfo[region]);
+    }
+    updateCardContent(sector) {
+        let vis = this;
+        vis.sectorInfo = {
+            'retail': "The retail sector, encompassing shopping centers, malls, and high-street shops, faces evolving trends like the shift towards e-commerce, the criticality of location, and the rise of mixed-use developments. Key challenges include adapting to online shopping trends, sustaining foot traffic, and managing market competition.",
+            'office': "Encompassing skyscrapers and small business offices, the office sector is seeing a rise in demand for flexible workspaces and green buildings, with amenities gaining importance. Key challenges include adapting to remote work, managing vacancy rates, and upgrading older buildings.",
+            'industrial': "This sector, covering manufacturing, logistics, warehouses, and distribution centers, is experiencing an e-commerce driven demand surge for warehouses and smart factories. Challenges include maintaining location accessibility, technological advancements, and adhering to environmental regulations.",
+            'multifamily': "The multifamily sector, including rental apartments and condominiums, is witnessing urbanization-driven demand and the development of luxury units with community amenities. Major challenges are providing affordable housing, effective property management, and navigating market fluctuations."
+        };
+        d3.select("#content .card-body").html(vis.sectorInfo[sector]);
+    }
+
+    updateHeaderText(text, color) {
+        let vis = this;
+        const header = document.querySelector('#sectors h1');
+        header.textContent = text;
+        header.style.color = color; // Set the header color
+    }
+
+    getSectorColor(sector) {
+        let vis = this;
+        switch(sector) {
+            case 'retail': return vis.retailColor;
+            case 'office': return vis.officeColor;
+            case 'industrial': return vis.industrialColor;
+            case 'multifamily': return vis.multifamilyColor;
+            default: return 'black'; // Default color if no match is found
+        }
+    }
+
 
     initSectorIcons() {
         let vis = this;
+        const sectors = {
+            'retail': "img/retail.svg",
+            'office': "img/office.svg",
+            'industrial': "img/industrial.svg",
+            'multifamily': "img/multifamily.svg"
+        };
 
-        // Define data for sector icons
-        const sectors = [
-            { id: "retail", iconPath: "img/retail.svg" },
-            { id: "office", iconPath: "img/office.svg" },
-            { id: "industrial", iconPath: "img/industrial.svg" },
-            { id: "multi", iconPath: "img/multi.svg" }
-        ];
 
-        // Iterate over sectors and load SVGs
-        sectors.forEach(sector => {
-            fetch(sector.iconPath)
+        Object.entries(sectors).forEach(([sector, iconPath]) => {
+            fetch(iconPath)
                 .then(response => response.text())
                 .then(svgData => {
-                    document.getElementById(sector.id).innerHTML = svgData;
-                    // Additional logic (like event listeners) for each sector icon
+                    document.getElementById(sector).innerHTML = svgData;
+                })
+                .then(() => {
+                    document.getElementById(sector).addEventListener("click", function() {
+                        if (vis.selectedRegionElement) {
+                            vis.selectedRegionElement.classed("region-clicked", false);
+                            vis.selectedRegionElement = null;
+                        }
+                        if (vis.selectedSectorElement) {
+                            vis.selectedSectorElement.classList.remove(`${vis.selectedSectorElement.id}-clicked`);
+                        }
+                        vis.selectedSectorElement = this;
+                        vis.selectedSectorElement.classList.add(`${sector}-clicked`);
+                        vis.updateCardContent(sector);
+                        let sectorColor = vis.getSectorColor(sector);
+                        vis.updateHeaderText(`${sector.charAt(0).toUpperCase() + sector.slice(1)} Sector`, sectorColor);
+                    });
                 });
         });
-
-        // Add click event listeners for each sector
-        document.getElementById("retail").addEventListener("click", () => vis.selectSector("retail"));
-        document.getElementById("office").addEventListener("click", () => vis.selectSector("office"));
-        document.getElementById("industrial").addEventListener("click", () => vis.selectSector("industrial"));
-        document.getElementById("multi").addEventListener("click", () => vis.selectSector("multi"));
-
-    }
-
-    selectSector(sector) {
-        let vis = this;
-        vis.selectedSector = sector;
-        vis.updateMap();
-    }
-
-    initTimeline() {
-        let vis = this;
-
-        // Define dimensions and margins for the timeline
-        vis.timelineMargin = { top: 20, right: 20, bottom: 20, left: 20 };
-        vis.timelineWidth = document.getElementById('timeline').clientWidth - vis.timelineMargin.left - vis.timelineMargin.right;
-        vis.timelineHeight = 100 - vis.timelineMargin.top - vis.timelineMargin.bottom; // Adjust height as needed
-
-        // Append SVG for the timeline to the 'timeline' div
-        vis.timelineSvg = d3.select("#timeline")
-            .append("svg")
-            .attr("width", vis.timelineWidth + vis.timelineMargin.left + vis.timelineMargin.right)
-            .attr("height", vis.timelineHeight + vis.timelineMargin.top + vis.timelineMargin.bottom)
-            .append("g")
-            .attr("transform", `translate(${vis.timelineMargin.left}, ${vis.timelineMargin.top})`);
-
-        // Scales for the timeline
-        vis.xScale = d3.scaleTime()
-            .range([0, vis.timelineWidth])
-            .domain(d3.extent(vis.combinedData, function(d) { return d.date; }));
-
-        vis.yScale = d3.scaleLinear()
-            .range([vis.timelineHeight, 0]);
-
-        // Axes
-        vis.xAxis = d3.axisBottom(vis.xScale);
-
-        vis.timelineSvg.append("g")
-            .attr("transform", `translate(0, ${vis.timelineHeight})`)
-            .call(vis.xAxis);
-
-        // Brush
-        vis.brush = d3.brushX()
-            .extent([[0, 0], [vis.timelineWidth, vis.timelineHeight]])
-            .on("brush end", brushed);
-
-        vis.timelineSvg.append("g")
-            .attr("class", "brush")
-            .call(vis.brush);
-
-        console.log("Timeline initialized", {
-            timelineWidth: vis.timelineWidth,
-            timelineHeight: vis.timelineHeight,
-            xScaleDomain: vis.xScale.domain()
-        });
-
-        function brushed(event) {
-            let selection = event.selection;
-            if (selection) {
-                let dateRange = selection.map(vis.xScale.invert);
-                vis.timelineRange = dateRange; // Set timeline range
-                vis.updateMap(vis.selectedSector); // Update the map with the current sector and new date range
-            }
-
-        }
-    }
-
-    updateMap() {
-        let vis = this;
-        if (!vis.selectedSector || !vis.timelineRange) return;
-
-        // Efficient filtering logic
-        let filteredData = vis.combinedData.filter(d =>
-            d.sector === vis.selectedSector &&
-            vis.timelineRange[0] <= d.date &&
-            d.date <= vis.timelineRange[1]
-        );
-    }
-
-    wrangleData() {
-        let vis = this;
-
-        if (!Array.isArray(vis.industrialData) || !Array.isArray(vis.officeData) ||
-            !Array.isArray(vis.multifamilyData) || !Array.isArray(vis.retailData)) {
-            console.error('Data is not in array format');
-            return;
-        }
-
-        // Combine all sector data into one array
-        vis.combinedData = [...vis.industrialData, ...vis.officeData, ...vis.multifamilyData, ...vis.retailData];
-
-        vis.combinedData.forEach(d => d.date = new Date(d.date));
-        vis.combinedData.sort((a, b) => a.date - b.date);
-
-        console.log("Display combinedData", vis.combinedData);
-
-        // Update the visualization
-        vis.updateVis();
-    }
-
-    updateVis() {
-        let vis = this;
-
-
-
-
-
-
     }
 }

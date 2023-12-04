@@ -74,7 +74,7 @@ async function loadData() {
 
     // Color scale for sectors
     var colorScale = d3.scaleOrdinal()
-        .range(["rgb(148,16,16)", "rgb(231,157,19)", "rgb(42,145,46)", "rgb(15,83,134)"]);
+        .range(["#D80621", "#F5E747", "#8FF53C", "#2066A3", "#9F21A3", "#21A3A1"]);
 
     // Axes
     var xAxis = d3.axisBottom().scale(xScale);
