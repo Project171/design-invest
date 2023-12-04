@@ -9,6 +9,8 @@ class SectorVis {
         this.tColor = _colors.tColor;
         this.oColor = _colors.oColor;
         this.mColor = _colors.mColor;
+        this.rentGrowthColor = _colors.rentGrowthColor;
+        this.vacancyColor = _colors.vacancyColor;
         this.combinedData = []; // Initialize combinedData
         this.selectedMarket = "Toronto"; // Initialize selectedMarket
         this.timelineRange = null; // Initialize timelineRange
@@ -27,39 +29,21 @@ class SectorVis {
 
     initVis() {
         let vis = this;
+        vis.margin = { top: 10, right: 10, bottom: 10, left: 10 };
+        vis.width = 800 - vis.margin.left - vis.margin.right;
+        vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        let element = document.getElementById(vis.parentElement);
+        vis.svg = d3.select(`#${vis.parentElement}`)
+            .append("svg")
+            .attr("width", vis.width + vis.margin.left + vis.margin.right)
+            .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
 
-        // Debugging: Log the element and its dimensions
-        console.log("Parent Element:", element);
-        if (element) {
-            console.log("Element Dimensions:", element.getBoundingClientRect());
-        }
-
-        // Only proceed if element exists
-        if (element) {
-            vis.width = element.getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-            vis.height = element.getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
-
-            console.log("SVG Width:", vis.width, "SVG Height:", vis.height);
-
-            // Check if width and height are positive
-            if (vis.width > 0 && vis.height > 0) {
-                vis.svg = d3.select("#" + vis.parentElement).append("svg")
-                    .attr("width", vis.width)
-                    .attr("height", vis.height)
-                    .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
-            } else {
-                console.error("Invalid dimensions for SVG:", vis.width, vis.height);
-            }
-        } else {
-            console.error("Parent element not found:", vis.parentElement);
-        }
 
         // Initialize Timeline
         vis.initTimeline();
-
+        vis.initSectorIcons();
         vis.wrangleData();
     }
 
@@ -388,6 +372,52 @@ class SectorVis {
             .call(yAxis);
     }
 
+    initSectorIcons() {
+        let vis = this;
+        const sectors = {
+            'vacancy': "img/vacancy.svg",
+            'rentGrowth': "img/rentGrowth.svg"
+        };
+
+        // Select the h3 element
+        const header = document.querySelector('#industrial1 h3');
+
+        Object.entries(sectors).forEach(([sector, iconPath]) => {
+            fetch(iconPath)
+                .then(response => response.text())
+                .then(svgData => {
+                    document.getElementById(sector).innerHTML = svgData;
+
+                })
+                .then(() => {
+                    document.getElementById(sector).addEventListener("click", function() {
+                        // Update the h3 text with the sector name
+                        header.textContent = `${sector.charAt(0).toUpperCase() + sector.slice(1)}`;
+
+                        if (vis.selectedSectorElement) {
+                            vis.selectedSectorElement.classList.remove(`${vis.selectedSectorElement.id}-clicked`);
+                        }
+                        vis.selectedSectorElement = this;
+                        vis.selectedSectorElement.classList.add(`${sector}-clicked`);
+                        let sectorColor = vis.getSectorColor(sector);
+                        vis.updateHeaderText(`${sector.charAt(0).toUpperCase() + sector.slice(1)} by Market`);
+                    });
+                });
+        });
+    }
+    updateHeaderText(text) {
+        let vis = this;
+        const header = document.querySelector('#industrial1 h3');
+        header.textContent = text;
+    }
+    getSectorColor(sector) {
+        let vis = this;
+        switch(sector) {
+            case 'vacancy': return vis.vacancyColor;
+            case 'rentGrowth': return vis.rentGrowthColor;
+            default: return 'black'; // Default color if no match is found
+        }
+    }
     drawBarChart() {
         let vis = this;
 

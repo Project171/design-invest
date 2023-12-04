@@ -5,15 +5,9 @@
     --color-profile: srgb;
     --color-mode: light;
     --color-text: #000000;
-    color: #000000;
     --color-background: rgba(255, 255, 255, 0.8);
     --text-background: rgba(255, 255, 255, 0.9);
-    /*--color-background: rgb(93, 93, 93);*/
-    --color-primary: #7CCCE5;
-    --color-secondary: #FDE47F;
-    --color-tertiary: #E04644;
-    --color-accent: #B7D968;
-    --myshadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.73);
+    --myshadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.9);
 
 
     --color1: #7CCCE5;;
@@ -23,8 +17,6 @@
     --color5: #FDE47F;
     --color6: #F9A553;
 }
-
-
 
 html {
     scroll-behavior: smooth;
@@ -43,32 +35,53 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     font-size: 1rem;
     color: #000000;
     padding: 0;
-    background-color: #3f3f3f;
+    /*background-color: #3f3f3f;*/
+    /*text-align: center;*/
+    line-height: 1.3; /* Adjust line height for better readability */
+    text-align: justify;
+}
+
+/*font-family: 'Bebas Neue', sans-serif;*/
+/*font-family: 'Encode Sans SC', sans-serif;*/
+/*font-family: 'Hedvig Letters Serif', serif;*/
+/*font-family: 'Montserrat', sans-serif;*/
+/*font-family: 'Open Sans', sans-serif;*/
+
+/*font-family: 'Roboto', sans-serif;*/
+/*font-family: 'Roboto Slab', serif;*/
+
+/*font-family: 'Vina Sans', sans-serif;*/
+
+
+h1 {
+    font-family: 'Encode Sans SC', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    text-shadow: var(--myshadow);
+    margin: 1rem 3%;
     text-align: center;
 }
 
-h1 {
-    font-family: 'Vina Sans', serif;
-    font-size: 2.6rem;
-    text-shadow: var(--myshadow);
-    margin: 1rem 3%;
-}
-
 h2 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 1rem 3%;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     text-shadow: 2px 2px 2px #aaa;
+    text-align: center;
+
 }
 
 h3 {
     font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     margin: 1rem 3%;
-    font-size: 1.25rem;
-    text-shadow: 2px 2px 2px #aaa;
+    font-size: 1.2rem;
+    text-align: center;
+    /*!**!text-shadow: 2px 2px 2px #aaa;*/
 }
 
 .container-fluid-custom {
@@ -157,11 +170,13 @@ h3 {
 
 .engaging-text {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 600; /* Normal font weight - 700 for bold */
+    font-weight: 600;
     color: #000000;
     font-size: 1rem;
     line-height: 1.6; /* Adjust line height for better readability */
     text-align: justify; /* This makes the text edges sharp and aligned */
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 @media (max-width: 768px) {
@@ -257,7 +272,7 @@ h3 {
     background-attachment: fixed;
 }
 
-#macro1  {
+#macro1 {
     background-color: var(--color4);
     background-size: cover;
     background-attachment: fixed;
@@ -351,10 +366,9 @@ h3 {
 #macro1 .category {
     flex: 1; /* Each column takes equal width */
     margin: 0 10px;
-    background-color: var(--color-background); /* Assuming you have this variable set */
+    background-color: var(--color-background);
     padding: 20px;
     border-radius: 1rem;
-    box-shadow: var(--myshadow); /* Assuming you have this variable set */
 }
 
 #macro1 .category h2 {
@@ -369,7 +383,8 @@ h3 {
 }
 
 #macro1 .category.macro2 h2 {
-    background-color: var(--color2);/
+    background-color: var(--color2);
+/
 }
 
 #macro1 .category.macro3 h2 {
@@ -418,13 +433,13 @@ h3 {
 
 #unemployment_vis {
     height: 20vh;
-    fill: var(--color-secondary);
+    fill: var(--color6);
     width: 45vh;
 }
 
 #mortgage_vis {
     height: 20vh;
-    fill: var(--color-secondary);
+    fill: var(--color6);
     width: 45vh;
 }
 
@@ -501,7 +516,7 @@ th {
     padding: 20px; /* Adjust the padding to make the button smaller or larger */
     background-color: rgb(143, 245, 60, 0.95); /* Use any color you like */
     border: none; /* Remove border if present */
-    border-radius:  1rem;
+    border-radius: 1rem;
     color: white; /* Text color */
     cursor: pointer; /* Change cursor to pointer when hovering over the button */
     transition: background-color 0.3s; /* Smooth transition for hover effect */
@@ -516,47 +531,14 @@ th {
 /*  Sector Viz  */
 /****************/
 
-#resetButton, #timeline1 {
-    display: none;
-}
-
 #population-legend {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    padding: 0 10px;
-}
-
-#population-legend .legend {
-    display: flex;
-    align-items: center;
-}
-
-#population-legend .legend-line {
-    flex: 1;
-    height: 2px;
-    background-color: #007BFF;
-    margin: 0 5px; /* Adjust the spacing between the line and labels as needed */
-}
-
-#population-legend .legend span {
-    font-size: 14px; /* Adjust the font size as needed */
-}
-
-#population-legend .key {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-}
-
-#population-legend .key span {
-    display: block;
-    margin-right: 5px;
-}
-
-#population-legend .key span:first-child {
-    width: 20px;
-    height: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
 }
 
 #canada {
@@ -565,7 +547,7 @@ th {
     width: 80%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 
 #content {
@@ -581,6 +563,7 @@ th {
 .card {
     width: 80%;
     padding: 15px;
+    justify-content: center;
 }
 
 .card-body {
@@ -588,8 +571,10 @@ th {
     font-weight: 600; /* Normal font weight - 700 for bold */
     color: #000000;
     font-size: 1rem;
-    line-height: 1.6; /* Adjust line height for better readability */
-    text-align: justify; /* This makes the text edges sharp and aligned */
+    line-height: 1.6;
+    text-align: justify;
+    margin-right: 15%;
+    margin-left: 15%;
 }
 
 #chart-container {
@@ -598,24 +583,19 @@ th {
     width: 80%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 
-/*.datamaps-hoverover {*/
-/*    position: absolute;*/
-/*    z-index: 1000;*/
+/*#timeline-container {*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    width: 90vh;*/
+/*    border-radius: 0 0 1rem 1rem;*/
+/*    box-shadow: var(--myshadow);*/
+/*    background-color: var(--color-background);*/
 /*}*/
-
-#timeline-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90vh;
-    border-radius: 0 0 1rem 1rem;
-    box-shadow: var(--myshadow);
-    background-color: var(--text-background);
-}
 
 
 #brushDiv svg {
@@ -623,11 +603,25 @@ th {
     height: 100%;
 }
 
-#timeline1, #timeline2 {
+#timeline1 {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 0 0 1rem 1rem;
+    background-color: var(--color-background);
+    margin: 0;
+}
+
+#timeline2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem 1rem 0 0;
+    background-color: var(--color-background);
+    margin: 0;
+    width: 80%;
 }
 
 #timeline1 line,
@@ -640,11 +634,20 @@ th {
     position: relative;
     max-height: 70vh;
     width: 100%;
-    flex-grow: 1;  /* This will allow the container to expand and take up available space */
+    flex-grow: 1; /* This will allow the container to expand and take up available space */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#industrial1 .sector-icon {
+    fill: var(--color2);
+    margin: 20px;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    transition: fill 0.3s;
 }
 
 .sector-icon {
@@ -717,9 +720,16 @@ th {
 }
 
 #map {
+    position: relative;
     height: 50vh;
     width: 90vh;
     border-radius: 1rem 1rem 0 0;
+}
+
+/* Ensure map and timeline containers are the same width */
+.map-timeline-container {
+    width: 90vh; /* Adjust this value to match the map's width */
+    margin: 0 auto; /* This will center the containers if they are block-level */
 }
 
 
@@ -739,7 +749,7 @@ th {
     margin: 0 10px;
     background-color: var(--color-background);
     padding: 20px;
-    border-radius:  1rem;
+    border-radius: 1rem;
     box-shadow: var(--myshadow);
 }
 
@@ -751,11 +761,12 @@ th {
     text-align: center;
     margin: -20px -20px 20px;
     padding: 10px 0;
-    border-radius:  1rem 1rem 0 0;
+    border-radius: 1rem 1rem 0 0;
 }
 
 .category.hold h2 {
-    background-color: var(--color5);/
+    background-color: var(--color5);
+/
 }
 
 .category.sell h2 {

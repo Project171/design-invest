@@ -1,8 +1,9 @@
 class AreaChart {
 
-    constructor(_parentElement, _data, selected_column) {
+    constructor(_parentElement, _data, selected_column, _colors) {
         this.parentElement = _parentElement;
         this.data = _data;
+        this.colors = _colors;
         // this.eventHandler = _eventHandler;
         this.selected_column = selected_column;
 

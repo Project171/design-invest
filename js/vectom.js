@@ -12,7 +12,7 @@ class VectomMapVis {
         this.mColor = _colors.mColor;
         this.provincePopulations = {};
         this.map = null;
-
+        this.brush = null;
         this.initVis();
     }
 
@@ -20,14 +20,13 @@ class VectomMapVis {
         let vis = this;
 
         // Define city coordinates
-        vis.cities = [
-            {"name": "Vancouver", "coords": [49.2827, -123.1207]},
-            {"name": "Edmonton", "coords": [53.5461, -113.4938]},
-            {"name": "Calgary", "coords": [51.0447, -114.0719]},
-            {"name": "Toronto", "coords": [43.6532, -79.3832]},
-            {"name": "Ottawa", "coords": [45.4215, -75.6972]},
-            {"name": "Montreal", "coords": [45.5017, -73.5673]}
-        ];
+        vis.cities = [{"name": "Vancouver", "coords": [49.2827, -123.1207]}, {
+            "name": "Edmonton",
+            "coords": [53.5461, -113.4938]
+        }, {"name": "Calgary", "coords": [51.0447, -114.0719]}, {
+            "name": "Toronto",
+            "coords": [43.6532, -79.3832]
+        }, {"name": "Ottawa", "coords": [45.4215, -75.6972]}, {"name": "Montreal", "coords": [45.5017, -73.5673]}];
 
         vis.x = null;
 
@@ -40,8 +39,7 @@ class VectomMapVis {
         }).setView([53.1304, -97.1384], 4);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap contributors'
+            maxZoom: 19, attribution: '© OpenStreetMap contributors'
         }).addTo(vis.map);
 
 
@@ -65,25 +63,41 @@ class VectomMapVis {
 
             vis.populateTimeline(Object.keys(vis.provincePopulations[Object.keys(vis.provincePopulations)[0]]));
         });
+        // Add event listener to the reset button
+        document.getElementById('resetButton').addEventListener('click', function () {
+            vis.resetToCurrentPopulation();
+        });
+
+
     }
 
     processData(data) {
         let vis = this;
 
+
         data.forEach(function (row) {
             let provinceName = row["Geography"];
-            vis.provincePopulations[provinceName] = vis.provincePopulations[provinceName] || {};
+            if (provinceName === "Canada") {
+                // Handle the total population of Canada
+                vis.totalPopulationCanada = vis.totalPopulationCanada || {};
+                Object.keys(row).forEach(key => {
+                    if (key.startsWith("Q") && key !== "Geography") {
+                        vis.totalPopulationCanada[key] = parseInt(row[key].replace(/,/g, ''));
+                    }
+                });
+            } else {
+                vis.provincePopulations[provinceName] = vis.provincePopulations[provinceName] || {};
 
-            Object.keys(row).forEach(key => {
-                if (key.startsWith("Q") && key !== "Geography") {
-                    // Convert population string to a number, removing commas
-                    let population = parseInt(row[key].replace(/,/g, ''));
-                    vis.provincePopulations[provinceName][key] = population;
-                }
-            });
+                Object.keys(row).forEach(key => {
+                    if (key.startsWith("Q") && key !== "Geography") {
+                        // Convert population string to a number, removing commas
+                        let population = parseInt(row[key].replace(/,/g, ''));
+                        vis.provincePopulations[provinceName][key] = population;
+                    }
+                });
+            }
         });
 
-        //console.log("Processed province populations:", vis.provincePopulations);
     }
 
 
@@ -97,7 +111,7 @@ class VectomMapVis {
                 let provinceName = feature.properties.name;
                 let currentPopulation = vis.getCurrentPopulation(provinceName);
                 // Update the text content of the element with id 'population-info'
-                document.getElementById('population-info').textContent = `Province: ${provinceName}, Population: ${currentPopulation}`;
+                document.getElementById('population-info').textContent = `Province: ${provinceName}, Population: ${currentPopulation.toLocaleString('en-US')}`;
             });
         }
 
@@ -119,8 +133,7 @@ class VectomMapVis {
                             color: 'white',
                             fillOpacity: 0.7
                         };
-                    },
-                    onEachFeature: onEachFeature // Use the defined onEachFeature function
+                    }, onEachFeature: onEachFeature // Use the defined onEachFeature function
                 }).addTo(vis.map);
             })
             .catch(error => console.error("Error loading data:", error));
@@ -129,14 +142,17 @@ class VectomMapVis {
         vis.cities.forEach(function (city) {
             L.marker(city.coords).bindPopup(city.name).addTo(vis.map);
         });
+        let totalPopulation = vis.getCurrentPopulation(); // Get total population for Canada
+        // Update the population display with total population
+
+        document.getElementById('population-info').textContent = `Total Population of Canada: ${totalPopulation.toLocaleString('en-US')}`;
     }
 
 
     populateTimeline(quarters) {
         let vis = this;
 
-        var margin = {top: 10, right: 30, bottom: 50, left: 30},
-            width = 860 - margin.left - margin.right,
+        var margin = {top: 10, right: 30, bottom: 50, left: 30}, width = 860 - margin.left - margin.right,
             height = 100 - margin.top - margin.bottom;
 
         var svg = d3.select("#timeline1").append("svg")
@@ -171,7 +187,7 @@ class VectomMapVis {
             .attr("dy", ".15em")
             .attr("transform", "rotate(-55)"); // Adjust the angle as needed
 
-        var brush = d3.brushX()
+        vis.brush = d3.brushX()
             .extent([[0, 0], [width, height - 2]]) // Adjusted height for brush
             .on("end", function (event) {
                 vis.brushed(event);
@@ -179,7 +195,7 @@ class VectomMapVis {
 
         svg.append("g")
             .attr("class", "brush")
-            .call(brush);
+            .call(vis.brush);
     }
 
     brushed(event) {
@@ -192,19 +208,28 @@ class VectomMapVis {
             const range = scale.range();
             const eachBand = (range[range.length - 1] - rangePadding * 2) / (domain.length - 1);
 
-            // Calculate the nearest index (round down to the nearest whole number)
             const index = Math.max(0, Math.min(domain.length - 1, Math.floor((value - rangePadding) / eachBand)));
 
             return domain[index];
         }
-        const rangePadding = 0; // You'll need to adjust this based on your scale's range settings
+
+        const rangePadding = 0; // Adjust based on scale's range settings
 
         // Convert pixel coordinates to data using the custom invert function
         const quarters = event.selection.map(pixelValue => invertPointScale(vis.x, pixelValue, rangePadding));
 
         // Update the map based on the selected range
         vis.updateMapColorsForRange(quarters[0], quarters[1]);
+
+        // Calculate and display the growth rate for all of Canada
+        let startPopulationCanada = vis.getPopulationForQuarter("Canada", quarters[0]);
+        let endPopulationCanada = vis.getPopulationForQuarter("Canada", quarters[1]);
+        if (startPopulationCanada && endPopulationCanada) {
+            let growthRateCanada = ((endPopulationCanada - startPopulationCanada) / startPopulationCanada) * 100;
+            document.getElementById('population-info').textContent = `Canada Growth Rate: ${growthRateCanada.toFixed(2)}% from ${quarters[0]} to ${quarters[1]}`;
+        }
     }
+
 
     updateMapColorsForRange(startQuarter, endQuarter) {
         let vis = this;
@@ -216,9 +241,17 @@ class VectomMapVis {
                 let endPopulation = vis.getPopulationForQuarter(provinceName, endQuarter);
 
                 if (startPopulation && endPopulation) {
-                    let populationChange = ((endPopulation - startPopulation) / startPopulation) * 100;
-                    let color = vis.getProvinceColor(populationChange);
+                    let growthRate = ((endPopulation - startPopulation) / startPopulation) * 100;
+                    let color = vis.getProvinceColor(endPopulation); // Use endPopulation for coloring
                     layer.setStyle({ fillColor: color });
+
+                    // Update click event to display population and growth rate
+                    layer.off('click'); // Remove previous click event
+                    layer.on('click', function () {
+                        document.getElementById('population-info').textContent = `Province: ${provinceName}, ${endQuarter} Population: ${endPopulation.toLocaleString('en-US')}, Growth Rate: ${growthRate.toFixed(2)}% since ${startQuarter}`;
+                    });
+                } else {
+                    console.warn("No population data for " + provinceName + " in quarter " + endQuarter);
                 }
             }
         });
@@ -228,17 +261,29 @@ class VectomMapVis {
 
     getPopulationForQuarter(provinceName, quarter) {
         let vis = this;
-        let population = vis.provincePopulations[provinceName] ? vis.provincePopulations[provinceName][quarter] : null;
-        return population;
+
+        // Check if the provinceName is 'Canada' and return the population from totalPopulationCanada
+        if (provinceName === "Canada") {
+            return vis.totalPopulationCanada[quarter] || null;
+        } else {
+            let population = vis.provincePopulations[provinceName] ? vis.provincePopulations[provinceName][quarter] : null;
+            return population;
+
+        }
+
+
     }
-
-
 
 
     getCurrentPopulation(provinceName) {
         let vis = this;
 
-        //console.log("Getting current population for:", provinceName);
+        if (!provinceName || provinceName === "Canada") {
+            console.log("Getting total population for Canada");
+            let quarters = Object.keys(vis.totalPopulationCanada);
+            let latestQuarter = quarters[quarters.length - 1];
+            return vis.totalPopulationCanada[latestQuarter];
+        }
 
         // Check if the province has data
         if (!vis.provincePopulations[provinceName] || vis.provincePopulations[provinceName].length === 0) {
@@ -253,7 +298,7 @@ class VectomMapVis {
         let latestQuarter = quarters[quarters.length - 1];
 
         //console.log("Latest quarter for", provinceName, ":", latestQuarter);
-       // console.log("Population for", latestQuarter, ":", vis.provincePopulations[provinceName][latestQuarter]);
+        // console.log("Population for", latestQuarter, ":", vis.provincePopulations[provinceName][latestQuarter]);
 
         return vis.provincePopulations[provinceName][latestQuarter];
     }
@@ -268,7 +313,25 @@ class VectomMapVis {
                 layer.setStyle({ fillColor: color });
             }
         });
+
+        // Clear the brush selection
+        if (vis.brush) {
+            d3.select('.brush').call(vis.brush.move, null);
+        }
+
+        // Explicitly remove the brush's visual elements
+        d3.select('.brush').selectAll('.selection, .handle').style('display', 'none');
+
+        // Reset the population info text
+        let totalPopulation = vis.getCurrentPopulation("Canada");
+        document.getElementById('population-info').textContent = `Total Population of Canada: ${totalPopulation.toLocaleString('en-US')}`;
+
+        // Recenter the map to the initial view
+        vis.map.setView([53.1304, -97.1384], 4); // Replace with your initial latitude, longitude, and zoom level
     }
+
+
+
 
 
     getProvinceColor(populationChange) {
