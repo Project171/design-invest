@@ -670,9 +670,7 @@ td {
 
 .button-text {
     margin-top: .5vh;
-    margin-top: .5vh;
 }
-
 
 #sortSelection, #dataSelection, #metricSelect, #lollipop-heading  {
     background-color: rgba(0, 0, 0, 0.8);
