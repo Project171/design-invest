@@ -13,8 +13,8 @@ class LineChart {
 
         vis.margin = { top: 15, right: 25, bottom: 30, left: 50 };
 
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right,
-            vis.height = 200 - vis.margin.top - vis.margin.bottom;
+        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        vis.height = 200 - vis.margin.top - vis.margin.bottom;
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
 
@@ -77,7 +77,7 @@ class LineChart {
         vis.svg.append("path")
             .datum(vis.data)
             .attr("fill", "none")
-            .attr("stroke", "black")
+            .attr("stroke", "var(--color-text)")
             .attr("stroke-width", 1.5)
             .attr("d", d3.line()
                 .x(function(d) { return vis.x(d.date) })

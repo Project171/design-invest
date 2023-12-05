@@ -39,7 +39,7 @@
                 </p>
                 <h1>What's the Story Behind the Numbers?</h1>
                 <div class="row">
-                    <div class="col-lg-12 mb-2">
+                    <div class="col-lg-12">
                         <div class="vis-container" id="macro_vis" style="height: 200px"></div>
                     </div>
                 </div>
@@ -361,6 +361,17 @@
             </div>
             <!-- Content Card -->
             <div class="row text-center mt-4">
+                <div id="regionSelector">
+                    <select id="regionDropdown">
+                        <option value="Canada">National</option>
+                        <option value="Toronto">Toronto</option>
+                        <option value="Montreal">Montreal</option>
+                        <option value="Ottawa">Ottawa</option>
+                        <option value="Vancouver">Vancouver</option>
+                        <option value="Calgary">Calgary</option>
+                        <option value="Edmonton">Edmonton</option>
+                    </select>
+                </div>
                 <h3></h3>
             </div>
         </div>
@@ -470,51 +481,54 @@
     <a class="dot" href="#acknowledgments"></a>
 </div>
 
-
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-        // Function to update H1 colors
-        function updateH1Colors() {
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                const backgroundColor = window.getComputedStyle(section).backgroundColor;
-                const h1Elements = section.querySelectorAll('h1');
-                h1Elements.forEach(h1 => {
-                    h1.style.color = backgroundColor;
-                });
-            });
-        }
-
-        // Apply fade-in-section class to all h1 elements
+        // Add fade-in effect to all h1 elements
         document.querySelectorAll('h1').forEach(h1 => {
             h1.classList.add('fade-in-section');
         });
 
-        // Update H1 colors
-        updateH1Colors();
+        // Scroll event listener to update dot navigation
+        window.addEventListener('scroll', function() {
+            updateDotNavigation();
+        });
+        // Function to update the dot navigation based on current scroll position
+        function updateDotNavigation() {
+            const sections = document.querySelectorAll('.scroll-section');
+            const dots = document.querySelectorAll('.dot-navigation .dot');
+            const scrollPosition = window.scrollY || window.pageYOffset;
+
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[index].classList.add('active');
+                }
+            });
+        }
+
+        // Initial call to set the correct dot on load
+        updateDotNavigation();
 
         // IntersectionObserver for fade-in effect
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("active");
-                } else {
-                    entry.target.classList.remove("active");
                 }
             });
-        }, {threshold: 1});
+        }, { threshold: 1 });
 
-        // Observe elements with fade-in-section class
-        const fadeInSection = document.querySelectorAll('.fade-in-section');
-        fadeInSection.forEach(section => {
+        // Observe elements for fade-in effect
+        document.querySelectorAll('.fade-in-section').forEach(section => {
             observer.observe(section);
         });
     });
 </script>
-
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Load JS libraries: jQuery, bootstrap, D3 -->
 <script crossorigin="anonymous"

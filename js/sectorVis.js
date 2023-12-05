@@ -1,5 +1,5 @@
 class SectorVis {
-    constructor(_parentElement, _vacancyData, _rentGrowthData, _colors) {
+    constructor(_parentElement, _vacancyData, _rentGrowthData, _colors, _industrial) {
         this.parentElement = _parentElement;
         this.vacancyData = _vacancyData;
         this.rentGrowthData = _rentGrowthData;
@@ -13,6 +13,7 @@ class SectorVis {
         this.vacancyColor = _colors.vacancyColor;
         this.combinedData = []; // Initialize combinedData
         this.selectedMarket = "Toronto"; // Initialize selectedMarket
+        this.selectedSector = 'vacancy';
         this.timelineRange = null; // Initialize timelineRange
         this.currentView = 'line'; // Default view
 
@@ -40,6 +41,11 @@ class SectorVis {
             .append("g")
             .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
 
+        // Event listener for the dropdown
+        d3.select("#regionDropdown").on("change", (event) => {
+            this.selectedMarket = event.target.value;
+            this.wrangleData();
+        });
 
         // Initialize Timeline
         vis.initTimeline();
@@ -51,25 +57,35 @@ class SectorVis {
     wrangleData() {
         let vis = this;
 
+        // Process the raw data
         vis.processedVacancyData = vis.processIndustrialData(vis.vacancyData);
-        console.log("processedVacancyData: ", vis.processedVacancyData);
-
         vis.processedRentGrowthData = vis.processIndustrialData(vis.rentGrowthData);
-        console.log("processedRentGrowthData: ", vis.processedRentGrowthData);
 
+        // Combine the processed data
         vis.combinedData = vis.combineData(vis.processedVacancyData, vis.processedRentGrowthData);
-        console.log("combinedData: ", vis.combinedData);
 
+        // Check if the data arrays are valid
         if (!Array.isArray(vis.vacancyData) || !Array.isArray(vis.rentGrowthData)) {
             console.error('Data is not in array format');
             return;
         }
 
+        // Filter or modify the combinedData based on the selected region
+        if (vis.selectedMarket) {
+            vis.filteredData = vis.combinedData.filter(d => {
+                // Example filter condition - modify according to your data structure
+                return d.market === vis.selectedMarket;
+            });
+        } else {
+            // If no market is selected, use the combined data as is
+            vis.filteredData = vis.combinedData;
+        }
 
-        // Update the visualization
+        // Update the visualization with the filtered or unfiltered data
         vis.updateTimeline();
         vis.updateVis();
     }
+
 
     updateTimeline() {
         let vis = this;
@@ -190,55 +206,44 @@ class SectorVis {
     initTimeline() {
         let vis = this;
 
-        // Define margin, width, and height
-        let margin = {top: 10, right: 30, bottom: 50, left: 30},
-            width = 960 - margin.left - margin.right, // Adjust as needed
-            height = 100 - margin.top - margin.bottom; // Adjust as needed
+        var margin = {top: 10, right: 30, bottom: 50, left: 30}, width = 860 - margin.left - margin.right,
+            height = 100 - margin.top - margin.bottom;
 
-        // Create SVG for timeline
-        vis.timelineSvg = d3.select("#timeline2") // Adjust selector as needed
-            .append("svg")
+        var svg = d3.select("#timeline2").append("svg")
             .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            .attr("height", height + margin.top + 50)
             .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
 
         // Extract quarters or appropriate time labels from combinedData
         let quarters = vis.combinedData.map(d => d.date); // Adjust this to your date format
 
-        // Define the scale for the timeline
-        vis.timelineX = d3.scalePoint()
+
+        // Define the x scale for the timeline
+        vis.x = d3.scalePoint()
             .domain(quarters)
             .range([0, width]);
 
-        // Define and append the X-axis with tick format
-        vis.timelineSvg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(vis.timelineX).tickFormat(function (d, i) {
-                return i % 4 === 0 ? d : "";
-            }));
-
-        // Define and append the X-axis with tick format
-        let xAxis = d3.axisBottom(vis.timelineX).tickFormat(function (d, i) {
+        var xAxis = d3.axisBottom(vis.x).tickFormat(function (d, i) {
             return i % 4 === 0 ? d : ""; // Only display every 4th label
         });
 
-        let gX = vis.timelineSvg.append("g")
+
+        var gX = svg.append("g")
             .attr("class", "x axis")
-            .attr("transform", `translate(0,${height})`)
+            .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 
-        // Rotate the text labels as in VectomMapVis
+        // Rotate the text labels
         gX.selectAll("text")
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
             .attr("transform", "rotate(-55)"); // Adjust the angle as needed
 
-
-        // Add brush
-        var brush = d3.brushX()
+        vis.brush = d3.brushX()
             .extent([[0, 0], [width, height - 2]]) // Adjusted height for brush
             .on("end", function (event) {
                 vis.brushEnded(event);
@@ -246,60 +251,94 @@ class SectorVis {
 
         svg.append("g")
             .attr("class", "brush")
-            .call(brush);
+            .call(vis.brush);
     }
 
     brushEnded(event) {
         let vis = this;
+        if (!event.selection) return; // If no selection, do nothing
 
-        if (!event.selection) return;
-        var selectedRange = event.selection.map(d => vis.invertPointScale(vis.x, d));
-        var startQuarter = selectedRange[0];
-        var endQuarter = selectedRange[1];
+        function invertPointScale(scale, value, rangePadding) {
+            // Assuming rangePadding is the padding you have on both sides of the range
+            const domain = scale.domain();
+            const range = scale.range();
+            const eachBand = (range[range.length - 1] - rangePadding * 2) / (domain.length - 1);
 
-        // Update the visualization
+            const index = Math.max(0, Math.min(domain.length - 1, Math.floor((value - rangePadding) / eachBand)));
+
+            return domain[index];
+        }
+
+
+        const rangePadding = 0; // Adjust based on scale's range settings
+
+        // Convert pixel coordinates to data using the custom invert function
+        const quarters = event.selection.map(pixelValue => invertPointScale(vis.x, pixelValue, rangePadding));
+
+        // Convert pixel coordinates to data values
+        const selectionRange = event.selection.map(vis.timelineX.invert);
+
+        // Filter the data based on the selected range
+        vis.filteredData = vis.combinedData.filter(d =>
+            d.date >= selectionRange[0] && d.date <= selectionRange[1]
+        );
+
+        // Optionally, update the visualization with the filtered data
         vis.updateVis();
     }
 
 
 
-    invertPointScale(scale, value) {
-        // Function to invert a point scale (find the closest domain value for a given pixel position)
-        const domain = scale.domain();
-        const range = scale.range();
-        const rangePoints = range.map((d, i) => [d, domain[i]]);
-        let minDistance = Math.abs(rangePoints[0][0] - value);
-        let closestElement = rangePoints[0][1];
-
-        rangePoints.forEach(function (d) {
-            let distance = Math.abs(d[0] - value);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestElement = d[1];
-            }
-        });
-
-        return closestElement;
-    }
+    // invertPointScale(scale, value) {
+    //     // Function to invert a point scale (find the closest domain value for a given pixel position)
+    //     const domain = scale.domain();
+    //     const range = scale.range();
+    //     const rangePoints = range.map((d, i) => [d, domain[i]]);
+    //     let minDistance = Math.abs(rangePoints[0][0] - value);
+    //     let closestElement = rangePoints[0][1];
+    //
+    //     rangePoints.forEach(function (d) {
+    //         let distance = Math.abs(d[0] - value);
+    //         if (distance < minDistance) {
+    //             minDistance = distance;
+    //             closestElement = d[1];
+    //         }
+    //     });
+    //
+    //     return closestElement;
+    // }
 
     updateVis() {
         let vis = this;
+
+        // Determine which data set to use (filtered data if available, otherwise the full data)
+        let dataToUse = vis.filteredData && vis.filteredData.length > 0 ? vis.filteredData : vis.combinedData;
 
         // Remove existing chart elements
         vis.svg.selectAll(".bar").remove();
         vis.svg.selectAll("path").remove();
 
 
-
-        // Draw the chart based on the current view
+        // Draw the chart based on the current view and selected sector
         if (vis.currentView === 'line') {
-            vis.drawLineChart();
-            console.log("drawLineChart:");
+            if (vis.selectedSector === 'vacancy') {
+                // Call a method to draw the line chart for vacancy
+                vis.drawLineChartVacancy(dataToUse);
+            } else if (vis.selectedSector === 'rentGrowth') {
+                // Call a method to draw the line chart for rent growth
+                vis.drawLineChartRentGrowth(dataToUse);
+            }
         } else if (vis.currentView === 'bar') {
-            vis.drawBarChart();
-            console.log("drawBarChart:");
+            if (vis.selectedSector === 'vacancy') {
+                // Call a method to draw the bar chart for vacancy
+                vis.drawBarChartVacancy(dataToUse);
+            } else if (vis.selectedSector === 'rentGrowth') {
+                // Call a method to draw the bar chart for rent growth
+                vis.drawBarChartRentGrowth(dataToUse);
+            }
         }
     }
+
 
     drawLineChart() {
         let vis = this;
@@ -371,7 +410,6 @@ class SectorVis {
             .attr("class", "axis y-axis")
             .call(yAxis);
     }
-
     initSectorIcons() {
         let vis = this;
         const sectors = {
@@ -387,24 +425,177 @@ class SectorVis {
                 .then(response => response.text())
                 .then(svgData => {
                     document.getElementById(sector).innerHTML = svgData;
-
                 })
                 .then(() => {
                     document.getElementById(sector).addEventListener("click", function() {
-                        // Update the h3 text with the sector name
-                        header.textContent = `${sector.charAt(0).toUpperCase() + sector.slice(1)}`;
+                        // Update the selected sector
+                        vis.selectedSector = sector;
+                        // Check if the sector is 'rentGrowth' to update the text accordingly
+                        if (sector === 'rentGrowth') {
+                            header.textContent = 'Rent Growth in Industrial Sector';
+                        } else {
+                            // Update the h3 text with the sector name for other sectors
+                            header.textContent = `${sector.charAt(0).toUpperCase() + sector.slice(1)} in Industrial Sector`;
+                        }
 
                         if (vis.selectedSectorElement) {
                             vis.selectedSectorElement.classList.remove(`${vis.selectedSectorElement.id}-clicked`);
                         }
                         vis.selectedSectorElement = this;
                         vis.selectedSectorElement.classList.add(`${sector}-clicked`);
-                        let sectorColor = vis.getSectorColor(sector);
-                        vis.updateHeaderText(`${sector.charAt(0).toUpperCase() + sector.slice(1)} by Market`);
+
+                        // Call updateVis to redraw the chart
+                        vis.updateVis();
                     });
                 });
         });
     }
+
+    drawLineChartVacancy(data) {
+        let vis = this;
+
+        // Define scales for vacancy data
+        let xScale = d3.scaleTime()
+            .domain(d3.extent(vis.combinedData, d => d.date))
+            .range([0, vis.width]);
+
+        let yScale = d3.scaleLinear()
+            .domain([0, d3.max(vis.combinedData, d => d[vis.selectedMarket + "_vacancy"])])
+            .range([vis.height, 0]);
+
+        // Define the line generator
+        let line = d3.line()
+            .x(d => xScale(d.date))
+            .y(d => yScale(d[vis.selectedMarket + "_vacancy"]));
+
+        // Draw the line for vacancy
+        vis.svg.append("path")
+            .datum(vis.combinedData)
+            .attr("fill", "none")
+            .attr("stroke", vis.vacancyColor)
+            .attr("d", line);
+
+        // Add X and Y axes
+        vis.svg.append("g")
+            .attr("class", "axis x-axis")
+            .attr("transform", "translate(0," + vis.height + ")")
+            .call(d3.axisBottom(xScale));
+
+        vis.svg.append("g")
+            .attr("class", "axis y-axis")
+            .call(d3.axisLeft(yScale));
+    }
+
+    drawLineChartRentGrowth(data) {
+        let vis = this;
+
+        // Define scales for rent growth data
+        let xScale = d3.scaleTime()
+            .domain(d3.extent(vis.combinedData, d => d.date))
+            .range([0, vis.width]);
+
+        let yScale = d3.scaleLinear()
+            .domain([0, d3.max(vis.combinedData, d => d[vis.selectedMarket + "_rentGrowth"])])
+            .range([vis.height, 0]);
+
+        // Define the line generator
+        let line = d3.line()
+            .x(d => xScale(d.date))
+            .y(d => yScale(d[vis.selectedMarket + "_rentGrowth"]));
+
+        // Draw the line for rent growth
+        vis.svg.append("path")
+            .datum(vis.combinedData)
+            .attr("fill", "none")
+            .attr("stroke", vis.rentGrowthColor)
+            .attr("d", line);
+
+        // Add X and Y axes
+        vis.svg.append("g")
+            .attr("class", "axis x-axis")
+            .attr("transform", "translate(0," + vis.height + ")")
+            .call(d3.axisBottom(xScale));
+
+        vis.svg.append("g")
+            .attr("class", "axis y-axis")
+            .call(d3.axisLeft(yScale));
+    }
+
+
+    drawBarChartVacancy(data) {
+        let vis = this;
+
+        // Define scales for bar chart
+        let xScale = d3.scaleBand()
+            .domain(vis.combinedData.map(d => d.date))
+            .range([0, vis.width])
+            .padding(0.1);
+
+        let yScale = d3.scaleLinear()
+            .domain([0, d3.max(vis.combinedData, d => d[vis.selectedMarket + "_vacancy"])])
+            .range([vis.height, 0]);
+
+        // Draw bars for vacancy
+        vis.svg.selectAll(".bar")
+            .data(vis.combinedData)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => xScale(d.date))
+            .attr("y", d => yScale(d[vis.selectedMarket + "_vacancy"]))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => vis.height - yScale(d[vis.selectedMarket + "_vacancy"]))
+            .attr("fill", vis.vacancyColor);
+
+        // Add X and Y axes
+        vis.svg.append("g")
+            .attr("class", "axis x-axis")
+            .attr("transform", "translate(0," + vis.height + ")")
+            .call(d3.axisBottom(xScale));
+
+        vis.svg.append("g")
+            .attr("class", "axis y-axis")
+            .call(d3.axisLeft(yScale));
+    }
+
+
+
+    drawBarChartRentGrowth(data) {
+        let vis = this;
+
+        // Define scales for bar chart
+        let xScale = d3.scaleBand()
+            .domain(vis.combinedData.map(d => d.date))
+            .range([0, vis.width])
+            .padding(0.1);
+
+        let yScale = d3.scaleLinear()
+            .domain([0, d3.max(vis.combinedData, d => d[vis.selectedMarket + "_rentGrowth"])])
+            .range([vis.height, 0]);
+
+        // Draw bars for rent growth
+        vis.svg.selectAll(".bar")
+            .data(vis.combinedData)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => xScale(d.date))
+            .attr("y", d => yScale(d[vis.selectedMarket + "_rentGrowth"]))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => vis.height - yScale(d[vis.selectedMarket + "_rentGrowth"]))
+            .attr("fill", vis.rentGrowthColor);
+
+        // Add X and Y axes
+        vis.svg.append("g")
+            .attr("class", "axis x-axis")
+            .attr("transform", "translate(0," + vis.height + ")")
+            .call(d3.axisBottom(xScale));
+
+        vis.svg.append("g")
+            .attr("class", "axis y-axis")
+            .call(d3.axisLeft(yScale));
+    }
+
     updateHeaderText(text) {
         let vis = this;
         const header = document.querySelector('#industrial1 h3');

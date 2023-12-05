@@ -4,11 +4,17 @@
 :root {
     --color-profile: srgb;
     --color-mode: light;
-    --color-text: #000000;
-    --color-background: rgba(255, 255, 255, 0.8);
-    --text-background: rgba(255, 255, 255, 0.9);
-    --myshadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.9);
+    --color-text: #ffffff;
+    --color-background: rgba(0, 0, 0, 0.8);
+    --text-background: rgba(0, 0, 0, 0.8);
+    --myshadow: .1rem .1rem .1rem rgba(255, 255, 255, 0.76);
 
+    --background1: linear-gradient( var(--color1), #000000);
+    --background2: linear-gradient( var(--color2), #000000);
+    --background3: linear-gradient( var(--color3), #000000);
+    --background4: linear-gradient( var(--color4), #000000);
+    --background5: linear-gradient( var(--color5), #000000);
+    --background6: linear-gradient( var(--color6), #000000);
 
     --color1: #7CCCE5;;
     --color2: #B576AD;
@@ -37,31 +43,19 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     font-size: 1rem;
-    color: #000000;
+    color: #ffffff;
     padding: 0;
     /*background-color: #3f3f3f;*/
     /*text-align: center;*/
     line-height: 1.3; /* Adjust line height for better readability */
-    text-align: justify;
+    text-align: center;
 }
-
-/*font-family: 'Bebas Neue', sans-serif;*/
-/*font-family: 'Encode Sans SC', sans-serif;*/
-/*font-family: 'Hedvig Letters Serif', serif;*/
-/*font-family: 'Montserrat', sans-serif;*/
-/*font-family: 'Open Sans', sans-serif;*/
-
-/*font-family: 'Roboto', sans-serif;*/
-/*font-family: 'Roboto Slab', serif;*/
-
-/*font-family: 'Vina Sans', sans-serif;*/
-
 
 h1 {
     font-family: 'Encode Sans SC', sans-serif;
     font-size: 2.2rem;
     font-weight: 500;
-    text-shadow: var(--myshadow);
+    /*text-shadow: var(--myshadow);*/
     margin: 1rem 3%;
     text-align: center;
 }
@@ -70,7 +64,7 @@ h2 {
     font-family: 'Open Sans', sans-serif;
     margin: 1rem 3%;
     font-size: 1.5rem;
-    text-shadow: 2px 2px 2px #aaa;
+    /*text-shadow: 2px 2px 2px #aaa;*/
     text-align: center;
 
 }
@@ -100,7 +94,7 @@ h3 {
 .custom-container-box {
     padding: 0;
     /*border-radius: 1rem;*/
-    background-color: var(--color-background);
+    background: linear-gradient(rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.4));
     height: 100%;
     width: 103%;
     box-sizing: border-box;
@@ -115,9 +109,9 @@ h3 {
     max-width: 60vw;
     min-height: 40vh;
     background-color: var(--text-background);
-    box-shadow: var(--myshadow);
-    border-radius: 1rem;
-    border: .1rem solid black;
+    /*box-shadow: var(--myshadow);*/
+    /*border-radius: 1rem;*/
+    /*border: .1rem solid #ffffff;*/
     padding: 20px;
     /*margin: 0 auto;*/
     resize: none;
@@ -128,20 +122,7 @@ h3 {
 
 }
 
-/*.text-box {*/
-/*    background-color: var(--text-background);*/
-/*    box-shadow: var(--myshadow);*/
-/*    border-radius: 1rem;*/
-/*    border: .1rem solid black;*/
-/*    padding: 20px;*/
-/*    !*margin: 0 auto;*!*/
-/*    resize: none;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
 
-/*}*/
 
 .vis-container {
     /*border: 1px solid #000000;*/
@@ -149,7 +130,7 @@ h3 {
     /*box-shadow: var(--myshadow);*/
     /*background-color: var(--text-background);*/
     border-radius: 1rem;
-    width: 90%; /* Use percentage for responsive width */
+    width: calc(100% - 30px);
     margin-bottom: 1px; /* Spacing between visualizations */
     overflow: hidden; /* Prevents content from overflowing */
     box-sizing: border-box;
@@ -171,7 +152,7 @@ h3 {
 .engaging-text {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    color: #000000;
+    color: #ffffff;
     font-size: 1rem;
     line-height: 1.6; /* Adjust line height for better readability */
     text-align: justify; /* This makes the text edges sharp and aligned */
@@ -226,7 +207,7 @@ h3 {
 .dot-navigation .dot.active,
 .dot-navigation .dot:hover,
 .dot-navigation .dot:focus {
-    background-color: var(--color1);
+    background-color: var(--color-text);
 }
 
 .scroll-container {
@@ -267,87 +248,149 @@ h3 {
 
 #introduction {
     background-image: url(../img/Downtown_Ottawa_2022.jpg);
-    background-color: var(--color3);
     background-size: cover;
     background-attachment: fixed;
+}
+
+#introduction h1 {
+    color: var(--color3);
+    font-size: 3.5rem;
 }
 
 #macro1 {
-    background-color: var(--color4);
+    background-image: url(../img/1.jpeg);
+    /*background: linear-gradient( #000000,var(--color4)) fixed;*/
     background-size: cover;
     background-attachment: fixed;
 }
 
+#macro1 h1 {
+    color: var(--color4);
+}
+
 #macro2 {
-    background-color: var(--color6);
+    /*background: linear-gradient( #000000,var(--color6)) fixed;*/
+    /*background-size: cover;*/
+    background-image: url(../img/3.jpeg);
     background-size: cover;
     background-attachment: fixed;
+}
+
+#macro2 h1 {
+    color: var(--color6);
 }
 
 #macro3 {
     background-image: url(../img/1.jpeg);
-    background-color: var(--color1);
     background-size: cover;
     background-attachment: fixed;
+}
+
+#macro3 h1 {
+    color: var(--color1);
 }
 
 #vectom {
-    background-color: var(--color2);
+    /*background: linear-gradient( #000000,var(--color2)) fixed;*/
+    /*background-size: cover;*/
+    background-image: url(../img/6.jpeg);
     background-size: cover;
     background-attachment: fixed;
+}
+
+#vectom h1 {
+    color: var(--color2);
 }
 
 #sectors {
-    background-color: var(--color5);
+    /*background: linear-gradient( #000000,var(--color5)) fixed;*/
+    /*background-size: cover;*/
+    background-image: url(../img/11.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
+
+#sectors h1 {
+    color: var(--color5);
+}
+
 
 #performance1 {
     background-image: url(../img/2.jpg);
-    background-color: var(--color3);
     background-size: cover;
     background-attachment: fixed;
+}
+
+#performance1 h1 {
+    color: var(--color3);
 }
 
 #performance2 {
-    background-color: var(--color4);
+    /*background: linear-gradient( #000000,var(--color4)) fixed;*/
+    /*background-size: cover;*/
+    background-image: url(../img/7.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
 
+#performance2 h1 {
+    color: var(--color4);
+}
+
 #performance3 {
-    background-color: var(--color6);
+    /*background: linear-gradient( #000000,var(--color6)) fixed;*/
+    /*background-size: cover;*/
+    background-image: url(../img/9.jpeg);
     background-size: cover;
     background-attachment: fixed;
+}
+
+#performance3 h1 {
+    color: var(--color6);
 }
 
 #performance4 {
     background-image: url(../img/5.jpg);
-    background-color: var(--color1);
     background-size: cover;
     background-attachment: fixed;
 }
 
+#performance4 h1 {
+    color: var(--color1);
+}
+
 #industrial1 {
-    /*background-image: url(../img/1.jpeg);*/
-    background-color: var(--color2);
+    /*background: linear-gradient( #000000,var(--color2)) fixed;*/
+    /*background-size: cover;*/
+    background-image: url(../img/12.jpg);
     background-size: cover;
     background-attachment: fixed;
+}
+
+#industrial1 h1 {
+    color: var(--color2);
 }
 
 #recommendation {
     background-image: url(../img/Downtown_Ottawa_2022.jpg);
-    background-color: var(--color1);
     background-size: cover;
     background-attachment: fixed;
 }
 
+#recommendation h1 {
+    color: var(--color1);
+}
+
 #acknowledgments {
-    /*background-image: url(../img/1.jpeg);*/
-    background-color: var(--color5);
+    /*background: linear-gradient( #000000,var(--color5)) fixed;*/
+    /*background-size: cover;*/
+    background-image: url(../img/8.jpg);
     background-size: cover;
     background-attachment: fixed;
+}
+
+#acknowledgments h1 {
+    color: var(--color5);
 }
 
 /*****************/
@@ -494,7 +537,7 @@ th {
 .axis line,
 .domain {
     fill: none;
-    stroke: black;
+    stroke: #ffffff;
     shape-rendering: crispEdges;
 }
 
@@ -520,7 +563,6 @@ th {
     color: white; /* Text color */
     cursor: pointer; /* Change cursor to pointer when hovering over the button */
     transition: background-color 0.3s; /* Smooth transition for hover effect */
-    box-shadow: var(--myshadow);
 }
 
 #playPauseButton:hover {
@@ -535,7 +577,7 @@ th {
     position: absolute;
     bottom: 10px;
     left: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--color-background);
     padding: 5px;
     border-radius: 5px;
     z-index: 1000;
@@ -569,7 +611,7 @@ th {
 .card-body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600; /* Normal font weight - 700 for bold */
-    color: #000000;
+    color: var(--color-text);
     font-size: 1rem;
     line-height: 1.6;
     text-align: justify;
@@ -585,18 +627,6 @@ th {
     justify-content: center;
     align-items: flex-end;
 }
-
-/*#timeline-container {*/
-/*    position: relative;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    width: 90vh;*/
-/*    border-radius: 0 0 1rem 1rem;*/
-/*    box-shadow: var(--myshadow);*/
-/*    background-color: var(--color-background);*/
-/*}*/
-
 
 #brushDiv svg {
     width: 100%;
@@ -626,7 +656,7 @@ th {
 
 #timeline1 line,
 #timeline1 path {
-    stroke: #000000; /* Sets the SVG line color */
+    stroke: var(--color-text); /* Sets the SVG line color */
 }
 
 #sectors-container,
@@ -715,8 +745,8 @@ th {
 }
 
 .region-clicked {
-    stroke: black; /* Replace with the color you want for the border */
-    stroke-width: 1px; /* Adjust the width of the border as needed */
+    stroke: var(--color-text);
+    stroke-width: 3;
 }
 
 #map {
@@ -750,7 +780,7 @@ th {
     background-color: var(--color-background);
     padding: 20px;
     border-radius: 1rem;
-    box-shadow: var(--myshadow);
+    /*box-shadow: var(--myshadow);*/
 }
 
 .category h2 {
@@ -799,6 +829,6 @@ th {
 .category strong {
     display: block;
     margin-bottom: 10px;
-    color: #000000;
-    font-weight: bold;
+    color: var(--color-text);
+    font-weight: bolder;
 }

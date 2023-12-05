@@ -67,6 +67,7 @@ class VectomMapVis {
         document.getElementById('resetButton').addEventListener('click', function () {
             vis.resetToCurrentPopulation();
         });
+        vis.addColorScaleKey();
 
 
     }
@@ -161,9 +162,6 @@ class VectomMapVis {
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var x = d3.scalePoint()
-            .domain(quarters)
-            .range([0, width]);
 
         // Define the x scale for the timeline
         vis.x = d3.scalePoint()
