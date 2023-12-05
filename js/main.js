@@ -20,7 +20,7 @@ let promises = [
     d3.csv("data/consumer.csv"),
     d3.csv("data/housing.csv"),
     d3.json(geoDataPath),
-    d3.json("data/filtered_file.json"),
+    d3.csv("data/industrial.csv"),
     d3.csv("data/vacancy.csv"),
     d3.csv("data/rentGrowth.csv"),
     d3.csv(populationDataPath)
@@ -90,7 +90,7 @@ function initMainPage(dataArray) {
     let consumer_data = dataArray[1]
     let housing_data = dataArray[2]
     let geoData = dataArray[3];
-    //let citiesData = dataArray[4];
+    let industrial = dataArray[4];
     let vacancyData = dataArray[5];
     let rentGrowthData = dataArray[6];
     //let populationData = dataArray[7];
@@ -133,7 +133,7 @@ function initMainPage(dataArray) {
     // Initialize my visualizations
     myMap = new CanadaMap("canada", geoData, colors);
     VectomMap = new VectomMapVis('map', populationDataPath, geoDataPath, colors);
-    mySectorVis = new SectorVis("chart-container", vacancyData, rentGrowthData, colors);
+    mySectorVis = new SectorVis("chart-container", vacancyData, rentGrowthData, colors, industrial);
     mySectorVis.toggleView('line'); // or 'bar'
     VectomMap.addColorScaleKey();
 

@@ -119,7 +119,7 @@ class cBarChart {
         legendItems.append("text")
             .attr("x", size * 1.2)
             .attr("y", size / 2)
-            .style("fill", "black")
+            .style("fill", "var(--color-text)")
             .text(d => d)
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle");
@@ -181,7 +181,7 @@ class cBarChart {
                     case "Housing":
                         return vis.housingColor; // Red
                     default:
-                        return "rgb(63,63,63, 0.9)";
+                        return "var(--text-color)";
                 }
             });
 

@@ -3,7 +3,6 @@ class CanadaMap {
     constructor(_parentElement, _geoData, _colors) {
         this.parentElement = _parentElement;
         this.geoData = _geoData;
-        this.colors = _colors;
         this.retailColor = _colors.retailColor;
         this.officeColor = _colors.officeColor;
         this.industrialColor = _colors.industrialColor;
@@ -14,7 +13,6 @@ class CanadaMap {
         this.tColor = _colors.tColor;
         this.oColor = _colors.oColor;
         this.mColor = _colors.mColor;
-        this.selectedSector = null;
         this.selectedRegionElement = null;
         this.selectedSectorElement = null;
 
@@ -75,16 +73,30 @@ class CanadaMap {
             .attr("cy", d => vis.projection(d[1].coords)[1])
             .attr("r", 10)
             .attr("fill", d => d[1].color)
+            .on("mouseover", function(event, d) {
+                d3.select(this)
+                    .attr("stroke", "var(--color-text)")
+                    .attr("stroke-width", 3);
+            })
+            .on("mouseout", function(event, d) {
+                d3.select(this)
+                    .attr("stroke", "none");
+            })
             .on("click", function(event, d) {
-                if (vis.selectedSectorElement) {
-                    vis.selectedSectorElement.classList.remove(`${vis.selectedSectorElement.id}-clicked`);
-                    vis.selectedSectorElement = null;
-                }
+                // Reset the previously selected region, if any
                 if (vis.selectedRegionElement) {
-                    vis.selectedRegionElement.classed("region-clicked", false);
+                    vis.selectedRegionElement
+                        .attr("stroke", "none")
+                        .attr("stroke-width", 0);
                 }
+
+                // Update the selected region element
                 vis.selectedRegionElement = d3.select(this);
-                vis.selectedRegionElement.classed("region-clicked", true);
+                vis.selectedRegionElement
+                    .attr("stroke", "var(--color-text)")  // or a specific color if you prefer
+                    .attr("stroke-width", 3);
+
+                // Update content based on the selected region
                 vis.updateCardContentRegion(d[0]);
                 vis.updateHeaderText(`${d[0]}`, d[1].color);
             })
