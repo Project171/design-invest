@@ -427,7 +427,7 @@ h3 {
 
 #macro1 .category.macro2 h2 {
     background-color: var(--color2);
-/
+
 }
 
 #macro1 .category.macro3 h2 {
@@ -490,16 +490,38 @@ h3 {
 /*  Perf   Viz  */
 /****************/
 
+/*.!*Bubble & Bar-lollipop Tooltip*!*/
 .tooltip {
     position: absolute;
     text-align: center;
     width: auto;
     height: auto;
     padding: 8px;
+    font: 12px Arial;
     background: var(--color-background);
     border: 0;
-    border-radius: 1rem;
+    border-radius: 8px;
     pointer-events: none;
+}
+
+h4 {
+    color: white;
+    font: 14px "arial";
+    font-weight: bold;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+h5 {
+    font: 10px "arial";
+    font-weight: bold;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.tooltip h4, .tooltip h5 {
+    margin: 0;
+    padding: 0;
 }
 
 .legend {
@@ -547,27 +569,165 @@ th {
     font-weight: bold;
 }
 
+#bubble-area text {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#table-box {
+    opacity: 0.9;
+    text-align: start;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+th {
+    color: white;
+    font-size: 14px;
+    text-align: end;
+    white-space: normal;
+    word-break: break-word;
+    padding: 0.7vh;
+}
+
+td {
+    text-align: end;
+    font-size: 15px;
+}
+
+.table-highlight th {
+    font-size: larger;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+}
+
+.table.table-highlight tr {
+    border: black; /* Removes all borders from rows and cells */
+}
+
+#table-container {
+    position: relative; /* Container for the table and the commentary box */
+}
+
+#commentary-box1, #commentary-box2, #commentary-box3, #commentary-box4 {
+    display: none; /* Initially hidden */
+    background-color: wheat;
+    border-radius: 20px; /* Rounded corners for bubble effect */
+    padding: 15px; /* Padding inside the bubble */
+    margin-top: 2vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6); /* Subtle shadow for depth */
+    width: auto; /* Auto width based on content */
+    max-width: 100%; /* Maximum width */
+    text-align: center; /* Center align text */
+    font-size: 14px; /* Font size */
+    color: #333; /* Text color */
+    /* Position the box */
+    position: absolute;
+    /*right: 20%;*/
+    left: 20%;
+    transform: translateX(0%);
+}
+
+/* Arrow at the top of the bubble */
+#commentary-box1:after, #commentary-box2:after, #commentary-box3:after, #commentary-box4:after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* At the bottom of the bubble */
+    left: 85%; /* Centered horizontally */
+    margin-left: -10px; /* Half the width of the arrow */
+    border-width: 15px; /* Size of the arrow */
+    border-style: solid;
+    border-color: transparent transparent wheat transparent; /* Arrow color */
+}
+
+/* Optional: Add custom styling for the text */
+#commentary-box1 p, #commentary-box2 p, #commentary-box3 p, #commentary-box4 p {
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    line-height: 1.5; /* Improves line spacing */
+}
+
+/*Buttons and Others*/
+
+/*Play, Forward, Back buttons*/
+.btn, .btn1, .btn2, .btn3 {
+    padding: 5px 2px;
+    /*font-weight: bold;*/
+    /*margin-top: 1vh;*/
+    margin-bottom: 2vh;
+    color: white;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 0.5rem;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-text {
+    margin-top: .5vh;
+    margin-top: .5vh;
+}
+
+
+#sortSelection, #dataSelection, #metricSelect, #lollipop-heading  {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+#sortSelection:hover, #dataSelection:hover, #metricSelect:hover {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.source {
+    font-size: 12px;
+    color: purple;
+}
+
+/*Buttons*/
+.mt-2 {
+    color: purple;
+    margin: 1vh;
+    font-size: 11px;
+}
+
+/*Legend*/
+.legend {
+    font-size: 12px;
+}
+
+.legend rect {
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+    opacity: 0.7;
+}
+
 .axis-label {
     fill: rgb(216, 6, 33, 0.9);
     font-size: 12px;
     font-weight: bold;
 }
 
-#playPauseButton {
-    font-size: 1rem; /* Adjust the font size as needed */
-    width: 50%;
-    padding: 20px; /* Adjust the padding to make the button smaller or larger */
-    background-color: rgb(143, 245, 60, 0.95); /* Use any color you like */
-    border: none; /* Remove border if present */
-    border-radius: 1rem;
-    color: white; /* Text color */
-    cursor: pointer; /* Change cursor to pointer when hovering over the button */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-}
+/*#playPauseButton {*/
+/*    font-size: 1rem; !* Adjust the font size as needed *!*/
+/*    width: 50%;*/
+/*    padding: 20px; !* Adjust the padding to make the button smaller or larger *!*/
+/*    background-color: rgb(143, 245, 60, 0.95); !* Use any color you like *!*/
+/*    border: none; !* Remove border if present *!*/
+/*    border-radius: 1rem;*/
+/*    color: white; !* Text color *!*/
+/*    cursor: pointer; !* Change cursor to pointer when hovering over the button *!*/
+/*    transition: background-color 0.3s; !* Smooth transition for hover effect *!*/
+/*}*/
 
-#playPauseButton:hover {
-    background-color: rgb(216, 6, 33, 0.95); /* Slightly darker shade when hovered for a visual feedback */
-}
+/*#playPauseButton:hover {*/
+/*    background-color: rgb(216, 6, 33, 0.95); !* Slightly darker shade when hovered for a visual feedback *!*/
+/*}*/
 
 /****************/
 /*  Sector Viz  */
