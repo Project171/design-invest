@@ -94,7 +94,7 @@ h3 {
 .custom-container-box {
     padding: 0;
     /*border-radius: 1rem;*/
-    background: linear-gradient(rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.4));
+    background: linear-gradient(rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.6));
     height: 100%;
     width: 103%;
     box-sizing: border-box;
@@ -316,7 +316,7 @@ h3 {
 
 
 #performance1 {
-    background-image: url(../img/2.jpg);
+    background-image: url(../img/sector.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -350,7 +350,7 @@ h3 {
 }
 
 #performance4 {
-    background-image: url(../img/5.jpg);
+    background-image: url(../img/sector.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
