@@ -256,7 +256,7 @@ h3 {
 /****************/
 
 #introduction {
-    background-image: url(../img/Downtown_Ottawa_2022.jpg);
+    background-image: url(../img/1.jpeg);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -267,7 +267,7 @@ h3 {
 }
 
 #macro1 {
-    background-image: url(../img/1.jpeg);
+    background-image: url(../img/4.jpg);
     /*background: linear-gradient( #000000,var(--color4)) fixed;*/
     background-size: cover;
     background-attachment: fixed;
@@ -290,7 +290,7 @@ h3 {
 }
 
 #macro3 {
-    background-image: url(../img/1.jpeg);
+    background-image: url(../img/toronto.jpeg);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -314,7 +314,7 @@ h3 {
 #sectors {
     /*background: linear-gradient( #000000,var(--color5)) fixed;*/
     /*background-size: cover;*/
-    background-image: url(../img/11.jpg);
+    background-image: url(../img/calgary-alberta-canada-alix-kreil.jpeg);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -325,7 +325,7 @@ h3 {
 
 
 #performance1 {
-    background-image: url(../img/2.jpg);
+    background-image: url(../img/11.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -381,8 +381,8 @@ h3 {
 }
 
 #recommendation {
-    background-image: url(../img/Downtown_Ottawa_2022.jpg);
-    background-size: cover;
+    background-image: url(../img/Global-Commercial-Investment-keyimage2.jpg);
+    background-size: 100%;
     background-attachment: fixed;
 }
 
