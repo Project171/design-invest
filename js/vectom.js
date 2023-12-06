@@ -67,7 +67,6 @@ class VectomMapVis {
         document.getElementById('resetButton').addEventListener('click', function () {
             vis.resetToCurrentPopulation();
         });
-        vis.addColorScaleKey();
 
 
     }
@@ -107,6 +106,17 @@ class VectomMapVis {
 
         // Define the onEachFeature function
         function onEachFeature(feature, layer) {
+            // Define the content of the tooltip
+            let tooltipContent = `Province: ${feature.properties.name}`;
+
+            // Bind the tooltip to the layer
+            layer.bindTooltip(tooltipContent, {
+                // Options for the tooltip
+                permanent: false, // The tooltip will only show on hover
+                direction: 'auto', // Automatic placement
+                className: 'leaflet-tooltip-custom' // A custom CSS class for styling
+            });
+
             layer.on('click', function () {
                 // Get the current population for the clicked province
                 let provinceName = feature.properties.name;
@@ -342,7 +352,7 @@ class VectomMapVis {
     }
 
     addColorScaleKey() {
-        let vis = this; // Keep a reference to 'this'
+        let vis = this;
 
         // Define the color scale
         let colorScale = d3.scaleThreshold()
@@ -353,7 +363,7 @@ class VectomMapVis {
         let labels = ['< 1M', '1M - 2M', '2M - 3M', '3M - 4M', '4M - 5M', '> 5M'];
 
         // Select the DOM element where the legend should be added
-        const legendContainer = d3.select("#population-legend");
+        const legendContainer = d3.select("#population-legend").style('text-align', 'center');
 
         // Create a list to hold legend items
         const legendList = legendContainer.append('ul')
@@ -366,13 +376,13 @@ class VectomMapVis {
             // Create a list item for each legend item
             let listItem = legendList.append('li')
                 .attr('class', 'key')
-                .style('display', 'flex')
+                .style('display', 'inline-block')
                 .style('align-items', 'center')
                 .style('margin-right', '10px');
 
             // Create a color box using a div element
             listItem.append('div')
-                .style('display', 'block')
+                .style('display', 'inline-block')
                 .style('width', '20px')
                 .style('height', '20px')
                 .style('margin-right', '5px')
@@ -383,4 +393,5 @@ class VectomMapVis {
                 .text(label);
         });
     }
+
 }

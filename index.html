@@ -34,23 +34,17 @@
     <section class="scroll-section" id="macro1">
         <div class="container-fluid h-100 d-flex flex-column justify-content-between">
             <div class="container custom-container-box">
+                <h1>What's the Story Behind the Numbers?</h1>
                 <p class="engaging-text">Gross Domestic Product (GDP) is a comprehensive measure of a country's economic
                     activity. GDP growth
                     typically signals increased business confidence and spending.
                 </p>
-                <h1>What's the Story Behind the Numbers?</h1>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="vis-container" id="macro_vis" style="height: 200px"></div>
-                    </div>
-                </div>
-                <div class="row text-center mt-4">
-                    <div class="col-lg-12">
-                        <p class="engaging-text">Observe the pivotal periods reflected in the GDP timeline and consider
-                            their lasting impact
-                            on Canada's economic landscape.</p>
-                    </div>
-                </div>
+
+                <div class="vis-container1" id="macro_vis"></div>
+                <p class="engaging-text">Observe the pivotal periods reflected in the GDP timeline and consider
+                    their lasting impact
+                    on Canada's economic landscape.</p>
+
                 <!-- Commentary Columns -->
                 <div class="macro-categories">
                     <div class="category macro1">
@@ -85,53 +79,31 @@
                         </ul>
                     </div>
                 </div>
-                <!-- Impact Header Section -->
-                <div class="row text-center mt-4">
-                    <div class="col-lg-12">
-                        <h1>How did these events impact consumer spending, mortgage rates, and unemployment?</h1>
-                    </div>
-                </div>
+                <h1>How did these events impact consumer spending, mortgage rates, and unemployment?</h1>
             </div>
         </div>
     </section>
 
     <!-- 3. Macro Section -->
     <section class="scroll-section" id="macro2">
-        <div class="container-fluid h-100 d-flex flex-column justify-content-between">
+        <div class="container-fluid h-100 justify-content-between">
             <div class="container custom-container-box">
+                <h1>In an era of escalating inflation, where does commercial real estate find its footing?</h1>
                 <!-- GDP Visualization -->
                 <p class="engaging-text">Explore key GDP timeline phases and corresponding consumer spending trends.</p>
-                <div class="row">
-                    <div class="col-lg-12 mb-2">
-                        <div class="vis-container" id="macro_vis2" style="height: 200px"></div>
-                    </div>
-                </div>
-
-
+                <div class="vis-container1" id="macro_vis2"></div>
                 <!-- Consumer Spending and Unemployment/Mortgage Rate Visualization Row -->
                 <div class="row">
-                    <div class="col-lg-8 mb-2">
-                        <h2>Consumer Spending</h2>
-                        <div class="vis-container" id="consumer_vis"></div>
+                    <div class="col-lg-8">
+                        <h3>Consumer Spending</h3>
+                        <div class="vis-container1" id="consumer_vis"></div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="h-100 d-flex flex-column justify-content-between">
-                            <div>
-                                <h2>Unemployment Rate</h2>
-                                <div class="vis-container" id="unemployment_vis"></div>
-                            </div>
-                            <div>
-                                <h2>Mortgage Rate</h2>
-                                <div class="vis-container" id="mortgage_vis"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <h3>Unemployment Rate</h3>
+                        <div class="vis-container1" id="unemployment_vis"></div>
 
-                <!-- Impact Header Section -->
-                <div class="row text-center mt-4">
-                    <div class="col-lg-12">
-                        <h1>In an era of escalating inflation, where does commercial real estate find its footing?</h1>
+                        <h3>Mortgage Rate</h3>
+                        <div class="vis-container1" id="mortgage_vis"></div>
                     </div>
                 </div>
             </div>
@@ -162,13 +134,14 @@
         <div class="container-fluid h-100 d-flex flex-column justify-content-between">
             <div class="container custom-container-box">
                 <!-- VECTOM Cities Introduction -->
-                <div class="row">
+                <div class="row text-center">
+                    <h1>What is VECTOM?</h1>
                     <div class="col text-center">
-                        <h2>VECTOM: Canada's urban growth epicenters.
-                        </h2>
+                        <br>
                         <p class="engaging-text">Witness how burgeoning populations in Vancouver, Edmonton, Calgary,
-                            Toronto, Ottawa, and Montreal are reshaping the commercial real estate landscape. Explore the map and timeline to
-                            see these demographic surges in action.
+                            Toronto, Ottawa, and Montreal are reshaping the commercial real estate landscape. Explore
+                            the
+                            map and timeline to see these demographic surges in action.
                         </p>
                     </div>
                 </div>
@@ -185,16 +158,9 @@
                         <div class="map-timeline-container" id="timeline1"></div>
                     </div>
                 </div>
-                <!-- Inflation Era Question -->
-                <div class="row text-center mt-4">
+                <div class="row justify-content-center">
                     <div id="controls">
                         <button id="resetButton">Reset to Total Population</button>
-                    </div>
-                    <div class="col-lg-12">
-                        <h1>
-                            What are the key commercial real estate sectors influenced by VECTOM's population
-                            growth?
-                        </h1>
                     </div>
                 </div>
             </div>
@@ -205,58 +171,54 @@
     <section class="scroll-section" id="sectors">
         <div class="container-fluid h-100 d-flex flex-column justify-content-between">
             <div class="container custom-container-box">
-                <h1></h1>
+                <h1>
+                    What are the key commercial real estate sectors influenced by VECTOM's population
+                    growth?
+                </h1>
 
                 <!-- Map and Sector Visualizations Row -->
                 <div id="sectors-container">
 
                     <!-- Sector Icons -->
-                    <div class="sector-icon" id="retail" style="position: absolute; top: 0; left: 0;"
-                         title="Retail Sector">
+                    <div class="sector-icon" id="retail" title="Retail Sector">
                         <!-- SVG for Retail will be loaded here -->
                     </div>
-                    <div class="sector-icon" id="office" style="position: absolute; top: 0; right: 0;"
-                         title="Office Sector">
+                    <div class="sector-icon" id="office" title="Office Sector">
                         <!-- SVG for Office will be loaded here -->
                     </div>
-                    <div class="sector-icon" id="industrial" style="position: absolute; bottom: 0; left: 0;"
-                         title="Industrial Sector">
+                    <div class="sector-icon" id="industrial" title="Industrial Sector">
                         <!-- SVG for Industrial will be loaded here -->
                     </div>
-                    <div class="sector-icon" id="multifamily" style="position: absolute; bottom: 0; right: 0;"
-                         title="Multifamily Sector">
+                    <div class="sector-icon" id="multifamily" title="Multifamily Sector">
                         <!-- SVG for Multi will be loaded here -->
                     </div>
 
                     <!-- Canada Map -->
-                    <div id="canada" style="margin: auto;">
+                    <div class="canada-icon-icon" id="canada">
                         <!-- Map of Canada will be rendered here -->
                     </div>
-
-                </div>
-
-                <!-- Content Card -->
-                <div class="row text-center mt-4">
-                    <div class="card" id="content" style="width: 100%;">
+                    <div class="card" id="content">
                         <div class="card-body"><!-- Content will be filled dynamically --></div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </section>
 
 
-<!-- 7. Investment Performance Section -->
-<section class="scroll-section" id="performance1">
-    <div class="container-fluid-custom">
-        <div class="title-box">
-            <h1>Investment Performance Measurements
-            </h1>
-            <h2>How have the <strong>4 Sectors</strong> and the <strong>6 Markets</strong> performed since 2001?</h2>
+    <!-- 7. Investment Performance Section -->
+    <section class="scroll-section" id="performance1">
+        <div class="container-fluid-custom">
+            <div class="title-box">
+                <h1>Examining Sector and Market Dynamics
+                </h1>
+                <h2>A Review of Performance from 2001
+                    Across <strong>Four Sectors</strong> and <strong>Six Markets</strong> in Canada.
+                </h2>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- 8. Investment Performance Section -->
     <section class="scroll-section" id="performance2">
@@ -407,10 +369,10 @@
         <div class="container-fluid-custom">
             <div class="title-box">
                 <h1>
-                    Placeholder for Transition Page
+                    Reflecting on Investment Insights
                 </h1>
-                <h2>Summarize what we learned about investment returns by sector and region and focus in on
-                    industrial.</h2>
+                <h2>Particularly in the industrial sector, we observed robust growth and resilience, standing out as a
+                    key area of interest for future investment considerations.</h2>
             </div>
         </div>
     </section>
@@ -419,57 +381,42 @@
     <section class="scroll-section" id="industrial1">
         <div class="container-fluid h-100 d-flex flex-column justify-content-between">
             <div class="container custom-container-box">
-                <p class="engaging-text">The VECTOM regions, already pivotal economic engines, are seeing their vacancy
-                    rates plummet,
-                    particularly in the industrial sector. This underscores the burgeoning need for spaces that can
-                    house the digital infrastructure of tomorrow.
-                </p>
                 <h1>Why has the industrial sector been so resilient in Canada?</h1>
+                <p class="engaging-text">The VECTOM regions, key economic hubs, are witnessing a sharp decline in
+                    industrial vacancy rates, signaling a growing need for future-ready spaces to power tomorrow's
+                    digital infrastructure.
+                </p>
                 <!-- Map and Sector Visualizations Row -->
                 <div id="industrial-container">
-                    <div class="map-timeline-container" id="timeline2"></div>
                     <!-- Sector Icons -->
-                    <div class="sector-icon" id="vacancy" style="position: absolute; top: 0; left: 0;"
-                         title="Availability">
+                    <div class="sector-icon" id="vacancy">
                         <!-- SVG for Retail will be loaded here -->
                     </div>
-                    <div class="sector-icon" id="rentGrowth" style="position: absolute; top: 0; right: 0;"
-                         title="Rental Growth">
+                    <div class="sector-icon" id="rentGrowth">
                         <!-- SVG for Office will be loaded here -->
                     </div>
-                    <div id="chart-container" style="margin: auto;">
+                    <div class="vis-container2" id="stacked-chart">
                         <!-- Graphs will be rendered here -->
                     </div>
                 </div>
-                <!-- Content Card -->
-                <div class="row text-center mt-4">
-                    <div id="regionSelector">
-                        <select id="regionDropdown">
-                            <option value="Canada">National</option>
-                            <option value="Toronto">Toronto</option>
-                            <option value="Montreal">Montreal</option>
-                            <option value="Ottawa">Ottawa</option>
-                            <option value="Vancouver">Vancouver</option>
-                            <option value="Calgary">Calgary</option>
-                            <option value="Edmonton">Edmonton</option>
-                        </select>
-                    </div>
-                    <h3></h3>
-                </div>
+                <h3></h3>
             </div>
         </div>
+        <!-- Tooltip container -->
+        <div class="tooltip"></div>
     </section>
 
     <!-- 12. Recommendation Section -->
     <section class="scroll-section" id="recommendation">
         <div class="container-fluid h-100 d-flex flex-column">
             <div class="container custom-container-box">
-                <p class="engaging-text">The digital revolution is transforming not just how we work, but where we work.
-                    Industrial real estate is at the forefront of this transformation, offering a unique opportunity for
+                <h1>Strategic Insights: Navigating the Future of Commercial Real Estate</h1>
+                <h3>The digital revolution is transforming not just how we work, but where we work. Industrial
+                    real estate is at the forefront of this transformation, offering a unique opportunity for
                     investors to capitalize on the growth of AI and tech. By focusing on strategic locations and
-                    adaptable properties, investors can harness the momentum of Canada's burgeoning digital economy.
-                </p>
-                <h1>Placeholder text for question?</h1>
+                    adaptable properties, investors can harness the momentum of Canada's burgeoning digital
+                    economy.
+                </h3>
                 <div class="investment-categories">
                     <div class="category buy">
                         <h2>Buy</h2>
@@ -502,17 +449,8 @@
                     </div>
                 </div>
                 <div class="row mt-auto">
-                    <div class="col">
-                        <h3>The digital revolution is transforming not just how we work, but where we work. Industrial
-                            real estate is at the forefront of this transformation, offering a unique opportunity for
-                            investors to capitalize on the growth of AI and tech. By focusing on strategic locations and
-                            adaptable properties, investors can harness the momentum of Canada's burgeoning digital
-                            economy.
-                        </h3>
-                    </div>
                 </div>
                 <div class="row text-center mt-4">
-                    <h1>Placeholder text for question?</h1>
                 </div>
             </div>
         </div>
@@ -524,24 +462,31 @@
             <div class="container custom-container-box">
                 <div class="row">
                     <h1>Acknowledgments</h1>
-                    <div class="col-md-6">
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                    <p class ="engaging-text">We would like to thank colleagues from a private equity company for their expert input on this
+                        project. Their unconditional guidance helped us to identify the strength of our skills and
+                        inspired us to push our visualizations further. A huge shout-out to the company for sharing
+                        their data and resources with us. Lastly, we owe tremendous gratitude to the entire CS171
+                        teaching team for their guidance during labs and office hours. Our journey through this course
+                        has taught us valuable skills in HTML/CSS/JS/D3 that we will take directly to our jobs and
+                        future learning endeavors.</p>
+                    </div>
+                </div>
                         <h2>Datasets used:</h2>
                         <!-- Add content for datasets used here -->
-                        <p>MSCI: https://www.msci.com/</p>
-                        <p>CBRE: https://www.cbre.ca/</p>
-                        <p>Statistics Canada: https://www.statcan.gc.ca/en/start</p>
-                        <p>Oxford Economics: https://www.oxfordeconomics.com/</p>
-                    </div>
-                    <div class="col-md-6">
+                        <p>MSCI: <a href="https://www.msci.com/">https://www.msci.com/</a> </p>
+                        <p>CBRE: <a href="https://www.cbre.ca/">https://www.cbre.ca/</a></p>
+                        <p>Statistics Canada: <a href="https://www.statcan.gc.ca/en/start">https://www.statcan.gc.ca/en/start</a></p>
+                        <p>Oxford Economics: <a href="https://www.oxfordeconomics.com/">https://www.oxfordeconomics.com</a></p>
+
                         <h2>Other sources:</h2>
                         <!-- Add content for other sources here -->
-                    </div>
-                </div>
+
+
                 <div class="row text-center mt-4">
                     <h1>The End?</h1>
-                </div>
-                <div class="row text-center mt-4">
-                    <p>We would like to thank colleagues from a private equity company for their expert input on this project. Their unconditional guidance helped us to identify the strength of our skills and inspired us to push our visualizations further. A huge shout-out to the company for sharing their data and resources with us. Lastly, we owe tremendous gratitude to the entire CS171 teaching team for their guidance during labs and office hours. Our journey through this course has taught us valuable skills in HTML/CSS/JS/D3 that we will take directly to our jobs and future learning endeavors.</p>
                 </div>
             </div>
         </div>
@@ -628,7 +573,6 @@
 <script src="https://d3js.org/d3-geo.v2.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v3.min.js"></script>
-<script src="js/datamaps.can.min.js"></script>
 
 <!--==============================================================================================-->
 <!-- Team JS Files -->
@@ -640,7 +584,7 @@
 <script src="js/AreaChart.js"></script>
 <script src="js/vectom.js"></script>
 <script src="js/canadaMap.js"></script>
-<script src="js/sectorVis.js"></script>
+<script src="js/stackedChart.js"></script>
 <script src="js/main.js"></script>
 
 <!--==============================================================================================-->

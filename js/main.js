@@ -4,7 +4,7 @@
 
 
 // Combined Global Variables
-let myMap, VectomMap, mySectorVis;
+let myMap, VectomMap, mySectorVis,myStackedChart;
 let macroChart, consumerChart, unemploymentChart, mortgageChart;
 
 // Function to convert date objects to strings or reverse
@@ -133,9 +133,8 @@ function initMainPage(dataArray) {
     // Initialize my visualizations
     myMap = new CanadaMap("canada", geoData, colors);
     VectomMap = new VectomMapVis('map', populationDataPath, geoDataPath, colors);
-    mySectorVis = new SectorVis("chart-container", vacancyData, rentGrowthData, colors, industrial);
-    mySectorVis.toggleView('line'); // or 'bar'
     VectomMap.addColorScaleKey();
+    myStackedChart = new stackedChart("stacked-chart", vacancyData, rentGrowthData, colors, industrial);
 
     document.getElementById('resetButton').addEventListener('click', () => {
         VectomMap.resetToCurrentPopulation(); //
@@ -282,6 +281,8 @@ function createHousingData(data) {
 function getColorDefinitions() {
     const rootStyle = getComputedStyle(document.documentElement);
     return {
+        textColor: rootStyle.getPropertyValue('--color-text').trim(),
+        backgroundColor: rootStyle.getPropertyValue('--color-background').trim(),
         totalColor: rootStyle.getPropertyValue('--color1').trim(),
         essentialColor: rootStyle.getPropertyValue('--color2').trim(),
         discretionaryColor: rootStyle.getPropertyValue('--color3').trim(),
