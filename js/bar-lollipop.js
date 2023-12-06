@@ -137,7 +137,7 @@ function initBarChart(data) {
         .attr("dx", "-.80em")
         .attr("dy", "1.5em")
         .attr("transform", "rotate(0)")
-        .attr("fill", "white")
+        .attr("fill", "var(--color-text)")
         .attr("font-size", "10px");
 
     // Y-axis scale
@@ -155,7 +155,7 @@ function initBarChart(data) {
     svgBar.append("g")
         .call(d3.axisLeft(yScaleBar).tickFormat(d3.format(".0%")))
         .selectAll("text")
-        .attr("fill", "white")
+        .attr("fill", "var(--color-text)")
         .attr("font-size", "10px");
 
     // Bars for income returns
@@ -167,7 +167,7 @@ function initBarChart(data) {
         .attr("y", d => yScaleBar(Math.max(0, d.income)))
         .attr("width", xScaleBar.bandwidth())
         .attr("height", d => Math.abs(yScaleBar(d.income) - yScaleBar(0)))
-        .attr("fill", "#21A3A1")
+        .attr("fill", "var(--color1)")
         .on("mouseover", function (event, d) {
             tooltip.transition()
                 .duration(300)
@@ -175,8 +175,8 @@ function initBarChart(data) {
             tooltip.html("<strong>Income Returns:</strong> " + d3.format(".1%")(d.income) + "<br/>" + d.year)
                 .style("left", (event.pageX + 20) + "px")
                 .style("top", (event.pageY) + "px")
-                .style("background", "#21A3A1")
-                .style("color", "white");
+                .style("background", "var(--color1)")
+                .style("color", "var(--color-text)");
         })
         .on("mouseout", function (d) {
             tooltip.transition()
@@ -195,7 +195,7 @@ function initBarChart(data) {
         .attr("y", d => yScaleBar(Math.max(0, d.income + d.growth)))
         .attr("width", xScaleBar.bandwidth())
         .attr("height", d => Math.abs(yScaleBar(d.growth) - yScaleBar(0)))
-        .attr("fill", "#9F21A3")
+        .attr("fill", "var(--color2)")
         .on("mouseover", function (event, d) {
             tooltip.transition()
                 .duration(300)
@@ -203,8 +203,8 @@ function initBarChart(data) {
             tooltip.html("<strong>Capital Growth:</strong> " + d3.format(".1%")(d.growth) + "<br/>" + d.year)
                 .style("left", (event.pageX + 20) + "px")
                 .style("top", (event.pageY) + "px")
-                .style("background", "#9F21A3")
-                .style("color", "white");
+                .style("background", "var(--color2)")
+                .style("color", "var(--color-text)");
         })
         .on("mouseout", function (d) {
             tooltip.transition()
@@ -224,7 +224,7 @@ function initBarChart(data) {
         .datum(data)
         .attr("class", "line")
         .attr("fill", "none")
-        .attr("stroke", "#8FF53C")
+        .attr("stroke", "var(--color4)")
         .attr("stroke-width", 2.5)
         .attr("d", line);
 
@@ -249,8 +249,8 @@ function initBarChart(data) {
         })
         .attr("cy", d => yScaleBar(d.total))
         .attr("r", 2.5)
-        .attr("fill", "red")
-        .attr("stroke", "white")
+        .attr("fill", "var(--color3)")
+        .attr("stroke", "var(--color-text)")
         .attr("stroke-width", 1)
         .on("mouseover", function (event, d) {
             tooltip.transition()
@@ -259,7 +259,7 @@ function initBarChart(data) {
             tooltip.html("<strong>Total Returns:</strong> " + d3.format(".1%")(d.total) + "<br/>" + d.year)
                 .style("left", (event.pageX + 20) + "px")
                 .style("top", (event.pageY) + "px")
-                .style("background", "#8FF53C")
+                .style("background", "var(--color4)")
                 .style("color", "black");
         })
         .on("mouseout", function (d) {
@@ -292,7 +292,7 @@ function initBarChart(data) {
         .attr("y", marginBar.bottom * 4.18 - heightBar)
         .attr("width", 12)
         .attr("height", 12)
-        .attr("fill", (d, i) => ["#21A3A1", "#9F21A3"][["Income Returns", "Capital Growth"].indexOf(d)]);
+        .attr("fill", (d, i) => ["var(--color1)", "var(--color2)"][["Income Returns", "Capital Growth"].indexOf(d)]);
 
     // Capital Growth (Line with Marker)
     legend.filter(d => d === "Total Returns")
@@ -302,15 +302,15 @@ function initBarChart(data) {
                 .attr("x2", marginBar.left * 11.8 - widthBar)
                 .attr("y1", marginBar.bottom * 4.24 - heightBar)
                 .attr("y2", marginBar.bottom * 4.24 - heightBar)
-                .attr("stroke", "#8FF53C")
+                .attr("stroke", "var(--color4)")
                 .attr("stroke-width", 4);
 
             d3.select(this).append("circle")
                 .attr("cx", marginBar.left * 11.45 - widthBar)
                 .attr("cy", marginBar.bottom * 4.24 - heightBar)
                 .attr("r", 2.5)
-                .attr("fill", "red")
-                .attr("stroke", "white");
+                .attr("fill", "var(--color3)")
+                .attr("stroke", "var(--color-text)");
         });
 
     legend.append("text")
@@ -318,7 +318,7 @@ function initBarChart(data) {
         .attr("y", marginBar.bottom * 4.25 - heightBar)
         .attr("dy", "0.32em")
         .text(d => d)
-        .style("fill", "white");
+        .style("fill", "var(--color-text)");
 
     // Brush setup
     var brush = d3.brushX()
@@ -531,7 +531,7 @@ function updateLollipopChart(data) {
             if (d === 'Sectors' || d === 'Markets') {
                 d3.select(this).style("fill", "none");
             } else {
-                d3.select(this).style("fill", "white");
+                d3.select(this).style("fill", "var(--color-text)");
             }
         });
 
@@ -549,23 +549,23 @@ function updateLollipopChart(data) {
         .attr("y2", d => yScaleLollipop(d.segment))
         .attr("stroke", function (d) {
             if (d.newValue < 0) {
-                return "red";
+                return "var(--color3)";
             }
             switch (d.segment) {
                 case 'Residential':
                 case 'Industrial':
                 case 'Office':
                 case 'Retail':
-                    return "lightblue";
+                    return "var(--color1)";
                 case 'Calgary':
                 case 'Edmonton':
                 case 'Montreal':
                 case 'Ottawa':
                 case 'Toronto':
                 case 'Vancouver':
-                    return "green";
+                    return "var(--color4)";
                 case 'All':
-                    return "violet";
+                    return "var(--color2)";
             }
         })
         .attr("stroke-opacity", 0.3)
@@ -573,14 +573,14 @@ function updateLollipopChart(data) {
         .on("mouseover", function (event, d) {
             let color;
             if (d.newValue < 0) {
-                color = "darkred";
+                color = "var(--color3)";
             } else {
-                color = (d.segment === 'Residential' || d.segment === 'Industrial' || d.segment === 'Office' || d.segment === 'Retail') ? "grey" : (d.segment === 'Calgary' || d.segment === 'Edmonton' || d.segment === 'Montreal' || d.segment === 'Ottawa' || d.segment === 'Toronto' || d.segment === 'Vancouver') ? "green" : (d.segment === 'All') ? "violet" : "#21A3A1"; // Default color
+                color = (d.segment === 'Residential' || d.segment === 'Industrial' || d.segment === 'Office' || d.segment === 'Retail') ? "var(--color5)" : (d.segment === 'Calgary' || d.segment === 'Edmonton' || d.segment === 'Montreal' || d.segment === 'Ottawa' || d.segment === 'Toronto' || d.segment === 'Vancouver') ? "var(--color4)" : (d.segment === 'All') ? "var(--color2)" : "var(--color1)"; // Default color
             }
             tooltip.transition()
                 .duration(100)
                 .style("opacity", 0.8)
-                .style("color", "white");
+                .style("color", "var(--color-text)");
             tooltip.html(d.segment + "<br/>" + "% Change: " + d3.format(".1%")(d.newValue))
                 .style("left", (event.pageX + 20) + "px")
                 .style("top", (event.pageY) + "px")
@@ -608,27 +608,27 @@ function updateLollipopChart(data) {
         .style("fill", function (d) {
             switch (selectedMetric) {
                 case 'income':
-                    return "#21A3A1";
+                    return "var(--color1)";
                 case 'total':
-                    return "#8FF53C";
+                    return "var(--color4)";
                 case 'growth':
-                    return "#9F21A3";
+                    return "var(--color2)";
                 default:
-                    return "#21A3A1";
+                    return "var(--color1)";
             }
         })
         .attr("opacity", 1)
         .on("mouseover", function (event, d) {
             let color;
             if (d.newValue < 0) {
-                color = "darkred";
+                color = "var(--color3)";
             } else {
-                color = (d.segment === 'Residential' || d.segment === 'Industrial' || d.segment === 'Office' || d.segment === 'Retail') ? "grey" : (d.segment === 'Calgary' || d.segment === 'Edmonton' || d.segment === 'Montreal' || d.segment === 'Ottawa' || d.segment === 'Toronto' || d.segment === 'Vancouver') ? "green" : (d.segment === 'All') ? "violet" : "#21A3A1"; // Default color
+                color = (d.segment === 'Residential' || d.segment === 'Industrial' || d.segment === 'Office' || d.segment === 'Retail') ? "var(--color5)" : (d.segment === 'Calgary' || d.segment === 'Edmonton' || d.segment === 'Montreal' || d.segment === 'Ottawa' || d.segment === 'Toronto' || d.segment === 'Vancouver') ? "var(--color4)" : (d.segment === 'All') ? "var(--color2)" : "var(--color1)"; // Default color
             }
             tooltip.transition()
                 .duration(100)
                 .style("opacity", 0.8)
-                .style("color", "white");
+                .style("color", "var(--color-text)");
             tooltip.html(d.segment + "<br/>" + "% Change: " + d3.format(".1%")(d.newValue))
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px")
@@ -647,9 +647,9 @@ function updateLollipopChart(data) {
     svgLollipop.selectAll(".lollipop-legend").remove();
 
 // Legend items
-    const legendItems = [{color: "violet", text: "All"}, {color: "lightblue", text: "Sectors"}, {
-        color: "green", text: "Markets"
-    }, {color: "red", text: "Negative Return"},];
+    const legendItems = [{color: "var(--color2)", text: "All"}, {color: "var(--color1)", text: "Sectors"}, {
+        color: "var(--color4)", text: "Markets"
+    }, {color: "var(--color3)", text: "Negative Return"},];
 
 // Fixed width for each legend item
     const legendItemWidth = 70;
@@ -680,7 +680,7 @@ function updateLollipopChart(data) {
                 .attr("y", 10)
                 .text(d.text)
                 .style("font-size", "10px")
-                .style("fill", "white");
+                .style("fill", "var(--color-text)");
         });
 
 // Add labels to the lollipop chart
@@ -702,7 +702,7 @@ function updateLollipopChart(data) {
         .attr("y", d => yScaleLollipop(d.segment) + yScaleLollipop.bandwidth() / 2)
         .attr("text-anchor", d => d.newValue >= 0 ? "end" : "start") // Adjust text anchor based on value
         .attr("font-size", "10px")
-        .style("fill", "white")
+        .style("fill", "var(--color-text)")
         .each(function (d) {
             if (d.segment !== '') {
                 var label = d3.select(this);

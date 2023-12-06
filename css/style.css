@@ -55,7 +55,6 @@ h1 {
     font-family: 'Encode Sans SC', sans-serif;
     font-size: 2.2rem;
     font-weight: 500;
-    /*text-shadow: var(--myshadow);*/
     margin: 10px 3%;
     text-align: center;
 }
@@ -65,7 +64,6 @@ h2 {
     font-family: 'Open Sans', sans-serif;
     margin: 10px 3%;
     font-size: 1.5rem;
-    /*text-shadow: 2px 2px 2px #aaa;*/
     text-align: center;
 
 }
@@ -121,6 +119,19 @@ h3 {
 }
 
 
+.vis-container3 {
+    height: 100%; /* adjust based on your needs */
+    width: 100%;
+    background-color: var(--color-background);
+    margin: 20px 20px;
+    border-radius: 1rem;
+}
+
+.vis-container3 svg {
+    width: 100%;
+    height: 100%;
+}
+
 .vis-container2 {
     height: 100%; /* adjust based on your needs */
     width: 100%;
@@ -157,6 +168,15 @@ h3 {
     margin-right: .5rem;
 }
 
+.commentary-container {
+    padding: 0;
+    height: 100%;
+    width: 80vw;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 .engaging-text {
     font-family: 'Montserrat', sans-serif;
@@ -521,7 +541,7 @@ h3 {
 }
 
 h4 {
-    color: white;
+    color: var(--color-text);
     font: 14px "arial";
     font-weight: bold;
     margin-top: 1vh;
@@ -561,7 +581,7 @@ h5 {
 }
 
 th {
-    color: white;
+    color: var(--color-text);
     font: 12px "arial";
 }
 
@@ -575,7 +595,7 @@ th {
 .axis line,
 .domain {
     fill: none;
-    stroke: #ffffff;
+    stroke: var(--color-text);
     shape-rendering: crispEdges;
 }
 
@@ -597,7 +617,7 @@ th {
 }
 
 th {
-    color: white;
+    color: var(--color-text);
     font-size: 14px;
     text-align: end;
     white-space: normal;
@@ -613,8 +633,8 @@ td {
 .table-highlight th {
     font-size: larger;
     font-weight: bold;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--color1);
+    color: var(--color-text);
 }
 
 .table.table-highlight tr {
@@ -668,12 +688,10 @@ td {
 /*Play, Forward, Back buttons*/
 .btn, .btn1, .btn2, .btn3 {
     padding: 5px 2px;
-    /*font-weight: bold;*/
-    /*margin-top: 1vh;*/
     margin-bottom: 2vh;
-    color: white;
+    color: var(--color-text);
     font-size: 14px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: var(--color-background);
     border-radius: 0.5rem;
 }
 
@@ -685,12 +703,12 @@ td {
 }
 
 .button-text {
-    margin-top: .5vh;
+    margin: .5vh;
 }
 
 #sortSelection, #dataSelection, #metricSelect, #lollipop-heading  {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
+    background-color: var(--color-background);
+    color: var(--color-text);
 }
 
 #sortSelection:hover, #dataSelection:hover, #metricSelect:hover {
@@ -699,12 +717,12 @@ td {
 
 .source {
     font-size: 12px;
-    color: purple;
+    color: var(--color2);
 }
 
 /*Buttons*/
 .mt-2 {
-    color: purple;
+    color: var(--color2);
     margin: 1vh;
     font-size: 11px;
 }
@@ -722,26 +740,10 @@ td {
 }
 
 .axis-label {
-    fill: rgb(216, 6, 33, 0.9);
+    fill: var(--color3);
     font-size: 12px;
     font-weight: bold;
 }
-
-/*#playPauseButton {*/
-/*    font-size: 1rem; !* Adjust the font size as needed *!*/
-/*    width: 50%;*/
-/*    padding: 20px; !* Adjust the padding to make the button smaller or larger *!*/
-/*    background-color: rgb(143, 245, 60, 0.95); !* Use any color you like *!*/
-/*    border: none; !* Remove border if present *!*/
-/*    border-radius: 1rem;*/
-/*    color: white; !* Text color *!*/
-/*    cursor: pointer; !* Change cursor to pointer when hovering over the button *!*/
-/*    transition: background-color 0.3s; !* Smooth transition for hover effect *!*/
-/*}*/
-
-/*#playPauseButton:hover {*/
-/*    background-color: rgb(216, 6, 33, 0.95); !* Slightly darker shade when hovered for a visual feedback *!*/
-/*}*/
 
 /****************/
 /*  Sector Viz  */
@@ -785,8 +787,8 @@ td {
     border: none;
     background-color: var(--color-background);
     border-radius: 1rem;
-    display: flex;
     padding: 0;
+    display: flex;
 }
 
 .card {
@@ -797,8 +799,6 @@ td {
     position: absolute;
     transition: fill 0.3s;
 }
-
-
 
 .card-body {
     font-family: 'Montserrat', sans-serif;
@@ -825,17 +825,6 @@ td {
 }
 
 
-#timeline2 {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem 1rem 0 0;
-    background-color: var(--color-background);
-    margin: 0;
-    width: 80%;
-}
-
 #timeline1 line,
 #timeline1 path {
     stroke: var(--color-text); /* Sets the SVG line color */
@@ -858,7 +847,7 @@ td {
     width: 150px;
     height: 150px;
     position: absolute;
-    transition: fill 0.3s;
+    transition: fill 0.5s;
 }
 
 .sector-icon {
@@ -867,7 +856,7 @@ td {
     width: 150px;
     height: 150px;
     position: absolute;
-    transition: fill 0.3s;
+    transition: fill 0.5s;
 }
 
 #vacancy {
@@ -879,7 +868,6 @@ td {
     top: 75px;
     right: 10px;
 }
-
 
 #retail {
     top: 10px;
@@ -954,18 +942,6 @@ td {
     margin: 0 auto; /* This will center the containers if they are block-level */
 }
 
-/*.vis-container2 {*/
-/*    height: 100%; !* adjust based on your needs *!*/
-/*    width: 100%;*/
-/*    background-color: var(--color-background);*/
-/*    margin: 40px 40px;*/
-/*    border-radius: 1rem;*/
-/*}*/
-/*.vis-container2 svg {*/
-/*    width: 70%;*/
-/*    height: auto;*/
-/*}*/
-
 h6 {
     margin: 0;
     padding: .5rem;
@@ -1015,7 +991,6 @@ h6 {
     background-color: var(--color-background);
     padding: 20px;
     border-radius: 1rem;
-    /*box-shadow: var(--myshadow);*/
 }
 
 .category h2 {
