@@ -460,7 +460,7 @@ h3 {
 }
 
 #macro1 .category.macro3 h2 {
-    background-color: var(--color3);
+    background-color: var(--color6);
 }
 
 
@@ -533,7 +533,7 @@ h3 {
     height: auto;
     padding: 8px;
     font: .76rem Arial;
-    background: var(--color-background);
+    background: var(--color-text);
     border: 0;
     border-radius: 1rem;
     pointer-events: none;
@@ -612,7 +612,7 @@ th {
 
 #table-box {
     opacity: 0.9;
-    text-align: start;
+    text-align: center;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -647,7 +647,7 @@ td {
 
 #commentary-box1, #commentary-box2, #commentary-box3, #commentary-box4 {
     display: none; /* Initially hidden */
-    background-color: wheat;
+    background-color: var(--color5);
     border-radius: 20px; /* Rounded corners for bubble effect */
     padding: 15px; /* Padding inside the bubble */
     margin-top: 2vh;
@@ -673,7 +673,7 @@ td {
     margin-left: -10px; /* Half the width of the arrow */
     border-width: 15px; /* Size of the arrow */
     border-style: solid;
-    border-color: transparent transparent wheat transparent; /* Arrow color */
+    border-color: transparent transparent var(--color5) transparent; /* Arrow color */
 }
 
 /* Optional: Add custom styling for the text */
@@ -683,6 +683,42 @@ td {
     line-height: 1.5; /* Improves line spacing */
 }
 
+#commentary-box, #commentary-bar {
+    border-radius: 20px;
+    padding: 15px 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Deeper shadow for a 3D effect */
+    width: auto;
+    max-width: 85%;
+    text-align: center;
+    font-size: 14px;
+    color: var(--color3);
+    margin: 10px auto;
+    transition: all 0.1s ease-in-out;
+}
+
+#commentary-box:hover, #commentary-bar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Arrow at the top of the bubble */
+#commentary-box:after, #commentary-bar:after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent transparent var(--color2) transparent; /* Arrow color matching box */
+}
+
+/* Styling for the text */
+#commentary-box p, #commentary-bar p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
 /*Buttons and Others*/
 
 /*Play, Forward, Back buttons*/
