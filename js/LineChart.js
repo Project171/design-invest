@@ -11,7 +11,7 @@ class LineChart {
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 15, right: 25, bottom: 30, left: 50 };
+        vis.margin = { top: 25, right: 25, bottom: 30, left: 50 };
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = 200 - vis.margin.top - vis.margin.bottom;
@@ -106,6 +106,62 @@ class LineChart {
         vis.brushGroup = vis.svg.append("g")
             .attr("class", "brush")
             .call(vis.brush)
+
+        const highlightedPeriods = [
+            { start: new Date("1986-01-01"), end: new Date("1991-01-01"), label: "Oil Crisis" },
+            { start: new Date("1999-01-01"), end: new Date("2001-01-01"), label: "Tech Bubble" },
+            { start: new Date("2007-01-01"), end: new Date("2011-01-01"), label: "Global Financial Crisis" },
+            { start: new Date("2020-01-01"), end: new Date("2022-01-01"), label: "COVID" },
+        ];
+
+        // Create area chart that highlights the crisis time periods
+        vis.area = d3.area()
+            .x(function(d) { return vis.x(d.date); })
+            .y0(vis.height)
+            .y1(0);
+
+        // Create a group for the highlighted areas and labels
+        vis.highlightedGroup = vis.svg.append("g")
+            .attr("class", "highlighted-group");
+
+        // Add new highlighted areas based on the specified time periods
+        vis.highlightedGroup.selectAll(".highlighted-area")
+            .data(highlightedPeriods)
+            .enter().append("g")
+            .attr("class", "highlighted-group-item")
+            .each(function(d) {
+                // Filter data to include only points within the current time period
+                const areaData = vis.data.filter(point => point.date >= d.start && point.date <= d.end);
+
+                // Append the highlighted area
+                d3.select(this).append("path")
+                    .attr("class", "highlighted-area")
+                    .attr("fill", "orange")
+                    .attr("opacity", 0.3)
+                    .attr("d", vis.area(areaData));
+
+                // Append the label above the highlighted area
+                d3.select(this).append("text")
+                    .attr("class", "highlighted-label")
+                    // .attr("x", vis.x(areaData[0].date))
+                    .attr("x", vis.x(areaData[Math.floor(areaData.length / 2)].date)) // Use the midpoint of the data
+                    .attr("y", -10) // Adjust the position as needed
+                    .text(d.label);
+            });
+
+        //
+        // // Add new highlighted areas based on the specified time periods
+        // vis.highlightedAreaGroup.selectAll(".highlighted-area")
+        //     .data(highlightedPeriods)
+        //     .enter().append("path")
+        //     .attr("class", "highlighted-area")
+        //     .attr("fill", "orange")
+        //     .attr("opacity", 0.3)
+        //     .attr("d", function(d) {
+        //         // Filter data to include only points within the current time period
+        //         const areaData = vis.data.filter(point => point.date >= d.start && point.date <= d.end);
+        //         return vis.area(areaData);
+        //     });
 
 
         // (Filter, aggregate, modify data)

@@ -486,6 +486,12 @@ h3 {
     width: 45vh;
 }
 
+.highlighted-label {
+    fill: white;
+    font-size: 11px;
+    text-anchor: middle;
+}
+
 /****************/
 /*  Perf   Viz  */
 /****************/
