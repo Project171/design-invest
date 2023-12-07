@@ -520,6 +520,12 @@ h3 {
     }
 }
 
+.highlighted-label {
+    fill: white;
+    font-size: 11px;
+    text-anchor: middle;
+}
+
 /****************/
 /*  Perf   Viz  */
 /****************/
