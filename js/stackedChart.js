@@ -1,5 +1,5 @@
 class stackedChart {
-    constructor(_parentElement, _vacancyData, _rentGrowthData, _colors, _industrial) {
+    constructor(_parentElement, _vacancyData, _rentGrowthData, _colors) {
         this.parentElement = _parentElement;
         this.vacancyData = _vacancyData;
         this.rentGrowthData = _rentGrowthData;
@@ -14,7 +14,7 @@ class stackedChart {
         this.rentGrowthColor = _colors.rentGrowthColor;
         this.vacancyColor = _colors.vacancyColor;
         this.combinedData = []; // Initialize combinedData
-        this.selectedRegion = "Toronto"; // Initialize selectedMarket
+        //this.selectedRegion = "Toronto"; // Initialize selectedMarket
         this.selectedSector = 'vacancy';
         this.keys = ["Vancouver", "Edmonton", "Calgary", "Toronto", "Ottawa", "Montreal"];
         this.colors = {

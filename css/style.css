@@ -104,6 +104,12 @@ h3 {
 
 }
 
+.svg-content-responsive {
+    display: block; /* if you want it to shrink-to-fit in its container */
+    width: 100%; /* set to 100% of the parent element */
+    height: auto; /* maintain the aspect ratio */
+}
+
 .title-box {
     max-width: 60vw;
     min-height: 40vh;
@@ -154,6 +160,24 @@ h3 {
 .vis-container1 svg {
     width: 100%;
     height: auto;
+}
+
+.vis-container4 {
+    height: 100%;
+    width: 70vw;
+    background-color: var(--color-background);
+    margin: 20px 20px;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.vis-container4 svg {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Targets unordered lists within the commentary columns */
@@ -931,6 +955,48 @@ td {
     right: 10px;
 }
 
+
+.triangle-button {
+    background-color: transparent;
+    border-style: solid;
+    border-width: 20px 30px 20px 0; /* Adjust size with these values */
+    border-color: transparent var(--color4) transparent transparent; /* Right pointing triangle */
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+#scroll-left {
+    border-width: 20px 0 20px 30px;
+    border-color: transparent transparent transparent var(--color4); /* Left pointing triangle */
+    top: 35vh;
+    right: 25vw;
+}
+
+#scroll-right {
+    top: 35vh;
+    left: 25vw;
+}
+
+/* Add any additional styles for positioning, etc. */
+.triangle-button:focus {
+    outline: none; /* Removes outline on focus */
+}
+/*#scroll-left {*/
+/*    position: ABSOLUTE;*/
+/*    bottom: 10px;*/
+/*    left: 10px;*/
+/*    transform: translateY(-50%);*/
+/*    z-index: 1000;*/
+/*    color: var(--color-text);*/
+/*    background-color: var(--color-background);*/
+/*    padding: 5px;*/
+/*    border-radius: 1rem;*/
+/*    text-align: center;*/
+/*}*/
+
+
 #vacancy:hover, .vacancy-clicked {
     fill: var(--color3);
 }
@@ -1015,6 +1081,32 @@ h6 {
     pointer-events: auto;
     border-radius: 1rem;
 }
+
+/****************/
+/* National Viz */
+/****************/
+
+
+.y0.axis path,
+.y0.axis line {
+    stroke: #98abc5;
+}
+
+.y1.axis path,
+.y1.axis line {
+    stroke: #d0743c;
+}
+
+.x.axis path,
+.x.axis line {
+    stroke: orange;
+}
+
+.x.axis text {
+    fill: orange;
+}
+
+
 
 /*****************/
 /*Recommendations*/

@@ -20,13 +20,13 @@ class VectomMapVis {
         let vis = this;
 
         // Define city coordinates
-        vis.cities = [{"name": "Vancouver", "coords": [49.2827, -123.1207]}, {
-            "name": "Edmonton",
-            "coords": [53.5461, -113.4938]
-        }, {"name": "Calgary", "coords": [51.0447, -114.0719]}, {
-            "name": "Toronto",
-            "coords": [43.6532, -79.3832]
-        }, {"name": "Ottawa", "coords": [45.4215, -75.6972]}, {"name": "Montreal", "coords": [45.5017, -73.5673]}];
+        vis.cities = [
+            {"name": "Vancouver", "coords": [49.2827, -123.1207]},
+            {"name": "Edmonton", "coords": [53.5461, -113.4938]},
+            {"name": "Calgary", "coords": [51.0447, -114.0719]},
+            {"name": "Toronto", "coords": [43.6532, -79.3832]},
+            {"name": "Ottawa", "coords": [45.4215, -75.6972]},
+            {"name": "Montreal", "coords": [45.5017, -73.5673]}];
 
         vis.x = null;
 

@@ -4,7 +4,7 @@
 
 
 // Combined Global Variables
-let myMap, VectomMap, mySectorVis,myStackedChart;
+let myMap, VectomMap, myNationalVis,myStackedChart;
 let macroChart, consumerChart, unemploymentChart, mortgageChart;
 
 // Function to convert date objects to strings or reverse
@@ -135,7 +135,7 @@ function initMainPage(dataArray) {
     VectomMap = new VectomMapVis('map', populationDataPath, geoDataPath, colors);
     VectomMap.addColorScaleKey();
     myStackedChart = new stackedChart("stacked-chart", vacancyData, rentGrowthData, colors, industrial);
-
+    myNationalVis = new dualChart("national-vis", industrial, colors);
     document.getElementById('resetButton').addEventListener('click', () => {
         VectomMap.resetToCurrentPopulation(); //
     });
