@@ -614,7 +614,7 @@ strong {
 #sectors-container,
 #industrial-container {
     position: relative;
-    max-height: 70%;
+    max-height: 80%;
     width: 90%;
     display: flex;
     justify-content: center;
