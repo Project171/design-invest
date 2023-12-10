@@ -142,6 +142,27 @@ function initMainPage(dataArray) {
         VectomMap.resetToCurrentPopulation(); //
     });
 
+
+    // Attach event listeners to scroll buttons
+    const scrollLeftHandler = (event) => {
+        event.stopPropagation();
+        myNationalVis.scrollLeft();
+    };
+
+    const scrollRightHandler = (event) => {
+        event.stopPropagation();
+        myNationalVis.scrollRight();
+    };
+
+    document.getElementById('scroll-left').removeEventListener('click', scrollLeftHandler);
+    document.getElementById('scroll-left').addEventListener('click', scrollLeftHandler);
+
+    document.getElementById('scroll-right').removeEventListener('click', scrollRightHandler);
+    document.getElementById('scroll-right').addEventListener('click', scrollRightHandler);
+
+
+
+
     //update dot navigation
     // Initialize an IntersectionObserver for dot navigation
     const dotObserver = new IntersectionObserver((entries) => {
@@ -247,24 +268,6 @@ function initMainPage(dataArray) {
 
     toggleSwitch.addEventListener('change', switchTheme, false);
 
-}
-
-// Function to update the dot navigation based on current scroll position
-function updateDotNavigation() {
-    const sections = document.querySelectorAll('.section');
-    const dots = document.querySelectorAll('.dot-navigation .dot');
-
-    sections.forEach((section, index) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const scrollPosition = window.scrollY;
-
-        // Update active dot based on current active section
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[index].classList.add('active');
-        }
-    });
 }
 
 // For Macro Dash
