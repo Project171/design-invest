@@ -1,11 +1,12 @@
 class AreaChart {
 
-    constructor(_parentElement, _data, selected_column, _colors, _chartTitle) {
+    constructor(_parentElement, _data, selected_column, _colors, _chartTitle, _tooltipText) {
         this.parentElement = _parentElement;
         this.data = _data;
         this.colors = _colors;
         this.chartTitle = _chartTitle;
         this.selected_column = selected_column;
+        this.tooltipText = _tooltipText;
 
         this.initVis();
     }
@@ -59,7 +60,7 @@ class AreaChart {
             .attr("class", "y-axis axis");
 
         // Append title for the chart at the top
-        vis.svg.append("text")
+        vis.title = vis.svg.append("text")
             .attr("x", vis.width / 2)
             .attr("y", -5)
             .attr("text-anchor", "middle")
@@ -68,21 +69,27 @@ class AreaChart {
             .attr("fill", "currentColor")
             .text(vis.chartTitle);
 
-        // // Axis title
-        // vis.svg.append("text")
-        //     .attr("x", -50)
-        //     .attr("y", -8)
-        //     .text("Votes");
+        // Define a tooltip div
+        const tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
-        // // Append a path for the line
-        // vis.line = d3.line()
-        //     .x(d => vis.x(d.date))
-        //     .y(d => vis.y(d.mortgage_rates));
-        //
-        // vis.svg.append("path")
-        //     .datum(vis.data)
-        //     .attr("class", "line")
-        //     .attr("d", vis.line);
+        // // Add (?) symbol for the tooltip
+        vis.title.append("tspan")
+            .attr("class", "tooltip-trigger")
+            .style("cursor", "pointer")
+            .text(" ⓘ")
+            .on("mouseover", function (event) {
+                tooltip.transition().style("opacity", 1);
+
+                // Create a speech bubble with a white background
+                tooltip.html('<div class="speech-bubble">' + vis.tooltipText + '</div>')
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 15) + "px");
+            })
+            .on("mouseout", function () {
+                tooltip.transition().style("opacity", 0);
+            });
 
         // Append a path for the area function, so that it is later behind the brush overlay
         vis.ratePath = vis.svg.append("path")
