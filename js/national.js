@@ -34,7 +34,9 @@ class dualChart {
         const currentIndex = this.data.findIndex(d => {
             const year = d.parsedDate.getFullYear();
             const quarter = Math.ceil((d.parsedDate.getMonth() + 1) / 3);
-            return year === currentYear && quarter === currentQuarter;
+            const isCurrent = year === currentYear && quarter === currentQuarter;
+            console.log(`Data entry: ${d.Date}, Is current: ${isCurrent}`);
+            return isCurrent;
         });
 
         this.visibleYears = 5; // Or any other number of years you want to display
@@ -86,10 +88,10 @@ class dualChart {
         // Find the current year
         const currentYear = new Date().getFullYear();
 
-        // Calculate the start year (6 years ago)
-        vis.startYear = currentYear - 5; // Subtract 5 because the current year is included
+        // Calculate the start year (5 years ago)
+        vis.startYear = currentYear -5;
 
-        // Filter the data to include only the last 6 years
+        // Filter the data to include only the last 5 years
         vis.data = vis.data.filter(d => {
             const year = d.parsedDate.getFullYear();
             return year >= vis.startYear && year <= currentYear;
@@ -405,18 +407,23 @@ class dualChart {
             .style("stroke-width", "2px")
             .style("fill", "none");*/
 
+        console.log("Line Data:", vis.lineData);
+
         // Update the line for Availability Rate (RHS)
-        let line = vis.svg.selectAll(".line-availability-rate")
+        vis.line = vis.svg.selectAll(".line-availability-rate")
             .data([vis.lineData], d => d.date);
 
-        line.enter()
+        vis.line.enter()
             .append("path")
             .attr("class", "line-availability-rate")
-            .merge(line)
+            .merge(vis.line)
             .attr("d", vis.lineGenerator)
             .style("stroke", vis.vColor)
             .style("stroke-width", "2px")
-            .style("fill", "none");
+            .style("fill", "none")
+            .attr("transform", `translate(${vis.margin.left},0)`); // Add this line to adjust the x-coordinate
+
+
 
         // Draw the circles for Availability Rate
         vis.svg.selectAll(".circle-availability-rate")
@@ -484,12 +491,14 @@ class dualChart {
     }
 
     //Determine the Current Time
-     getCurrentQuarter() {
+    getCurrentQuarter() {
         const currentDate = new Date();
         const currentYear = currentDate.getFullYear();
-        const currentQuarter = Math.floor((currentDate.getMonth() + 3) / 3);
+        const currentQuarter = Math.ceil((currentDate.getMonth() + 1) / 3);
+        console.log(`Current Quarter: Q${currentQuarter}, Current Year: ${currentYear}`);
         return { currentYear, currentQuarter };
     }
+
 
     // // Scroll left function
     // scrollLeft() {
@@ -525,7 +534,8 @@ class dualChart {
     }
 
     scrollRight() {
-        const maxIndex = this.data.length - this.visibleYears * 4;
+        const maxIndex = this.data.length - 20; // Since you want to show 20 quarters at a time
+        console.log("Total data length:", this.data.length);
         console.log("Scrolling right");
         if (this.startIndex < maxIndex) {
             this.startIndex = Math.min(maxIndex, this.startIndex + 4); // Move forward one year
