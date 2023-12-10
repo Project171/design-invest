@@ -28,7 +28,7 @@ class cBarChart {
 
         // console.log("vis.market_change_data: ", vis.market_change_data)
 
-        vis.margin = { top: 40, right: 60, bottom: 60, left: 200 };
+        vis.margin = { top: 40, right: 150, bottom: 60, left: 200 };
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = 462.5 - vis.margin.top - vis.margin.bottom;
@@ -100,7 +100,7 @@ class cBarChart {
         // Legend container
         var legend = vis.svg.append("g")
             .attr("class", "legend")
-            .attr("transform", "translate(500, 250)"); // Adjust positioning as needed
+            .attr("transform", "translate(" + (vis.width + 20) + ", 250)"); // Adjust positioning as needed
 
         // Add a square for each legend item
         var legendItems = legend.selectAll(".legend-item")
