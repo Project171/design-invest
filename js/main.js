@@ -9,6 +9,7 @@ let macroChart, consumerChart, unemploymentChart, mortgageChart;
 
 // Function to convert date objects to strings or reverse
 let dateParser = d3.timeParse("%m/%d/%Y");
+let dateFormat = d3.timeFormat("%Y-%m-%d");
 
 
 let geoDataPath = "data/canada.topo.json";
@@ -32,7 +33,9 @@ Promise.all(promises)
         // Rename the column in the first dataset only
         const renamedData = data.map(function (dataset, index) {
             if (index === 0) {
-                return dataset.map(function (row) {
+                return dataset
+                    .filter(row => dateFormat(dateParser(row['Date'])) <= '2023-12-01')
+                    .map(function (row) {
                     return {
                         date: dateParser(row['Date']),
                         unemployment: +row['Unemployment rate'],
@@ -41,7 +44,9 @@ Promise.all(promises)
                     };
                 });
             } else if (index === 1) {
-                return dataset.map(function (row) {
+                return dataset
+                    .filter(row => dateFormat(dateParser(row['Date'])) <= '2023-12-01')
+                    .map(function (row) {
                     return {
                         date: dateParser(row['Date']),
                         clothing: +row['Consumer spending, nominal, LCU - Clothing and footwear - Total'],
@@ -61,7 +66,9 @@ Promise.all(promises)
                     }
                 })
             } else if (index === 2) {
-                return dataset.map(function (row) {
+                return dataset
+                    .filter(row => dateFormat(dateParser(row['Date'])) <= '2023-12-01')
+                    .map(function (row) {
                     return {
                         date: dateParser(row['Date']),
                         sale_price_index: +row['CREA Average Residential Sale Price Index'],
