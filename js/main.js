@@ -4,7 +4,7 @@
 
 
 // Combined Global Variables
-let myMap, VectomMap, myNationalVis,myStackedChart;
+let myMap, VectomMap, myNationalVis, myStackedChart;
 let macroChart, consumerChart, unemploymentChart, mortgageChart;
 
 // Function to convert date objects to strings or reverse
@@ -93,17 +93,8 @@ function initMainPage(dataArray) {
     let industrial = dataArray[4];
     let vacancyData = dataArray[5];
     let rentGrowthData = dataArray[6];
-    //let populationData = dataArray[7];
 
     let colors = getColorDefinitions();
-
-
-    // DEBUGGING data
-    //console.log(colors)
-    // console.log("macro_data: ", macro_data)
-    // console.log("consumer_data: ", consumer_data)
-    // console.log("housing_data: ", housing_data)
-    // console.log('check out ALL the data', dataArray);
 
     let macroEventHandler = {
         bind: (eventName, handler) => {
@@ -116,11 +107,11 @@ function initMainPage(dataArray) {
         }
     }
 
-    macroChart = new LineChart("macro_vis", macro_data, macroEventHandler)
+    //macroChart = new LineChart("macro_vis", macro_data, macroEventHandler)
     macroChart = new LineChart("macro_vis2", macro_data, macroEventHandler)
     consumerChart = new cBarChart("consumer_vis", consumer_data, colors, macroEventHandler)
-    unemploymentChart = new AreaChart("unemployment_vis", macro_data, "unemployment", colors)
-    mortgageChart = new AreaChart("mortgage_vis", housing_data, "mortgage_rates", colors)
+    unemploymentChart = new AreaChart("unemployment_vis", macro_data, "unemployment", colors, "Unemployment Rate")
+    mortgageChart = new AreaChart("mortgage_vis", housing_data, "mortgage_rates", colors, "Mortgage Rates")
 
     macroEventHandler.bind("selectionChanged", function (event) {
         let rangeStart = event.detail[0];
@@ -140,10 +131,9 @@ function initMainPage(dataArray) {
         VectomMap.resetToCurrentPopulation(); //
     });
 
-
     // navigation dots
     document.addEventListener('scroll', function () {
-        const sections = document.querySelectorAll('.scroll-section');
+        const sections = document.querySelectorAll('.section');
         const dots = document.querySelectorAll('.dot-navigation .dot');
 
         sections.forEach((section, index) => {
@@ -168,6 +158,56 @@ function initMainPage(dataArray) {
                 behavior: 'smooth'
             });
         });
+    });
+
+    // Site theme change
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+    const themeToggleLabel = document.getElementById('theme-toggle-label'); // Make sure you have this element in your HTML
+
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+            themeToggleLabel.textContent = 'Enable Light Mode!'; // Set the text for dark mode
+        } else {
+            themeToggleLabel.textContent = 'Enable Dark Mode!'; // Set the text for light mode
+        }
+    }
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeToggleLabel.textContent = 'Enable Light Mode!'; // Change the text when dark mode is enabled
+        }
+        else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            themeToggleLabel.textContent = 'Enable Dark Mode!'; // Change the text when light mode is enabled
+        }
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+}
+
+// Function to update the dot navigation based on current scroll position
+function updateDotNavigation() {
+    const sections = document.querySelectorAll('.section');
+    const dots = document.querySelectorAll('.dot-navigation .dot');
+
+    sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const scrollPosition = window.scrollY;
+
+        // Update active dot based on current active section
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+        }
     });
 }
 
@@ -299,3 +339,4 @@ function getColorDefinitions() {
         mColor: rootStyle.getPropertyValue('--color6').trim()
     };
 }
+

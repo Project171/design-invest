@@ -5,19 +5,22 @@ class dualChart {
         this.textColor = _colors.textColor;
         this.backgroundColor = _colors.backgroundColor;
         this.vColor = _colors.vColor;
+        this.eColor = _colors.eColor;
         this.cColor = _colors.cColor;
+        this.tColor = _colors.tColor;
+        this.oColor = _colors.oColor;
         this.mColor = _colors.mColor;
         this.dataAttributes = {
             'Absorption (LHS)': {
-                color: _colors.mColor,
+                color: _colors.cColor,
                 // Any other attributes you want to store for Absorption
             },
             'New Supply (LHS)': {
-                color: _colors.vColor,
+                color: _colors.mColor,
                 // Any other attributes you want to store for New Supply
             },
             'Availability Rate (RHS)': {
-                color: _colors.cColor,
+                color: _colors.vColor,
                 // Any other attributes you want to store for Availability Rate
             }
         };
@@ -89,7 +92,7 @@ class dualChart {
         let vis = this;
         vis.startIndex = 0; // Initialize startIndex
         vis.visibleYears = 6; // Set the number of years you want to display
-        vis.legendY = - 30;
+        vis.legendY = - 10;
 
         console.log("vis.data=", vis.data);
 
@@ -124,7 +127,7 @@ class dualChart {
 
         vis.y0 = d3.scaleLinear().range([vis.height, 0]);
         vis.y1 = d3.scaleLinear().range([vis.height, 0]);
-        vis.color = d3.scaleOrdinal().range([vis.vColor, vis.cColor, vis.mColor]);
+        vis.color = d3.scaleOrdinal().range([vis.cColor, vis.mColor, vis.vColor]);
 
         // Axes
         vis.xAxis = d3.axisBottom(vis.x0)
@@ -144,22 +147,25 @@ class dualChart {
 
         vis.svg.append("g")
             .attr("class", "x axis")
+            .style("fill", vis.textColor)
             .attr("transform", "translate(0," + vis.height + ")");
 
         vis.svg.append("g")
             .attr("class", "y0 axis")
+            .style("fill", vis.textColor)
             .append("text")
             .attr("transform", "rotate(-90)")
             .attr("x", -45)
             .attr("y", -80)
             .attr("dy", "1em")
             .style("text-anchor", "end")
+            .attr("fill", "currentColor")
             .style("font-size", "1rem")
-            .style("fill", vis.dataAttributes['Absorption (LHS)'].color)
             .text("Absorption (LHS) & New Supply (LHS)");
 
         vis.svg.append("g")
             .attr("class", "y1 axis")
+            .style("fill", vis.textColor)
             .attr("transform", "translate(" + vis.width + ",0)")
             .append("text")
             .attr("transform", "rotate(90)")
@@ -168,7 +174,7 @@ class dualChart {
             .attr("dy", ".1em")
             .style("text-anchor", "end")
             .style("font-size", "1rem")
-            .style("fill", vis.dataAttributes['Availability Rate (RHS)'].color)
+            .attr("fill", "currentColor")
             .text("Availability Rate (RHS)");
 
 
@@ -191,7 +197,7 @@ class dualChart {
     }
 
     // noinspection JSVoidFunctionReturnValueUsed
-    wrangleData(arrayLike) {
+    wrangleData() {
         let vis = this;
 
 
@@ -347,7 +353,7 @@ class dualChart {
             .datum(vis.lineData) // bind the processed data to the path
             .attr("class", "line-availability-rate")
             .attr("d", vis.lineGenerator)
-            .style("stroke", vis.cColor)
+            .style("stroke", vis.vColor)
             .style("stroke-width", "2px")
             .style("fill", "none");
 
@@ -367,9 +373,9 @@ class dualChart {
             })
             .attr("cy", d => vis.y1(d.value))
             .attr("r", 4)
-            .style("fill", vis.cColor)
+            .style("fill", vis.tColor)
             .style("stroke", vis.backgroundColor)
-            .style("stroke-width", "2px");
+            .style("stroke-width", "1px");
 
         vis.renderLegend();
 
@@ -408,7 +414,7 @@ class dualChart {
             .attr("y", 9)
             .attr("dy", ".35em")
             .style("text-anchor", "start") // Align text to start at the given x position
-            .style("fill", vis.textColor)
+            .attr("fill", "currentColor")
             .text(function(d) { return d; });
 
         // // Calculate the width of each legend item by summing up widths of text and rects
