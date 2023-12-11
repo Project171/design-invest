@@ -7,9 +7,9 @@
     --text-background: rgba(255, 255, 255, 0.7);
     --myshadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.78);
 
-    --color-primary: rgba(124, 204, 229, 0.3);
+    --color-primary: rgba(124, 204, 029, 0.3);
     --color-secondary: rgba(181, 118, 173, 0.3);
-    --color-accent: rgba(253, 228, 127, 0.3);
+    --color-accent: rgba(253, 228, 027, 0.3);
 
 
     --background1: linear-gradient(var(--color1), #000000);
@@ -50,7 +50,7 @@
     display: flex;
     align-items: center;
 
-    em {
+    .em {
         margin-left: 10px;
         font-size: .5rem;
         color: var(--color-text)
@@ -199,13 +199,14 @@ body {
 
 .section h2 {
     font-size: 2em;
-    margin-bottom: 20px;
-    display: none;
+    margin-bottom: 25px;
+    font-weight: bold;
+    /*display: none;*/
 }
 
 .section .text-box h3,
 .section .black-background-container h3 {
-    font-size: 1.7em;
+    font-size: 1.75em;
     justify-content: center;
     color: var(--color-text);
 }
@@ -569,6 +570,7 @@ strong {
 /*}*/
 
 .canada-icon-icon {
+    margin-bottom: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
